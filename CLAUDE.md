@@ -1,0 +1,441 @@
+# CLAUDE.md - AI Assistant Guide for Kraljic_Course Repository
+
+## Repository Overview
+
+This repository contains a comprehensive Korean-language educational course on **Strategic Inventory Management and Material Planning** using the Kraljic Matrix framework. The course addresses the paradigm shift from Just-In-Time (JIT) to Just-In-Case (JIC) inventory management and provides practical frameworks for material categorization and planning.
+
+### Project Purpose
+- Educational content for supply chain management professionals
+- Practical training on the Kraljic Matrix methodology
+- Strategic inventory management and material planning techniques
+- Supplier relationship management and performance evaluation
+
+### Language
+- **Primary Language**: Korean (한국어)
+- All course content, documentation, and data files are in Korean
+- File names and directory names use Korean characters
+
+---
+
+## Repository Structure
+
+```
+Kraljic_Course/
+├── README.md                                    # Basic repository description
+├── CLAUDE.md                                    # This file - AI assistant guide
+├── Kraljic_Course_Contents.zip                 # Original archive
+├── ExportBlock-*.zip                            # Extracted course content archive
+└── 전략적 재고운영 및 자재계획수립/             # Main course directory
+    ├── [1회차] 전략적 재고운영 Foundation...md  # Session 1: Foundation & Kraljic Matrix
+    ├── [2회차] 자재군별 소싱 전략...md           # Session 2: Sourcing strategies
+    │   └── 공급업체 성과 평가/                  # Supplier scorecard data
+    │       ├── *.csv                             # Scorecard CSV files
+    │       └── [공급업체명]/*.md                # Individual supplier profiles
+    ├── [3회차] ABC-XYZ 재고 분류...md           # Session 3: ABC-XYZ analysis
+    ├── [4회차] 병목자재 전략 & ROP.md           # Session 4: Bottleneck materials & ROP
+    ├── [5회차] 레버리지자재 전략 & MRP.md       # Session 5: Leverage materials & MRP
+    ├── [6회차] 전략자재 전략 & 하이브리드...md  # Session 6: Strategic materials
+    ├── [7회차] 일상자재 효율화 & 자동화.md      # Session 7: Routine materials
+    ├── [8회차] Kraljic Matrix 실전 워크샵.md   # Session 8: Practical workshop
+    └── [9회차] 통합 워크샵...md                 # Session 9: Integrated workshop
+```
+
+---
+
+## Course Structure
+
+### 9-Session Curriculum
+
+| Session | Topic | Category | Importance | Difficulty | Duration |
+|---------|-------|----------|------------|------------|----------|
+| 1회차 | Kraljic Matrix Foundation & Methodology | Overview | High | Intermediate | 45 min |
+| 2회차 | Sourcing Strategy & Supplier Management | Overview | High | Intermediate | 45 min |
+| 3회차 | ABC-XYZ Inventory Classification | Overview | High | Intermediate | 45 min |
+| 4회차 | Bottleneck Materials & ROP | Bottleneck | High | Intermediate | 45 min |
+| 5회차 | Leverage Materials & MRP | Leverage | High | Intermediate | 45 min |
+| 6회차 | Strategic Materials & Hybrid Planning | Strategic | High | Advanced | 45 min |
+| 7회차 | Routine Materials Efficiency & Automation | Routine | Low | Beginner | 45 min |
+| 8회차 | Kraljic Matrix Practical Workshop | Workshop | High | Intermediate | 45 min |
+| 9회차 | Integrated Workshop: Real-world Application | Workshop | High | Advanced | 45 min |
+
+### Core Concepts Covered
+
+#### 1. Kraljic Matrix Framework
+The Kraljic Matrix categorizes materials into 4 quadrants based on:
+- **X-axis**: Supply Risk (공급 리스크)
+- **Y-axis**: Purchase Amount/Strategic Impact (구매 금액)
+
+**Four Material Categories**:
+1. **전략자재 (Strategic Materials)**: High risk, high impact
+2. **레버리지자재 (Leverage Materials)**: Low risk, high impact
+3. **병목자재 (Bottleneck Materials)**: High risk, low impact
+4. **일상자재 (Routine Materials)**: Low risk, low impact
+
+#### 2. Planning Methodologies
+- **ROP (Re-Order Point)**: For bottleneck materials
+- **MRP (Material Requirements Planning)**: For leverage materials
+- **Hybrid Planning**: For strategic materials
+- **Automation**: For routine materials
+
+#### 3. ABC-XYZ Analysis
+- **ABC**: Classification by value/amount
+- **XYZ**: Classification by demand variability
+- **Matrix**: 9 combinations for operational segmentation
+
+---
+
+## File Conventions
+
+### Naming Patterns
+
+1. **Session Files**: `[N회차] {Topic Title} {Hash}.md`
+   - N: Session number (1-9)
+   - Hash: Unique identifier (32 characters)
+   - Example: `[1회차] 전략적 재고운영 Foundation Kraljic Matrix와 자재계획 방법론 28287a1932c4811b9e53cae79af30fa8.md`
+
+2. **Data Files**:
+   - CSV format with Korean headers
+   - Two versions: `{name}.csv` and `{name}_all.csv`
+   - UTF-8 encoding with BOM (﻿)
+
+3. **Directory Structure**:
+   - Korean characters for all directory names
+   - Nested structure for hierarchical content
+   - Supplier data organized by scorecard type
+
+### File Content Structure
+
+#### Markdown Files
+```markdown
+# [Session] Title
+
+단계: {Category}
+중요도: {Importance Level}
+난이도: {Difficulty Level}
+Min: {Duration}
+No: {Session Number}
+
+---
+
+<aside>
+🎯
+**학습 목표** (Learning Objectives)
+- Bullet points...
+</aside>
+
+## Sections...
+```
+
+#### CSV Files
+- Headers in Korean
+- Comma-separated values
+- Date format: `YYYY년 MM월 DD일 오후/오전 HH:MM`
+- Percentage values with % symbol
+- Decimal separator: period (.)
+
+---
+
+## Data Schema
+
+### Course Curriculum CSV
+```csv
+No, 교육 주제, 단계, 중요도, 난이도, 교육 자료, Min
+```
+
+**Fields**:
+- `No`: Session number
+- `교육 주제`: Course topic
+- `단계`: Stage/category
+- `중요도`: Importance (높음/낮음)
+- `난이도`: Difficulty (초급/중급/고급)
+- `교육 자료`: Training materials
+- `Min`: Duration in minutes
+
+### Supplier Scorecard CSV
+```csv
+공급업체명, 가격 안정성, 가격경쟁력 점수, 개선제안 건수, 검사통과율, ...
+```
+
+**Key Fields**:
+- `공급업체명`: Supplier name
+- `자재군`: Material category (전략/레버리지/병목/일상)
+- `등급`: Grade (A/B/C/D)
+- `총점`: Total score
+- `납기준수율 OTD`: On-time delivery rate
+- `품질 점수`: Quality score
+- `협력성과 점수`: Collaboration performance score
+
+**10 Suppliers in Dataset**:
+1. 미래금속 (B - Strategic materials)
+2. 동양플라스틱 (B - Routine materials)
+3. 아시아MRO (C - Routine materials)
+4. 중앙산업 (D - Bottleneck materials)
+5. 글로벌스틸 (B - Leverage materials)
+6. 대한전자부품 (A - Leverage materials)
+7. 삼성화학 (B - Bottleneck materials)
+8. 신한부품 (C - Leverage materials)
+9. (주)한국정밀 (A - Strategic materials)
+10. 태평양소재 (C - Bottleneck materials)
+
+---
+
+## AI Assistant Guidelines
+
+### When Working with This Repository
+
+#### 1. Language Handling
+- **DO**: Preserve Korean language content exactly as written
+- **DO**: Use Korean terminology when discussing course concepts
+- **DO NOT**: Translate Korean content to English unless explicitly requested
+- **DO**: Be aware of Korean date/time formats when parsing data
+
+#### 2. File Modifications
+- **DO**: Maintain UTF-8 encoding with BOM for CSV files
+- **DO**: Preserve the hash suffixes in filenames when renaming
+- **DO**: Keep the `[N회차]` prefix format for session files
+- **DO NOT**: Change the directory structure without explicit request
+- **DO NOT**: Remove or modify the `<aside>` blocks in markdown files
+
+#### 3. Content Updates
+- **DO**: Follow the established markdown structure for new content
+- **DO**: Include learning objectives (학습 목표) in `<aside>` blocks
+- **DO**: Maintain session metadata (단계, 중요도, 난이도, Min, No)
+- **DO**: Use appropriate emoji indicators (🎯, 📋, 💡, etc.) consistently
+- **DO NOT**: Add content that contradicts the Kraljic Matrix framework
+
+#### 4. Data Operations
+- **DO**: Validate supplier grades match performance scores (A: 90+, B: 80-89, C: 70-79, D: <70)
+- **DO**: Ensure material category assignments align with Kraljic Matrix quadrants
+- **DO**: Preserve all columns when updating CSV files
+- **DO NOT**: Change date formats in CSV files
+- **DO NOT**: Remove the BOM from CSV files
+
+#### 5. Code/Script Development
+If creating analysis scripts or tools:
+- **DO**: Support Korean text (UTF-8 encoding)
+- **DO**: Handle CSV files with BOM properly
+- **DO**: Parse Korean date formats correctly
+- **DO**: Provide bilingual comments (Korean + English) for clarity
+- **DO NOT**: Assume ASCII-only input
+
+---
+
+## Common Tasks & Best Practices
+
+### Adding New Course Content
+1. Follow the `[N회차]` naming convention
+2. Include all metadata fields at the top
+3. Structure content with learning objectives
+4. Add appropriate emoji indicators
+5. Link related sessions using internal links
+
+### Updating Supplier Data
+1. Maintain CSV format with all columns
+2. Validate grade assignments (A/B/C/D)
+3. Ensure material category is one of: 전략/레버리지/병목/일상
+4. Update `최종수정일` (last modified date) field
+5. Keep both `{name}.csv` and `{name}_all.csv` in sync
+
+### Analyzing Course Structure
+- Reference the curriculum CSV for session ordering
+- Use the Kraljic Matrix quadrants as the primary framework
+- Consider the progression: Foundation → Deep Dives → Workshops
+- Session 1-3: Overview concepts
+- Session 4-7: Material-specific strategies
+- Session 8-9: Practical application
+
+### Working with Supplier Scorecards
+- Grade A suppliers (90-100): Strategic partnerships
+- Grade B suppliers (80-89): Good performance, room for improvement
+- Grade C suppliers (70-79): Improvement plans needed
+- Grade D suppliers (<70): Consider replacement
+- Material category affects supplier strategy expectations
+
+---
+
+## Development Workflows
+
+### Content Review Workflow
+1. Read session file to understand topic and objectives
+2. Verify alignment with Kraljic Matrix framework
+3. Check internal links between related sessions
+4. Validate metadata completeness
+5. Ensure learning objectives match content depth
+
+### Data Analysis Workflow
+1. Load CSV with UTF-8 BOM encoding
+2. Parse Korean headers correctly
+3. Validate data types (percentages, scores, dates)
+4. Cross-reference supplier grades with material categories
+5. Generate insights aligned with course concepts
+
+### Repository Maintenance
+1. Keep extracted content in `전략적 재고운영 및 자재계획수립/` directory
+2. Maintain archive files (`.zip`) for backup
+3. Update README.md if major changes occur
+4. Document any structural changes in commit messages
+5. Preserve the git history for course evolution tracking
+
+---
+
+## Key Concepts Reference
+
+### Kraljic Matrix Quadrants
+
+**전략자재 (Strategic Materials)**
+- High supply risk, high purchase impact
+- Characteristics: Critical, few suppliers, complex
+- Strategy: Long-term partnerships, collaborative planning
+- Planning: Hybrid planning methods
+- Examples in dataset: 미래금속, (주)한국정밀
+
+**레버리지자재 (Leverage Materials)**
+- Low supply risk, high purchase impact
+- Characteristics: Many suppliers, standardized, high volume
+- Strategy: Competitive bidding, volume leverage
+- Planning: MRP (Material Requirements Planning)
+- Examples in dataset: 글로벌스틸, 대한전자부품, 신한부품
+
+**병목자재 (Bottleneck Materials)**
+- High supply risk, low purchase impact
+- Characteristics: Limited suppliers, specialized
+- Strategy: Ensure supply continuity, buffer stock
+- Planning: ROP (Re-Order Point)
+- Examples in dataset: 중앙산업, 삼성화학, 태평양소재
+
+**일상자재 (Routine Materials)**
+- Low supply risk, low purchase impact
+- Characteristics: Commodity items, many suppliers
+- Strategy: Process efficiency, automation
+- Planning: Automated ordering systems
+- Examples in dataset: 동양플라스틱, 아시아MRO
+
+### Inventory Planning Methods
+
+**ROP (Re-Order Point)**
+- For bottleneck materials
+- Based on lead time and demand rate
+- Safety stock for supply uncertainty
+
+**MRP (Material Requirements Planning)**
+- For leverage materials
+- Demand-driven from production schedule
+- Minimize holding costs through precise timing
+
+**Hybrid Planning**
+- For strategic materials
+- Combines forecast-based and demand-based
+- Balances relationship commitments and flexibility
+
+**Automated Systems**
+- For routine materials
+- Minimize human intervention
+- Focus on efficiency and cost reduction
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+**Issue**: CSV files display incorrectly
+- **Cause**: BOM not recognized or wrong encoding
+- **Solution**: Open with UTF-8 BOM encoding explicitly
+
+**Issue**: Markdown formatting broken
+- **Cause**: Notion-specific syntax (`<aside>` blocks)
+- **Solution**: Use markdown processors that support HTML blocks
+
+**Issue**: Internal links not working
+- **Cause**: URL-encoded Korean characters in links
+- **Solution**: URL-decode links when processing programmatically
+
+**Issue**: Supplier grade doesn't match score
+- **Cause**: Data entry error or outdated calculation
+- **Solution**: Recalculate total score, verify grade assignment
+
+---
+
+## Version Control Guidelines
+
+### Commit Messages
+- Use Korean for content changes: "2회차 내용 업데이트"
+- Use English for structural changes: "Add new session template"
+- Reference session numbers: "[4회차] Add ROP calculation examples"
+
+### Branch Strategy
+- Current branch: `claude/claude-md-mi3s2y2jmbmk6esm-01EnHEQoFiPzet32PAdnoyKB`
+- Always develop on designated feature branches
+- Never push to main/master without explicit permission
+
+### What to Commit
+- ✅ Course content updates (markdown files)
+- ✅ Data updates (CSV files)
+- ✅ New analysis scripts or tools
+- ✅ Documentation improvements
+- ❌ Temporary files or build artifacts
+- ❌ Extracted archives (keep only source zips)
+
+---
+
+## Future Extensions
+
+### Potential Enhancements
+1. **Interactive Workshops**: Add code examples for Kraljic classification
+2. **Data Analysis Tools**: Python/R scripts for supplier scorecard analysis
+3. **Visualization**: Generate Kraljic Matrix plots from supplier data
+4. **Translation**: English version for international audiences
+5. **Case Studies**: Add real-world company examples
+6. **Assessment Tools**: Quizzes and exercises for each session
+7. **API Integration**: Connect to actual ERP/SCM systems
+
+### Maintaining Course Relevance
+- Update supplier examples with current market conditions
+- Refresh case studies annually
+- Incorporate new supply chain trends (e.g., sustainability, digitalization)
+- Add content on emerging topics (AI in SCM, blockchain, circular economy)
+
+---
+
+## Resources & References
+
+### Course Topics Covered
+- Kraljic Matrix methodology (Session 1)
+- Supplier relationship management (Session 2)
+- ABC-XYZ inventory classification (Session 3)
+- ROP planning for bottleneck materials (Session 4)
+- MRP for leverage materials (Session 5)
+- Hybrid planning for strategic materials (Session 6)
+- Automation for routine materials (Session 7)
+- Practical workshops (Sessions 8-9)
+
+### Related Frameworks
+- JIT (Just-In-Time) vs JIC (Just-In-Case)
+- ABC Analysis
+- XYZ Analysis
+- Supplier Scorecard methodology
+- Material Requirements Planning (MRP)
+- Re-Order Point (ROP) systems
+
+---
+
+## Contact & Contribution
+
+### Repository Information
+- **Repository**: TurtleLEE-teacher/Kraljic_Course
+- **Primary Language**: Korean
+- **Content Type**: Educational course materials
+- **Format**: Markdown + CSV data
+
+### For AI Assistants
+- Treat Korean text with care and precision
+- Respect the educational nature of the content
+- Maintain consistency with Kraljic Matrix framework
+- Preserve the structured learning progression
+- When in doubt, ask for clarification rather than assuming
+
+---
+
+**Last Updated**: 2025-11-17
+**CLAUDE.md Version**: 1.0
+**Repository State**: Initial structure documented
