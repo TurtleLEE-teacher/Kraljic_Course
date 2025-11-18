@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Course Master Template</title>
+  <link rel="stylesheet" href="./styles/variables.css">
+  <link rel="stylesheet" href="./styles/theme-strategic-edu.css">
+  <style>
+    /* Additional inline styles for HTML→PPTX conversion */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    /* Grid alignment helper */
+    .grid-10 {
+      background-image:
+        linear-gradient(to right, rgba(200,200,200,0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(200,200,200,0.1) 1px, transparent 1px);
+      background-size: 10px 10px;
+    }
+
+    /* Debug mode - show safe area */
+    .debug .slide-content {
+      outline: 2px dashed rgba(255, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <!--
+    Master Template for Education Course
+    전략적 재고운영 및 자재계획 교육 과정 마스터 템플릿
+
+    사용법:
+    1. 각 레이아웃 파일에서 이 구조를 상속
+    2. session-{{N}} 클래스로 회차별 색상 적용
+    3. {{변수}} 형식으로 데이터 바인딩
+
+    회차별 색상:
+    - session-1: #1a5276 (청색 - SCM & Kraljic)
+    - session-2: #e67e22 (주황 - 병목자재)
+    - session-3: #27ae60 (녹색 - 레버리지자재)
+    - session-4: #8e44ad (보라 - 전략자재)
+    - session-5: #95a5a6 (회색 - 일상자재)
+    - session-6: #3498db (밝은 청색 - 종합정리)
+    - session-7: #c0392b (빨강 - 케이스 스터디)
+  -->
+
+  <!-- Standard Slide Structure -->
+  <div class="slide session-{{session}}">
+    <div class="slide-content">
+      <!-- Header (Optional - 표지 제외) -->
+      {{#unless isCover}}
+      <div class="slide-header">
+        <h1 class="slide-title">{{title}}</h1>
+        <span class="slide-session-badge">{{sessionBadge}}</span>
+      </div>
+      {{/unless}}
+
+      <!-- Main Content Area -->
+      <div class="layout-content">
+        <!-- Content blocks here -->
+        {{content}}
+      </div>
+
+      <!-- Footer (Optional - 표지 제외) -->
+      {{#unless isCover}}
+      <div class="slide-footer">
+        <span>{{footer}}</span>
+        <span class="slide-number">{{slideNumber}}</span>
+      </div>
+      {{/unless}}
+    </div>
+  </div>
+
+  <!-- JSON Data Structure Example -->
+  <!--
+  {
+    "course": "전략적 재고운영 및 자재계획 수립",
+    "totalSessions": 7,
+    "totalSlides": 72,
+    "slides": [
+      {
+        "id": 1,
+        "session": 1,
+        "layout": "cover",
+        "data": {
+          "title": "1회차: SCM 개념과 Kraljic Matrix",
+          "subtitle": "전략적 재고운영의 기초",
+          "course": "전략적 재고운영 및 자재계획 수립",
+          "date": "2025",
+          "instructor": "강사명"
+        }
+      },
+      {
+        "id": 2,
+        "session": 1,
+        "layout": "toc",
+        "data": {
+          "title": "1회차 학습 목표",
+          "sessionBadge": "1회차",
+          "items": [
+            {
+              "number": "1",
+              "title": "SCM 개념 이해",
+              "description": "공급망관리의 기본 개념 및 Value Chain"
+            }
+          ],
+          "footer": "전략적 재고운영 교육",
+          "slideNumber": 2
+        }
+      }
+    ]
+  }
+  -->
+
+  <!-- Color Palette Reference -->
+  <!--
+  Material Colors (Kraljic Matrix):
+  - Bottleneck: #e67e22 (주황)
+  - Leverage: #27ae60 (녹색)
+  - Strategic: #8e44ad (보라)
+  - Routine: #95a5a6 (회색)
+
+  Brand Colors:
+  - Primary: #1a5276 (짙은 청색)
+  - Secondary: #3498db (밝은 청색)
+  - Accent: #e67e22 (주황)
+
+  Neutrals:
+  - White: #ffffff
+  - Gray-100: #f8f9fa
+  - Gray-600: #6c757d
+  - Gray-900: #212529
+  - Black: #000000
+  -->
+
+  <!-- Typography Scale -->
+  <!--
+  Font Sizes (Noto Sans KR):
+  - Title: 32pt (Bold)
+  - Subtitle: 24pt (Medium)
+  - Body: 20pt (Regular)
+  - Caption: 18pt (Regular)
+  - Small: 16pt (Regular)
+  - Footer: 14pt (Regular)
+
+  Line Heights:
+  - Tight: 1.2 (제목)
+  - Normal: 1.5 (본문)
+  - Relaxed: 1.8 (리스트)
+  -->
+
+  <!-- Spacing Scale (10px Grid) -->
+  <!--
+  - xs: 5px
+  - sm: 10px
+  - md: 20px
+  - lg: 30px
+  - xl: 40px
+  - 2xl: 60px
+  -->
+
+  <!-- Slide Dimensions -->
+  <!--
+  Slide Size: 960 x 540 (16:9)
+  Safe Area: 880 x 460 (margins: 40px)
+  Grid Unit: 10px
+  -->
+
+  <!-- 3-Color Rule Enforcement -->
+  <!--
+  각 슬라이드는 최대 3개 색상만 사용:
+  1. Primary (제목, 구조 요소)
+  2. Accent (강조, 하이라이트)
+  3. Neutral (배경, 텍스트)
+
+  자재군별 슬라이드:
+  1. 해당 자재군 색상 (Main)
+  2. Primary (구조)
+  3. Gray (텍스트)
+  -->
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kraljic Matrix Diagram</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/theme-strategic-edu.css">
+</head>
+<body>
+  <!--
+    Kraljic Matrix Diagram Template
+    용도: 4대 자재군 분류 매트릭스 시각화
+    특징: 2x2 그리드, 자재군별 색상 구분
+  -->
+  <div class="slide session-1">
+    <div class="slide-content">
+      <!-- Header -->
+      <div class="slide-header">
+        <h1 class="slide-title">{{title}}</h1>
+        <span class="slide-session-badge">{{sessionBadge}}</span>
+      </div>
+
+      <!-- Content Area -->
+      <div class="layout-content">
+        <!-- Introduction Text (Optional) -->
+        {{#if introduction}}
+        <div class="body-text text-center mb-md">{{introduction}}</div>
+        {{/if}}
+
+        <!-- Kraljic Matrix -->
+        <div class="kraljic-matrix">
+          <!-- Strategic Quadrant (Top-Right) -->
+          <div class="kraljic-quadrant quadrant-strategic">
+            <h3>전략자재</h3>
+            <p class="caption-text">Strategic Materials</p>
+            {{#if strategic}}
+            <ul class="bullet-list" style="color: white; font-size: 16pt; margin-top: 10px;">
+              {{#each strategic}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Bottleneck Quadrant (Top-Left) -->
+          <div class="kraljic-quadrant quadrant-bottleneck">
+            <h3>병목자재</h3>
+            <p class="caption-text">Bottleneck Materials</p>
+            {{#if bottleneck}}
+            <ul class="bullet-list" style="color: white; font-size: 16pt; margin-top: 10px;">
+              {{#each bottleneck}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Leverage Quadrant (Bottom-Right) -->
+          <div class="kraljic-quadrant quadrant-leverage">
+            <h3>레버리지자재</h3>
+            <p class="caption-text">Leverage Materials</p>
+            {{#if leverage}}
+            <ul class="bullet-list" style="color: white; font-size: 16pt; margin-top: 10px;">
+              {{#each leverage}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Routine Quadrant (Bottom-Left) -->
+          <div class="kraljic-quadrant quadrant-routine">
+            <h3>일상자재</h3>
+            <p class="caption-text">Routine Materials</p>
+            {{#if routine}}
+            <ul class="bullet-list" style="color: white; font-size: 16pt; margin-top: 10px;">
+              {{#each routine}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Axes Labels -->
+          <div class="kraljic-axis-label axis-x">구매 임팩트 (Purchase Impact) →</div>
+          <div class="kraljic-axis-label axis-y">공급 리스크 (Supply Risk) ↑</div>
+        </div>
+
+        <!-- Caption (Optional) -->
+        {{#if caption}}
+        <div class="caption-text text-center mt-md">{{caption}}</div>
+        {{/if}}
+      </div>
+
+      <!-- Footer -->
+      <div class="slide-footer">
+        <span>{{footer}}</span>
+        <span class="slide-number">{{slideNumber}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사용 예시 1: 기본 Kraljic Matrix -->
+  <!--
+  {
+    "layout": "diagram-kraljic",
+    "session": 1,
+    "data": {
+      "title": "Kraljic Matrix: 4대 자재군 분류",
+      "sessionBadge": "1회차",
+      "introduction": "자재를 공급 리스크와 구매 임팩트 두 축으로 분류합니다",
+      "strategic": ["핵심 부품", "고가 장비", "전략 원자재"],
+      "bottleneck": ["독점 공급 부품", "희토류", "특수 소재"],
+      "leverage": ["범용 부품", "표준 원자재", "MRO 물품"],
+      "routine": ["사무용품", "소모품", "저가 부품"],
+      "caption": "각 자재군은 차별화된 관리 전략이 필요합니다",
+      "footer": "전략적 재고운영 교육",
+      "slideNumber": 8
+    }
+  }
+  -->
+
+  <!-- 사용 예시 2: 실제 자재 예시 포함 -->
+  <!--
+  {
+    "layout": "diagram-kraljic",
+    "session": 1,
+    "data": {
+      "title": "제조업 자재 분류 예시",
+      "sessionBadge": "1회차",
+      "strategic": [
+        "리튬이온 배터리",
+        "OLED 디스플레이",
+        "고급 센서"
+      ],
+      "bottleneck": [
+        "반도체 칩",
+        "희토류 원소",
+        "특허 부품"
+      ],
+      "leverage": [
+        "알루미늄 판재",
+        "플라스틱 원료",
+        "포장재"
+      ],
+      "routine": [
+        "나사/볼트",
+        "접착제",
+        "청소용품"
+      ],
+      "footer": "전략적 재고운영 교육",
+      "slideNumber": 9
+    }
+  }
+  -->
+</body>
+</html>

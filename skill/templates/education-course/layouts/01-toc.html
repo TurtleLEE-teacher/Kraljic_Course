@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table of Contents</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/theme-strategic-edu.css">
+</head>
+<body>
+  <!--
+    Table of Contents Template
+    용도: 교육 과정 목차, 회차별 내용 개요
+    레이아웃: 2x3 그리드
+  -->
+  <div class="slide session-1">
+    <div class="slide-content">
+      <!-- Header -->
+      <div class="slide-header">
+        <h1 class="slide-title">{{title}}</h1>
+        <span class="slide-session-badge">{{sessionBadge}}</span>
+      </div>
+
+      <!-- TOC Grid -->
+      <div class="layout-toc">
+        <!-- TOC Item 반복 -->
+        {{#each items}}
+        <div class="toc-item">
+          <div class="toc-number">{{number}}</div>
+          <div class="toc-content">
+            <div class="toc-title">{{title}}</div>
+            <div class="toc-description">{{description}}</div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
+      <!-- Footer -->
+      <div class="slide-footer">
+        <span>{{footer}}</span>
+        <span class="slide-number">{{slideNumber}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사용 예시 (JSON 데이터) -->
+  <!--
+  {
+    "layout": "toc",
+    "session": 1,
+    "data": {
+      "title": "교육 과정 개요",
+      "sessionBadge": "1회차",
+      "items": [
+        {
+          "number": "1",
+          "title": "SCM 개념 및 Value Chain",
+          "description": "공급망관리의 기본 개념"
+        },
+        {
+          "number": "2",
+          "title": "Kraljic Matrix 소개",
+          "description": "자재 분류 프레임워크"
+        },
+        {
+          "number": "3",
+          "title": "4대 자재군 특성",
+          "description": "병목/레버리지/전략/일상 자재"
+        },
+        {
+          "number": "4",
+          "title": "실습: 자재 분류",
+          "description": "30개 자재 Kraljic 서베이"
+        }
+      ],
+      "footer": "전략적 재고운영 교육",
+      "slideNumber": 2
+    }
+  }
+  -->
+</body>
+</html>

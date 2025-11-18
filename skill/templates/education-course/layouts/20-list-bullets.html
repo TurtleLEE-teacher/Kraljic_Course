@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bullet List</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/theme-strategic-edu.css">
+</head>
+<body>
+  <!--
+    Bullet List Template
+    용도: 불릿 포인트로 핵심 내용 나열
+    원칙: 최대 6개 항목 (6x6 규칙)
+  -->
+  <div class="slide session-{{session}}">
+    <div class="slide-content">
+      <!-- Header -->
+      <div class="slide-header">
+        <h1 class="slide-title">{{title}}</h1>
+        <span class="slide-session-badge">{{sessionBadge}}</span>
+      </div>
+
+      <!-- Content Area -->
+      <div class="layout-content">
+        <!-- Optional Introduction -->
+        {{#if introduction}}
+        <div class="body-text mb-md">{{introduction}}</div>
+        {{/if}}
+
+        <!-- Bullet List -->
+        <ul class="bullet-list">
+          {{#each items}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+
+        <!-- Optional Callout -->
+        {{#if callout}}
+        <div class="callout {{callout.type}}">
+          <div class="callout-title">{{callout.title}}</div>
+          <div class="callout-content">{{callout.content}}</div>
+        </div>
+        {{/if}}
+      </div>
+
+      <!-- Footer -->
+      <div class="slide-footer">
+        <span>{{footer}}</span>
+        <span class="slide-number">{{slideNumber}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사용 예시 (JSON 데이터) -->
+  <!--
+  {
+    "layout": "list-bullets",
+    "session": 1,
+    "data": {
+      "title": "SCM 트렌드 및 미래 전망",
+      "sessionBadge": "1회차",
+      "introduction": "글로벌 공급망은 다음과 같은 변화를 겪고 있습니다:",
+      "items": [
+        "디지털화: AI/ML 기반 수요 예측 및 재고 최적화",
+        "ESG 경영: 친환경 소싱 및 탄소 배출 감축",
+        "회복탄력성(Resilience): 공급망 다변화 및 리스크 관리",
+        "니어쇼어링(Nearshoring): 지역 기반 공급망 구축",
+        "실시간 가시성: IoT 센서를 통한 재고 모니터링",
+        "협업 플랫폼: 공급업체-구매자 간 정보 공유"
+      ],
+      "callout": {
+        "type": "callout-sowhat",
+        "title": "So What",
+        "content": "전통적 구매 방식에서 벗어나 전략적 파트너십 구축이 핵심입니다."
+      },
+      "footer": "전략적 재고운영 교육",
+      "slideNumber": 5
+    }
+  }
+  -->
+
+  <!-- Simple List Example (No Callout) -->
+  <!--
+  {
+    "layout": "list-bullets",
+    "session": 2,
+    "data": {
+      "title": "병목자재 공급 리스크 유형",
+      "sessionBadge": "2회차",
+      "items": [
+        "공급처 독점: 단일 공급업체 의존",
+        "지역 리스크: 특정 국가/지역 집중",
+        "기술 리스크: 핵심 기술 보유 업체 제한",
+        "원자재 리스크: 희소 원자재 가격 변동",
+        "규제 리스크: 수출입 규제, 환경 규제"
+      ],
+      "footer": "전략적 재고운영 교육",
+      "slideNumber": 12
+    }
+  }
+  -->
+</body>
+</html>

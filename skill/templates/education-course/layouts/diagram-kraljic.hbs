@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kraljic Matrix Diagram</title>
+  {{> common-styles}}
+</head>
+<body>
+  <div class="slide session-{{session}}">
+    <div class="slide-content">
+      {{> header}}
+
+      <div class="layout-content">
+        {{#if introduction}}
+        <div class="body-text mb-md"><p>{{introduction}}</p></div>
+        {{/if}}
+
+        <!-- Kraljic Matrix -->
+        <div class="kraljic-matrix">
+          <!-- Strategic Quadrant (Top-Right) -->
+          <div class="kraljic-quadrant quadrant-strategic">
+            <h3>전략자재</h3>
+            <p class="caption-text">Strategic Materials</p>
+            {{#if strategic}}
+            <ul class="bullet-list">
+              {{#each strategic}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Bottleneck Quadrant (Top-Left) -->
+          <div class="kraljic-quadrant quadrant-bottleneck">
+            <h3>병목자재</h3>
+            <p class="caption-text">Bottleneck Materials</p>
+            {{#if bottleneck}}
+            <ul class="bullet-list">
+              {{#each bottleneck}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Leverage Quadrant (Bottom-Right) -->
+          <div class="kraljic-quadrant quadrant-leverage">
+            <h3>레버리지자재</h3>
+            <p class="caption-text">Leverage Materials</p>
+            {{#if leverage}}
+            <ul class="bullet-list">
+              {{#each leverage}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Routine Quadrant (Bottom-Left) -->
+          <div class="kraljic-quadrant quadrant-routine">
+            <h3>일상자재</h3>
+            <p class="caption-text">Routine Materials</p>
+            {{#if routine}}
+            <ul class="bullet-list">
+              {{#each routine}}
+              <li>{{this}}</li>
+              {{/each}}
+            </ul>
+            {{/if}}
+          </div>
+
+          <!-- Axes Labels -->
+          <div class="kraljic-axis-label axis-x">구매 임팩트 (Purchase Impact) →</div>
+          <div class="kraljic-axis-label axis-y">공급 리스크 (Supply Risk) ↑</div>
+        </div>
+
+        {{#if caption}}
+        <div class="caption-text text-center mt-md"><p>{{caption}}</p></div>
+        {{/if}}
+      </div>
+
+      {{> footer}}
+    </div>
+  </div>
+</body>
+</html>

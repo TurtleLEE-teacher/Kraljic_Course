@@ -1,0 +1,38 @@
+{
+  "name": "pptx-mslee-education",
+  "version": "2.0.0",
+  "description": "Education course PPTX generator with HTML→PPTX workflow",
+  "main": "scripts/edu-pptx-builder.js",
+  "type": "module",
+  "scripts": {
+    "generate": "node scripts/generate-course.js",
+    "validate": "node scripts/quality-checker.js",
+    "thumbnail": "python scripts/thumbnail.py",
+    "test": "node scripts/test-builder.js"
+  },
+  "keywords": [
+    "pptx",
+    "education",
+    "powerpoint",
+    "presentation",
+    "html2pptx",
+    "kraljic",
+    "scm"
+  ],
+  "author": "ahfif",
+  "license": "MIT",
+  "dependencies": {
+    "@ant/html2pptx": "file:html2pptx.tgz",
+    "chalk": "^5.3.0",
+    "cheerio": "^1.0.0-rc.12",
+    "handlebars": "^4.7.8",
+    "pptxgenjs": "^3.12.0",
+    "sharp": "^0.34.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

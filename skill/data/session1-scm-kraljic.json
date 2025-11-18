@@ -1,0 +1,179 @@
+{
+  "course": "전략적 재고운영 및 자재계획수립 과정",
+  "session": 1,
+  "slides": [
+    {
+      "id": 1,
+      "layout": "cover",
+      "data": {
+        "title": "전략적 재고운영 Foundation",
+        "subtitle": "Kraljic Matrix와 자재계획 방법론",
+        "course": "전략적 재고운영 및 자재계획수립 과정",
+        "date": "2025년 1회차",
+        "instructor": "SCM 전문가"
+      }
+    },
+    {
+      "id": 2,
+      "layout": "list-bullets",
+      "data": {
+        "title": "학습 목표",
+        "sessionBadge": "1회차",
+        "items": [
+          "JIT에서 JIC로의 패러다임 전환 배경과 필요성 이해",
+          "전략적 재고운영의 핵심 개념과 차별화된 접근법 습득",
+          "Kraljic Matrix를 활용한 자재 포트폴리오 분류 역량 확보",
+          "자재군별 관리 철학과 자재계획 방법론의 전체 맵 이해"
+        ],
+        "callout": {
+          "type": "info",
+          "title": "1회차 구성",
+          "content": "패러다임 전환 → Kraljic Matrix → 4대 자재군 → 자재계획 방법론"
+        },
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 2
+      }
+    },
+    {
+      "id": 3,
+      "layout": "content-2col",
+      "data": {
+        "title": "JIT vs JIC: 패러다임의 전환",
+        "sessionBadge": "1회차",
+        "leftTitle": "JIT (과거)",
+        "leftContent": "• 재고 = 낭비 (Waste)\n• 목표: 재고 Zero\n• 우선순위: 효율성 (Efficiency)\n• 안전재고: 최소 (1-2주)\n• 공급업체: Single Source\n• 의사결정: 원가 절감",
+        "rightTitle": "JIC (현재/미래)",
+        "rightContent": "• 재고 = 전략적 자산\n• 목표: 최적 재고 (Optimal)\n• 우선순위: 회복력 (Resilience)\n• 안전재고: 차별화 (1주-6개월)\n• 공급업체: Dual/Multi Source\n• 의사결정: TCO + 리스크",
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 3
+      }
+    },
+    {
+      "id": 4,
+      "layout": "list-bullets",
+      "data": {
+        "title": "JIT 붕괴 사례: 2020-2021 공급망 위기",
+        "sessionBadge": "1회차",
+        "introduction": "2020년 팬데믹은 JIT 방식의 치명적 약점을 극명하게 드러냈습니다.",
+        "items": [
+          "2021년 글로벌 반도체 대란: 자동차 생산 1,000만 대 감소, 산업 손실 $210억",
+          "마스크 대란 (2020): 전 세계 생산의 50%를 중국에 의존, 봉쇄로 공급 중단",
+          "컨테이너선 대란 (2021-2022): 운임비 10배 폭등, 리드타임 2배 증가",
+          "GM: 반도체 부족으로 생산 차질 200만 대, 안전재고 0주 → 10-12주 확대",
+          "Toyota: JIT 창시자조차 반도체 안전재고 4-6개월치 확보로 전략 전환"
+        ],
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 4
+      }
+    },
+    {
+      "id": 5,
+      "layout": "list-bullets",
+      "data": {
+        "title": "Kraljic Matrix의 탄생과 핵심 통찰",
+        "sessionBadge": "1회차",
+        "introduction": "Peter Kraljic (1983, Harvard Business Review): \"Purchasing Must Become Supply Management\"",
+        "items": [
+          "탄생 배경: 1970년대 2차례 석유파동으로 공급 불안정 극심",
+          "핵심 통찰: \"Not all materials are created equal\" - 모든 자재가 동등하지 않다",
+          "차별화 필요성: 자재의 특성에 따라 차별화된 관리 전략 적용",
+          "2축 평가: 공급 리스크 (Supply Risk) × 구매 임팩트 (Purchase Impact)",
+          "4대 자재군: 전략/레버리지/병목/일상 자재로 분류"
+        ],
+        "callout": {
+          "type": "warning",
+          "title": "중요",
+          "content": "JIC ≠ 무조건 재고 증가. 자재 특성에 따른 차별화가 핵심입니다."
+        },
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 5
+      }
+    },
+    {
+      "id": 6,
+      "layout": "content-2col",
+      "data": {
+        "title": "Kraljic Matrix의 두 축",
+        "sessionBadge": "1회차",
+        "leftTitle": "Y축: 공급 리스크 (Supply Risk)",
+        "leftContent": "• 공급업체 수 (1-2개 고위험)\n• 대체 가능성 (대체 불가 고위험)\n• 시장 구조 (독과점 고위험)\n• 지리적 집중도 (특정 지역 집중 고위험)\n• 기술 복잡성 (특수 기술 고위험)\n• 리드타임 (6개월 이상 고위험)",
+        "rightTitle": "X축: 구매 임팩트 (Purchase Impact)",
+        "rightContent": "• 구매 금액 (총 구매액 대비 비중)\n• 원가 비중 (제품 원가 중 차지 비율)\n• 사업 영향도 (결품 시 생산 중단)\n• 부가가치 (최종 제품 성능 영향)\n• 품질 중요성 (품질 문제 파급 효과)",
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 6
+      }
+    },
+    {
+      "id": 7,
+      "layout": "diagram-kraljic",
+      "data": {
+        "title": "Kraljic Matrix: 4대 자재군 분류",
+        "sessionBadge": "1회차",
+        "introduction": "자재를 공급 리스크와 구매 임팩트 두 축으로 분류합니다",
+        "strategic": [
+          "핵심 부품",
+          "고가 장비",
+          "전략 원자재",
+          "예: 반도체, OLED"
+        ],
+        "bottleneck": [
+          "독점 공급 부품",
+          "희토류",
+          "특수 소재",
+          "예: 희귀 광물"
+        ],
+        "leverage": [
+          "범용 부품",
+          "표준 원자재",
+          "MRO 물품",
+          "예: 철강, 플라스틱"
+        ],
+        "routine": [
+          "사무용품",
+          "소모품",
+          "저가 부품",
+          "예: 나사/볼트"
+        ],
+        "caption": "각 자재군은 차별화된 관리 전략이 필요합니다",
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 7
+      }
+    },
+    {
+      "id": 8,
+      "layout": "content-2col",
+      "data": {
+        "title": "4대 자재군별 관리 전략",
+        "sessionBadge": "1회차",
+        "leftTitle": "전략자재 & 병목자재",
+        "leftContent": "전략자재 (고리스크+고금액)\n• 장기 파트너십 구축\n• Hybrid 계획 방법론\n• 공급 안정성 최우선\n\n병목자재 (고리스크+저금액)\n• 공급 연속성 확보\n• ROP 기반 안전재고\n• 대체재 개발",
+        "rightTitle": "레버리지자재 & 일상자재",
+        "rightContent": "레버리지자재 (저리스크+고금액)\n• 경쟁 입찰 적극 활용\n• MRP 기반 정밀 계획\n• 물량 레버리지 활용\n\n일상자재 (저리스크+저금액)\n• 프로세스 효율화\n• 자동 발주 시스템\n• 관리 비용 최소화",
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 8
+      }
+    },
+    {
+      "id": 9,
+      "layout": "list-bullets",
+      "data": {
+        "title": "핵심 요약 및 다음 단계",
+        "sessionBadge": "1회차",
+        "items": [
+          "JIT → JIC: 재고는 낭비가 아닌 전략적 자산으로 전환",
+          "Kraljic Matrix: 공급 리스크 × 구매 임팩트로 4대 자재군 분류",
+          "차별화 전략: 각 자재군별로 다른 관리 철학과 계획 방법론 적용",
+          "2회차 예고: 자재군별 소싱 전략과 공급업체 성과 평가 방법",
+          "실습 준비: 여러분의 조직 자재를 Kraljic Matrix로 분류해보세요"
+        ],
+        "callout": {
+          "type": "success",
+          "title": "Action Item",
+          "content": "다음 세션까지 자사의 주요 자재 10개를 Kraljic Matrix에 배치해 오세요."
+        },
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 9
+      }
+    }
+  ]
+}
