@@ -21,16 +21,18 @@ This repository contains a comprehensive Korean-language educational course on *
 
 ```
 Kraljic_Course/
-├── README.md                                    # Basic repository description
+├── README.md                                    # Repository overview and course guide
 ├── CLAUDE.md                                    # This file - AI assistant guide
+├── .gitignore                                   # Git ignore patterns
 ├── Kraljic_Course_Contents.zip                 # Original archive
 ├── ExportBlock-*.zip                            # Extracted course content archive
+├── 전략적 재고운영 및 자재계획수립.csv         # Course curriculum index
 └── 전략적 재고운영 및 자재계획수립/             # Main course directory
     ├── [1회차] 전략적 재고운영 Foundation...md  # Session 1: Foundation & Kraljic Matrix
     ├── [2회차] 자재군별 소싱 전략...md           # Session 2: Sourcing strategies
     │   └── 공급업체 성과 평가/                  # Supplier scorecard data
     │       ├── *.csv                             # Scorecard CSV files
-    │       └── [공급업체명]/*.md                # Individual supplier profiles
+    │       └── [공급업체명]/*.md                # Individual supplier profiles (10 suppliers)
     ├── [3회차] ABC-XYZ 재고 분류...md           # Session 3: ABC-XYZ analysis
     ├── [4회차] 병목자재 전략 & ROP.md           # Session 4: Bottleneck materials & ROP
     ├── [5회차] 레버리지자재 전략 & MRP.md       # Session 5: Leverage materials & MRP

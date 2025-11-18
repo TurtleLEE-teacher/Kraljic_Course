@@ -1,0 +1,73 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*~
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Node.js
+node_modules/
+npm-debug.log
+package-lock.json
+yarn.lock
+
+# Archives (keeping original zips)
+# Uncomment if you don't want to track zip files
+# *.zip
+
+# CSV temporary files
+~$*.csv
+*.csv#
+
+# Office temporary files
+~$*
+.~lock.*
+
+# Build outputs
+dist/
+build/
+*.o
+*.exe
+*.out
+
+# Environment variables
+.env
+.env.local
+.env.*.local
