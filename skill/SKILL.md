@@ -208,17 +208,21 @@ open output/my-report.pptx
 
 #### Typography (Arial Only)
 ```css
+--font-cover-title: 48pt Bold;   /* Cover slide main title */
 --font-title: 20pt Bold;         /* Slide titles */
---font-governing: 14pt Italic;   /* Governing messages */
---font-heading: 14pt Bold;       /* Section headings */
---font-body: 12pt Regular;       /* Body text */
---font-caption: 11pt Regular;    /* Captions, notes */
+--font-governing: 16pt Bold;     /* Governing messages (NOT 14pt Italic!) */
+--font-heading: 14pt Bold;       /* Section headings, large bullets */
+--font-body: 9-11pt Regular;     /* Body text (MOST COMMON - use small fonts!) */
+--font-caption: 8pt Regular;     /* Captions, footnotes, annotations */
+--font-tiny: 6-7pt Regular;      /* Tiny notes (rare) */
 ```
 
 **Font rules**:
 - **Only Arial** - web-safe, universally available
 - No custom fonts or font downloads
 - Use weight and size for hierarchy
+- **CRITICAL**: Use **small fonts (8-11pt) extensively** to maximize content density
+- S4HANA reference shows 9pt is the MOST common body text size (not 12pt!)
 
 #### Governing Message Pattern (REQUIRED)
 Every content slide must include a governing message - a one-sentence summary that captures the entire slide's key point:
@@ -232,10 +236,12 @@ Every content slide must include a governing message - a one-sentence summary th
 
 **Governing message guidelines**:
 - Maximum 1-2 sentences
-- 14pt italic font
-- Positioned directly under the title
+- **16pt Bold font** (NOT 14pt Italic!) - based on S4HANA reference
+- Positioned directly under the title at (0.30", 1.01")
+- Size: 10.32" × 0.63"
 - Summarizes the "so what" of the slide
 - Reader should understand the slide's purpose from this alone
+- 맑은 고딕 for Korean text, Arial for English
 
 #### Slide Dimensions
 ```css
@@ -248,9 +254,13 @@ body {
 
 **Layout requirements**:
 - 13:9 aspect ratio (business reporting standard)
+- **Actual S4HANA dimensions**: 10.83" × 7.50" (aspect ratio 1.44:1)
 - Minimum 0.5" (45px) bottom margin
-- Content density: 80%+ target
-- No wasted whitespace
+- **Content density: 85%+ target** (S4HANA average: 83.4%)
+- No wasted whitespace - use small fonts (8-11pt) to pack more content
+- **Visual elements**: Include 10-50+ shapes per slide (flowcharts, arrows, diagrams)
+- **Shapes**: Rectangles, arrows, connectors for timelines and process flows
+- **Tables**: Use for data grids and comparison matrices
 
 #### 2-Column Comparison Layout
 For vs/comparison slides (e.g., "ROP vs MRP", "Before vs After"):

@@ -126,8 +126,17 @@ The reference file uses **S4HANA monochrome design principles**:
 #### Typography
 - **Title font**: Arial (English), 맑은 고딕 (Korean)
 - **Body font**: 맑은 고딕 (Korean), Arial (English)
-- **Font sizes**: Consistent hierarchy (see SKILL.md variables)
-- **Font weights**: Bold for titles, Regular for body
+- **Font sizes** (actual usage from S4HANA reference):
+  - **48pt**: Cover slide main title (Bold)
+  - **20pt**: Content slide titles (Bold)
+  - **16pt**: Governing messages (Bold)
+  - **14pt**: Section headers, large bullet points
+  - **12-13pt**: Regular bullet points
+  - **9-11pt**: Body text, detailed descriptions (**most common**)
+  - **8pt**: Small annotations, footnotes
+  - **6-7pt**: Tiny notes (rare)
+- **Font weights**: Bold for titles/headers, Regular for body
+- **Key insight**: S4HANA uses **small fonts (8-11pt) extensively** to fit more content
 
 #### Slide Dimensions
 - **Width**: 10.83 inches
@@ -136,10 +145,21 @@ The reference file uses **S4HANA monochrome design principles**:
 
 #### Layout Principles
 - **White background**: Default for all content slides (cover slide can use color)
-- **Simple and clean**: Minimal decoration, focus on content
+- **Content density**: CRITICAL - Slides must use **85%+ of slide area**
+  - S4HANA average: 83.4% (median: 75.5%)
+  - Many slides exceed 100% density due to overlapping elements
+  - **Minimize whitespace** - Use small fonts (8-11pt) to fit more content
+  - Example: Slide 4 has 26 AUTO_SHAPES + 7 text boxes = 84.6% density
+- **Visual elements**: Use extensive diagrams, flowcharts, and shapes
+  - **Shapes per slide**: 10-50+ AUTO_SHAPES (rectangles, arrows, connectors)
+  - **Flowcharts**: Timeline diagrams, process flows with arrows
+  - **Tables**: Data grids, comparison matrices
+  - **Groups**: Organize related shapes into logical groups
+  - Example: Slide 4 has timeline with phases, arrows, and 20+ detail boxes
 - **Governing messages**: REQUIRED for all content slides
   - One-sentence summary under the title
-  - Italic, 14pt font
+  - Position: (0.30", 1.01"), Size: 10.32" × 0.63"
+  - 16pt Bold 맑은 고딕 (NOT 14pt Italic)
   - Captures the "so what" of the slide
 
 ### 📋 Governing Message Pattern
@@ -190,18 +210,26 @@ The reference file uses **S4HANA monochrome design principles**:
 5. **Ignoring the reference file**: It's the gold standard
 6. **Direct python-pptx coding without skill workflow**: Try skill approach first
 7. **Using gradients on cover slide**: Use solid colors (gradient causes rendering issues)
+8. **Using too large fonts**: Don't use 16-18pt for body text - use 8-11pt like S4HANA!
+9. **Too much whitespace**: Slides must be 85%+ filled - add more content, diagrams, shapes
+10. **Missing visual elements**: No flowcharts, arrows, or shapes - S4HANA uses 10-50+ shapes per slide
+11. **Misunderstanding Part numbers**: "Part 1" = Session 1 only, NOT Sessions 1-3
 
 ### ✅ Checklist Before Generating PPTX
 
 - [ ] Read complete SKILL.md (no offset/limit)
 - [ ] Read complete html2pptx.md
 - [ ] Read complete css.md
-- [ ] Analyzed S4HANA reference PPTX file
+- [ ] Analyzed S4HANA reference PPTX file with detailed script
 - [ ] Understood monochrome color system (3-Color Rule)
-- [ ] Planned governing messages for all content slides
+- [ ] Understood font size ranges (8-11pt for body, NOT 16-18pt)
+- [ ] Planned content density to achieve 85%+ filled area
+- [ ] Designed flowcharts, diagrams, shapes (10-50+ per slide)
+- [ ] Planned governing messages for all content slides (16pt Bold)
 - [ ] Prepared JSON data structure
 - [ ] Verified Handlebars templates exist or created them
 - [ ] Confirmed slide dimensions: 10.83" × 7.5"
+- [ ] Confirmed Part/Session mapping (Part N = Session N, not Sessions N-M)
 - [ ] Tested with small sample before full generation
 
 ---

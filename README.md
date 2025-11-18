@@ -193,9 +193,13 @@ AI 도구를 사용하여 이 레포지토리를 작업하는 경우, 반드시 
 
 3. **필수 준수 사항**:
    - ✅ S4HANA Monochrome 디자인 (3-Color Rule)
-   - ✅ Governing messages (모든 콘텐츠 슬라이드에 필수)
+   - ✅ Governing messages (모든 콘텐츠 슬라이드에 필수, 16pt Bold)
    - ✅ 슬라이드 크기: 10.83" × 7.5"
    - ✅ 폰트: Arial (제목), 맑은 고딕 (본문)
+   - ✅ 폰트 크기: 8-11pt (본문 텍스트) - 작은 폰트로 콘텐츠 밀도 높이기!
+   - ✅ 콘텐츠 밀도: 85% 이상 (여백 최소화)
+   - ✅ 시각 요소: 슬라이드당 10-50개 도형 (플로우차트, 화살표, 다이어그램)
+   - ✅ Part 번호: "Part N" = Session N (Part 1 = Session 1만, NOT Sessions 1-3!)
    - ✅ JSON → HTML → PPTX 워크플로우 사용
 
 자세한 내용은 `CLAUDE.md`의 체크리스트를 참조하세요.
