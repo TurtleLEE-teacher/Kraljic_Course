@@ -178,6 +178,28 @@ cd "전략적 재고운영 및 자재계획수립"
 
 AI 도구를 사용하여 이 레포지토리를 작업하는 경우, 반드시 `CLAUDE.md` 파일을 먼저 읽어주세요. 한국어 콘텐츠 처리, 파일 명명 규칙, 데이터 스키마 등 중요한 가이드라인이 포함되어 있습니다.
 
+#### ⚠️ PPTX 생성 시 필수 확인사항
+
+**PPTX 파일을 생성하기 전에 반드시**:
+
+1. **CLAUDE.md의 "PPTX Generation Guidelines" 섹션을 완전히 읽을 것**
+   - Skill 문서 전체 읽기 (offset/limit 없이)
+   - S4HANA 참조 파일 분석
+   - Monochrome 디자인 시스템 이해
+
+2. **참조 파일 확인**:
+   - 스타일 참조: `PPTX_SAMPLE/S4HANA_PI단계_단계 종료보고_20230510_v.1.4.pptx`
+   - Skill 문서: `skill/SKILL.md`, `skill/html2pptx.md`, `skill/css.md`
+
+3. **필수 준수 사항**:
+   - ✅ S4HANA Monochrome 디자인 (3-Color Rule)
+   - ✅ Governing messages (모든 콘텐츠 슬라이드에 필수)
+   - ✅ 슬라이드 크기: 10.83" × 7.5"
+   - ✅ 폰트: Arial (제목), 맑은 고딕 (본문)
+   - ✅ JSON → HTML → PPTX 워크플로우 사용
+
+자세한 내용은 `CLAUDE.md`의 체크리스트를 참조하세요.
+
 ## 📄 라이선스
 
 교육 목적으로 자유롭게 활용 가능합니다.
