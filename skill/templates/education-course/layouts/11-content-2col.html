@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2-Column Content</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/theme-strategic-edu.css">
+</head>
+<body>
+  <!--
+    2-Column Content Template
+    용도: 본문 내용을 좌우 2단으로 구성
+    사용 사례: 비교, 개념 설명, 다이어그램 + 텍스트
+  -->
+  <div class="slide session-{{session}}">
+    <div class="slide-content">
+      <!-- Header -->
+      <div class="slide-header">
+        <h1 class="slide-title">{{title}}</h1>
+        <span class="slide-session-badge">{{sessionBadge}}</span>
+      </div>
+
+      <!-- 2-Column Layout -->
+      <div class="layout-content content-2col">
+        <!-- Left Column -->
+        <div class="col-left">
+          <h2 class="section-title">{{leftTitle}}</h2>
+          <div class="body-text">{{leftContent}}</div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="col-right">
+          <h2 class="section-title">{{rightTitle}}</h2>
+          <div class="body-text">{{rightContent}}</div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="slide-footer">
+        <span>{{footer}}</span>
+        <span class="slide-number">{{slideNumber}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사용 예시 (JSON 데이터) -->
+  <!--
+  {
+    "layout": "content-2col",
+    "session": 1,
+    "data": {
+      "title": "SCM Value Chain 구조",
+      "sessionBadge": "1회차",
+      "leftTitle": "기존 방식",
+      "leftContent": "<ul class='bullet-list'><li>부서별 독립 운영</li><li>정보 공유 부족</li><li>재고 중복 발생</li></ul>",
+      "rightTitle": "통합 SCM",
+      "rightContent": "<ul class='bullet-list'><li>전체 최적화</li><li>실시간 정보 공유</li><li>재고 최소화</li></ul>",
+      "footer": "전략적 재고운영 교육",
+      "slideNumber": 3
+    }
+  }
+  -->
+
+  <!-- 2-Column with List and Diagram Example -->
+  <!--
+  {
+    "layout": "content-2col",
+    "session": 2,
+    "data": {
+      "title": "병목자재 특성 및 관리 전략",
+      "sessionBadge": "2회차",
+      "leftTitle": "특성 (Why So)",
+      "leftContent": "<ul class='bullet-list'><li>공급처 제한적 (독점 또는 과점)</li><li>대체재 없음</li><li>공급 중단 시 사업 영향 큼</li><li>예시: 반도체 칩, 희토류</li></ul>",
+      "rightTitle": "관리 전략 (How)",
+      "rightContent": "<div class='process-flow'><div class='process-step'><div class='process-step-number'>1</div><div class='process-step-title'>공급 안정성</div></div><div class='process-arrow'>→</div><div class='process-step'><div class='process-step-number'>2</div><div class='process-step-title'>리스크 완화</div></div><div class='process-arrow'>→</div><div class='process-step'><div class='process-step-number'>3</div><div class='process-step-title'>관계 강화</div></div></div>",
+      "footer": "전략적 재고운영 교육",
+      "slideNumber": 10
+    }
+  }
+  -->
+</body>
+</html>

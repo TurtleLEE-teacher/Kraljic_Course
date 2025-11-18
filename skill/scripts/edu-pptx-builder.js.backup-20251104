@@ -1,0 +1,516 @@
+/**
+ * EduPptxBuilder - 교육자료 전용 PPTX 생성 도구
+ *
+ * 기능:
+ * - PptxGenJS 래핑
+ * - 테마 기반 슬라이드 생성
+ * - HTML 템플릿 → PPTX 변환
+ * - 디자인 검증 (3-Color Rule, 텍스트 오버플로우)
+ * - 배치 생성 지원
+ *
+ * 사용법:
+ * ```javascript
+ * import EduPptxBuilder from './edu-pptx-builder.js';
+ *
+ * const builder = new EduPptxBuilder('strategic-edu');
+ * await builder.addSlideFromTemplate('cover', coverData);
+ * await builder.addSlideFromTemplate('content-2col', contentData);
+ * await builder.save('output.pptx');
+ * ```
+ */
+
+import PptxGenJS from 'pptxgenjs';
+import fs from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import Handlebars from 'handlebars';
+import chalk from 'chalk';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+/**
+ * 색상 상수 (CSS Variables와 동기화)
+ */
+const COLORS = {
+  // Brand
+  primary: '1a5276',
+  secondary: '3498db',
+  accent: 'e67e22',
+
+  // Material Categories
+  bottleneck: 'e67e22',
+  leverage: '27ae60',
+  strategic: '8e44ad',
+  routine: '95a5a6',
+
+  // Sessions
+  session1: '1a5276',
+  session2: 'e67e22',
+  session3: '27ae60',
+  session4: '8e44ad',
+  session5: '95a5a6',
+  session6: '3498db',
+  session7: 'c0392b',
+
+  // Neutrals
+  white: 'ffffff',
+  gray100: 'f8f9fa',
+  gray600: '6c757d',
+  gray900: '212529',
+  black: '000000',
+};
+
+/**
+ * 폰트 크기 상수 (pt)
+ */
+const FONT_SIZES = {
+  title: 32,
+  subtitle: 24,
+  body: 20,
+  caption: 18,
+  small: 16,
+  footer: 14,
+};
+
+/**
+ * 레이아웃 상수 (inches)
+ */
+const LAYOUT = {
+  slideWidth: 10,      // 960px / 96dpi
+  slideHeight: 5.625,  // 540px / 96dpi
+  margin: 0.42,        // 40px / 96dpi
+  safeWidth: 9.17,     // 880px / 96dpi
+  safeHeight: 4.79,    // 460px / 96dpi
+};
+
+/**
+ * EduPptxBuilder 클래스
+ */
+class EduPptxBuilder {
+  /**
+   * @param {string} theme - 테마 이름 (기본값: 'strategic-edu')
+   * @param {object} options - 추가 옵션
+   */
+  constructor(theme = 'strategic-edu', options = {}) {
+    this.pptx = new PptxGenJS();
+    this.theme = theme;
+    this.options = {
+      debug: options.debug || false,
+      strictValidation: options.strictValidation || true,
+      ...options
+    };
+
+    this.slides = [];
+    this.warnings = [];
+    this.errors = [];
+
+    this._initializePptx();
+    this._loadTheme();
+
+    if (this.options.debug) {
+      console.log(chalk.blue('EduPptxBuilder initialized with theme:'), chalk.green(theme));
+    }
+  }
+
+  /**
+   * PPTX 기본 설정 초기화
+   */
+  _initializePptx() {
+    this.pptx.defineLayout({ name: 'EDUCATION', width: LAYOUT.slideWidth, height: LAYOUT.slideHeight });
+    this.pptx.layout = 'EDUCATION';
+
+    this.pptx.author = 'EduPptxBuilder';
+    this.pptx.company = 'Strategic Inventory Education';
+    this.pptx.revision = '1';
+    this.pptx.subject = '전략적 재고운영 및 자재계획 교육';
+    this.pptx.title = '교육 과정 프레젠테이션';
+  }
+
+  /**
+   * 테마 로드
+   */
+  _loadTheme() {
+    // 테마별 기본 색상 설정
+    switch (this.theme) {
+      case 'strategic-edu':
+        this.themeColors = {
+          primary: COLORS.primary,
+          secondary: COLORS.secondary,
+          accent: COLORS.accent,
+        };
+        break;
+      default:
+        this.themeColors = {
+          primary: COLORS.primary,
+          secondary: COLORS.secondary,
+          accent: COLORS.accent,
+        };
+    }
+  }
+
+  /**
+   * 레이아웃 템플릿 로드
+   * @param {string} layoutName - 레이아웃 이름 (예: 'cover', 'content-2col')
+   * @returns {Promise<string>} HTML 템플릿 내용
+   */
+  async _loadLayoutTemplate(layoutName) {
+    const templateDir = path.join(__dirname, '..', 'templates', 'education-course', 'layouts');
+
+    // 레이아웃 파일명 매핑
+    const layoutFiles = {
+      'cover': '00-cover.html',
+      'toc': '01-toc.html',
+      'section-divider': '02-section-divider.html',
+      'content-1col': '10-content-1col.html',
+      'content-2col': '11-content-2col.html',
+      'content-3col': '12-content-3col.html',
+      'list-bullets': '20-list-bullets.html',
+      'list-numbered': '21-list-numbered.html',
+      'table-simple': '30-table-simple.html',
+      'table-comparison': '31-table-comparison.html',
+      'diagram-process': '50-diagram-process.html',
+      'diagram-kraljic': '51-diagram-kraljic.html',
+      'summary': '99-summary.html',
+    };
+
+    const filename = layoutFiles[layoutName];
+    if (!filename) {
+      throw new Error(`Unknown layout: ${layoutName}`);
+    }
+
+    const templatePath = path.join(templateDir, filename);
+    const templateContent = await fs.readFile(templatePath, 'utf-8');
+
+    return templateContent;
+  }
+
+  /**
+   * 세션별 색상 가져오기
+   * @param {number} session - 세션 번호 (1-7)
+   * @returns {string} 색상 코드
+   */
+  _getSessionColor(session) {
+    return COLORS[`session${session}`] || COLORS.primary;
+  }
+
+  /**
+   * 표지 슬라이드 추가
+   * @param {object} data - 슬라이드 데이터
+   */
+  addCoverSlide(data) {
+    const slide = this.pptx.addSlide();
+    const sessionColor = this._getSessionColor(data.session || 1);
+
+    // 배경 그라디언트
+    slide.background = {
+      fill: sessionColor
+    };
+
+    // 메인 타이틀
+    slide.addText(data.title || '제목', {
+      x: 1,
+      y: 1.5,
+      w: 8,
+      h: 1.5,
+      fontSize: 48,
+      bold: true,
+      color: COLORS.white,
+      align: 'center',
+      valign: 'middle',
+      fontFace: 'Noto Sans KR'
+    });
+
+    // 부제목
+    if (data.subtitle) {
+      slide.addText(data.subtitle, {
+        x: 1,
+        y: 3.2,
+        w: 8,
+        h: 0.8,
+        fontSize: 28,
+        color: COLORS.white,
+        align: 'center',
+        valign: 'middle',
+        fontFace: 'Noto Sans KR'
+      });
+    }
+
+    // 메타 정보
+    const metaText = [
+      data.course || '',
+      data.date || '',
+      data.instructor || ''
+    ].filter(Boolean).join('\n');
+
+    if (metaText) {
+      slide.addText(metaText, {
+        x: 1,
+        y: 4.5,
+        w: 8,
+        h: 0.8,
+        fontSize: FONT_SIZES.body,
+        color: COLORS.white,
+        align: 'center',
+        valign: 'middle',
+        fontFace: 'Noto Sans KR'
+      });
+    }
+
+    this.slides.push({ type: 'cover', slide, data });
+
+    if (this.options.debug) {
+      console.log(chalk.green('✓'), 'Cover slide added:', data.title);
+    }
+  }
+
+  /**
+   * 2단 본문 슬라이드 추가
+   * @param {object} data - 슬라이드 데이터
+   */
+  addContent2ColSlide(data) {
+    const slide = this.pptx.addSlide();
+    const sessionColor = this._getSessionColor(data.session || 1);
+
+    // 헤더
+    this._addHeader(slide, data.title, data.sessionBadge, sessionColor);
+
+    // 왼쪽 열
+    slide.addText(data.leftTitle || '왼쪽', {
+      x: LAYOUT.margin,
+      y: 1.2,
+      w: 4.2,
+      h: 0.4,
+      fontSize: FONT_SIZES.subtitle,
+      bold: true,
+      color: sessionColor,
+      fontFace: 'Noto Sans KR'
+    });
+
+    slide.addText(data.leftContent || '', {
+      x: LAYOUT.margin,
+      y: 1.7,
+      w: 4.2,
+      h: 3.0,
+      fontSize: FONT_SIZES.body,
+      color: COLORS.gray900,
+      fontFace: 'Noto Sans KR',
+      valign: 'top'
+    });
+
+    // 오른쪽 열
+    slide.addText(data.rightTitle || '오른쪽', {
+      x: 5.4,
+      y: 1.2,
+      w: 4.2,
+      h: 0.4,
+      fontSize: FONT_SIZES.subtitle,
+      bold: true,
+      color: sessionColor,
+      fontFace: 'Noto Sans KR'
+    });
+
+    slide.addText(data.rightContent || '', {
+      x: 5.4,
+      y: 1.7,
+      w: 4.2,
+      h: 3.0,
+      fontSize: FONT_SIZES.body,
+      color: COLORS.gray900,
+      fontFace: 'Noto Sans KR',
+      valign: 'top'
+    });
+
+    // 푸터
+    this._addFooter(slide, data.footer, data.slideNumber);
+
+    this.slides.push({ type: 'content-2col', slide, data });
+
+    if (this.options.debug) {
+      console.log(chalk.green('✓'), '2-column content slide added:', data.title);
+    }
+  }
+
+  /**
+   * 불릿 리스트 슬라이드 추가
+   * @param {object} data - 슬라이드 데이터
+   */
+  addBulletListSlide(data) {
+    const slide = this.pptx.addSlide();
+    const sessionColor = this._getSessionColor(data.session || 1);
+
+    // 헤더
+    this._addHeader(slide, data.title, data.sessionBadge, sessionColor);
+
+    // 소개 텍스트 (선택)
+    let yPos = 1.2;
+    if (data.introduction) {
+      slide.addText(data.introduction, {
+        x: LAYOUT.margin,
+        y: yPos,
+        w: LAYOUT.safeWidth,
+        h: 0.5,
+        fontSize: FONT_SIZES.body,
+        color: COLORS.gray800,
+        fontFace: 'Noto Sans KR'
+      });
+      yPos += 0.6;
+    }
+
+    // 불릿 리스트
+    if (data.items && data.items.length > 0) {
+      const bullets = data.items.map(item => ({ text: item, options: { bullet: true, color: COLORS.gray900 } }));
+
+      slide.addText(bullets, {
+        x: LAYOUT.margin,
+        y: yPos,
+        w: LAYOUT.safeWidth,
+        h: 3.5,
+        fontSize: FONT_SIZES.body,
+        fontFace: 'Noto Sans KR',
+        bullet: { type: 'bullet', color: sessionColor },
+        lineSpacing: 32
+      });
+    }
+
+    // 푸터
+    this._addFooter(slide, data.footer, data.slideNumber);
+
+    this.slides.push({ type: 'list-bullets', slide, data });
+
+    if (this.options.debug) {
+      console.log(chalk.green('✓'), 'Bullet list slide added:', data.title);
+    }
+  }
+
+  /**
+   * 헤더 추가 (공통)
+   */
+  _addHeader(slide, title, badge, color) {
+    // 제목
+    slide.addText(title || '제목', {
+      x: LAYOUT.margin,
+      y: LAYOUT.margin,
+      w: 7.5,
+      h: 0.6,
+      fontSize: FONT_SIZES.title,
+      bold: true,
+      color: color,
+      fontFace: 'Noto Sans KR'
+    });
+
+    // 세션 배지
+    if (badge) {
+      slide.addText(badge, {
+        x: 8.5,
+        y: LAYOUT.margin,
+        w: 1.1,
+        h: 0.4,
+        fontSize: FONT_SIZES.caption,
+        bold: true,
+        color: COLORS.white,
+        align: 'center',
+        valign: 'middle',
+        fontFace: 'Noto Sans KR',
+        fill: { color: color }
+      });
+    }
+
+    // 헤더 하단 라인
+    slide.addShape(this.pptx.ShapeType.rect, {
+      x: LAYOUT.margin,
+      y: 0.9,
+      w: LAYOUT.safeWidth,
+      h: 0.02,
+      fill: { color: color }
+    });
+  }
+
+  /**
+   * 푸터 추가 (공통)
+   */
+  _addFooter(slide, footer, slideNumber) {
+    // 상단 라인
+    slide.addShape(this.pptx.ShapeType.rect, {
+      x: LAYOUT.margin,
+      y: 5.1,
+      w: LAYOUT.safeWidth,
+      h: 0.01,
+      fill: { color: COLORS.gray300 || 'cccccc' }
+    });
+
+    // 푸터 텍스트
+    if (footer) {
+      slide.addText(footer, {
+        x: LAYOUT.margin,
+        y: 5.2,
+        w: 7,
+        h: 0.3,
+        fontSize: FONT_SIZES.footer,
+        color: COLORS.gray600,
+        fontFace: 'Noto Sans KR'
+      });
+    }
+
+    // 슬라이드 번호
+    if (slideNumber) {
+      slide.addText(`Slide ${slideNumber}`, {
+        x: 8,
+        y: 5.2,
+        w: 1.6,
+        h: 0.3,
+        fontSize: FONT_SIZES.footer,
+        color: COLORS.gray600,
+        align: 'right',
+        fontFace: 'Noto Sans KR'
+      });
+    }
+  }
+
+  /**
+   * PPTX 파일 저장
+   * @param {string} filename - 출력 파일명
+   */
+  async save(filename) {
+    try {
+      await this.pptx.writeFile({ fileName: filename });
+
+      if (this.options.debug) {
+        console.log(chalk.green('\n✓ PPTX saved successfully:'), chalk.cyan(filename));
+        console.log(chalk.gray(`  Total slides: ${this.slides.length}`));
+        console.log(chalk.gray(`  Warnings: ${this.warnings.length}`));
+        console.log(chalk.gray(`  Errors: ${this.errors.length}`));
+      }
+
+      return {
+        success: true,
+        filename,
+        slideCount: this.slides.length,
+        warnings: this.warnings,
+        errors: this.errors
+      };
+    } catch (error) {
+      console.error(chalk.red('Error saving PPTX:'), error);
+      throw error;
+    }
+  }
+
+  /**
+   * 품질 보고서 생성
+   * @returns {object} 품질 보고서
+   */
+  getQualityReport() {
+    return {
+      totalSlides: this.slides.length,
+      warnings: this.warnings,
+      errors: this.errors,
+      slideTypes: this.slides.reduce((acc, s) => {
+        acc[s.type] = (acc[s.type] || 0) + 1;
+        return acc;
+      }, {}),
+      timestamp: new Date().toISOString()
+    };
+  }
+}
+
+export default EduPptxBuilder;

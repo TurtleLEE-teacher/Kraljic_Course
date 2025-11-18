@@ -1,0 +1,591 @@
+---
+name: pptx-mslee
+description: "Professional education materials PPTX generator using HTML→PPTX workflow. JSON data → HTML templates → high-quality PowerPoint with 3-Color Rule, MECE principles, Why-How-So What framework, and Noto Sans KR typography. Fully automated with design system enforcement."
+license: Proprietary. LICENSE.txt has complete terms
+---
+
+# pptx-mslee - 교육자료 전용 고품질 PPTX 생성 도구
+
+**Professional Education Materials PowerPoint Generator**
+
+## 🎯 Overview
+
+This tool creates **high-quality PowerPoint presentations** specifically designed for Korean education materials using an **HTML→PPTX workflow** that ensures:
+
+- ✅ **Design Consistency**: 100% adherence to 3-Color Rule and typography standards
+- ✅ **No Text Overflow**: Precise layout control through HTML templates
+- ✅ **Full Automation**: JSON data → HTML → PPTX in one command
+- ✅ **Korean Education Standards**: MECE, Why-How-So What, Noto Sans KR
+
+**Primary Use Case**: Creating structured training courses (e.g., Strategic Inventory Management, Supply Chain courses) with 50-100 slides maintaining perfect design consistency.
+
+---
+
+## 🌟 PRIMARY WORKFLOW: Education Materials (JSON → HTML → PPTX)
+
+**This is the REQUIRED workflow for creating education materials** to ensure high quality.
+
+### Why This Workflow?
+
+| Feature | Direct PptxGenJS | **HTML→PPTX (This Tool)** |
+|---------|------------------|---------------------------|
+| Layout Precision | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| Text Overflow Prevention | ❌ Manual check | ✅ Automatic |
+| Design Consistency | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ (CSS enforced) |
+| 3-Color Rule Compliance | ⭐⭐ | ⭐⭐⭐⭐⭐ (Enforced) |
+| Speed | ⭐⭐⭐⭐⭐ (1s) | ⭐⭐⭐ (3-5s) |
+
+**Conclusion**: We sacrifice 2-4 seconds for **perfect quality** ✅
+
+### Quick Start (5 Minutes)
+
+```bash
+# 1. Install dependencies (one-time)
+cd ~/.claude/skills/pptx-mslee
+npm install
+
+# 2. Verify html2pptx is installed
+npm list -g @ant/html2pptx || npm install -g html2pptx.tgz
+
+# 3. Create JSON data
+cat > data/my-course.json << 'EOF'
+{
+  "course": "My Training Course",
+  "session": 1,
+  "slides": [
+    {
+      "id": 1,
+      "layout": "cover",
+      "data": {
+        "title": "Course Title",
+        "subtitle": "Subtitle",
+        "course": "Course Name",
+        "date": "2025"
+      }
+    }
+  ]
+}
+EOF
+
+# 4. Generate PPTX (auto: JSON → HTML → PPTX)
+node scripts/generate-course.js data/my-course.json
+
+# 5. Open result
+open output/my-course.pptx
+```
+
+**Result**: High-quality PPTX with perfect design consistency!
+
+### JSON Data Structure
+
+**Course-level metadata:**
+```json
+{
+  "course": "Course Title",
+  "session": 1,              // Session number (1-7 for different colors)
+  "title": "Session Title",
+  "totalSlides": 5,
+  "description": "Session description",
+  "slides": [...]            // Array of slide objects
+}
+```
+
+**Slide object structure:**
+```json
+{
+  "id": 1,
+  "layout": "cover|content-2col|list-bullets|...",
+  "data": {
+    // Layout-specific data (see below)
+  }
+}
+```
+
+**Available Layouts:**
+
+#### 1. Cover (Title Slide)
+```json
+{
+  "layout": "cover",
+  "data": {
+    "title": "Main Title",
+    "subtitle": "Subtitle",
+    "course": "Course Name",
+    "date": "2025",
+    "instructor": "Instructor Name"
+  }
+}
+```
+
+**Features**:
+- Gradient background (session color)
+- Center-aligned
+- 48pt bold title, 28pt subtitle
+
+#### 2. Content-2Col (Two-Column Content)
+```json
+{
+  "layout": "content-2col",
+  "data": {
+    "title": "Slide Title",
+    "sessionBadge": "Session 1",
+    "leftTitle": "Left Column Title",
+    "leftContent": "Left content\n(use \\n for line breaks)",
+    "rightTitle": "Right Column Title",
+    "rightContent": "Right content",
+    "footer": "Course Name",
+    "slideNumber": 3
+  }
+}
+```
+
+**Features**:
+- 50:50 column split
+- Perfect for comparisons (Before/After, Traditional/Strategic)
+- Session color accent on titles
+
+#### 3. List-Bullets (Bullet Points)
+```json
+{
+  "layout": "list-bullets",
+  "data": {
+    "title": "Slide Title",
+    "sessionBadge": "Session 1",
+    "introduction": "Optional intro text",
+    "items": [
+      "First bullet point",
+      "Second bullet point",
+      "Third bullet point (max 6 recommended)"
+    ],
+    "footer": "Course Name",
+    "slideNumber": 4
+  }
+}
+```
+
+**Features**:
+- Maximum 6 items (6x6 rule)
+- Session color bullets
+- Optional introduction paragraph
+
+### Design Principles (Enforced by HTML Templates)
+
+#### 3-Color Rule (한 페이지당 최대 3개 색상)
+**Strictly enforced** through CSS variables:
+```css
+:root {
+  --primary: #1a5276;    /* Title, structure */
+  --secondary: #3498db;  /* Accent, highlights */
+  --neutral: #6c757d;    /* Body text */
+  /* White/gray/black don't count */
+}
+```
+
+Each slide uses **maximum 3 colors**:
+1. Primary (from session color)
+2. Accent (for emphasis)
+3. Neutral (text)
+
+#### Session Colors (7 Sessions)
+| Session | Color | Hex | Theme |
+|---------|-------|-----|-------|
+| 1 | Blue | #1a5276 | SCM & Kraljic |
+| 2 | Orange | #e67e22 | Bottleneck Materials |
+| 3 | Green | #27ae60 | Leverage Materials |
+| 4 | Purple | #8e44ad | Strategic Materials |
+| 5 | Gray | #95a5a6 | Routine Materials |
+| 6 | Light Blue | #3498db | Summary |
+| 7 | Red | #c0392b | Case Study |
+
+#### Typography (Noto Sans KR)
+```css
+--font-title: 18pt Bold;      /* Slide titles */
+--font-subtitle: 16pt Medium;  /* Section headings */
+--font-body: 14pt Regular;     /* Body text */
+--font-caption: 12pt Regular;  /* Captions */
+--font-footer: 10pt Regular;   /* Footer */
+```
+
+#### MECE Principle (상호배타적이고 전체포괄적)
+Content structure must be:
+- **Mutually Exclusive**: No overlapping categories
+- **Collectively Exhaustive**: Cover all possibilities
+
+Example: Time-based (Past → Present → Future), Process-based (Input → Process → Output)
+
+#### Why-How-So What Framework
+Every topic follows this structure:
+```html
+<section class="why">
+  <h2>Why: 왜 필요한가?</h2>
+  <p>Problem statement, current challenges</p>
+</section>
+
+<section class="how">
+  <h2>How: 어떻게 하는가?</h2>
+  <ol>
+    <li>Solution approach</li>
+    <li>Key steps</li>
+  </ol>
+</section>
+
+<section class="so-what">
+  <h2>So What: 어떤 효과?</h2>
+  <p>Expected outcomes, action items</p>
+</section>
+```
+
+### Detailed Workflow Steps
+
+#### Step 1: Create JSON Data File
+
+```bash
+# Example: Strategic Inventory Course - Session 1
+cat > data/session1-scm-kraljic.json << 'EOF'
+{
+  "course": "전략적 재고운영 및 자재계획 수립",
+  "session": 1,
+  "title": "SCM 개념과 Kraljic Matrix",
+  "slides": [
+    {
+      "id": 1,
+      "layout": "cover",
+      "data": {
+        "title": "1회차: SCM 개념과 Kraljic Matrix",
+        "subtitle": "전략적 재고운영의 기초",
+        "course": "전략적 재고운영 교육",
+        "date": "2025"
+      }
+    },
+    {
+      "id": 2,
+      "layout": "content-2col",
+      "data": {
+        "title": "전통적 재고관리 vs 전략적 재고운영",
+        "sessionBadge": "1회차",
+        "leftTitle": "전통적 재고관리",
+        "leftContent": "• 단순 재고 수량 관리\n• 부서별 독립 운영\n• 과거 데이터 기반",
+        "rightTitle": "전략적 재고운영",
+        "rightContent": "• 공급망 전체 최적화\n• 부서 간 협업\n• AI/데이터 기반 예측",
+        "footer": "전략적 재고운영 교육",
+        "slideNumber": 2
+      }
+    }
+  ]
+}
+EOF
+```
+
+#### Step 2: Generate PPTX (Automatic HTML → PPTX)
+
+```bash
+node scripts/generate-course.js data/session1-scm-kraljic.json
+```
+
+**What happens internally** (fully automatic):
+1. **JSON parsing**: Load course data
+2. **HTML generation**: For each slide:
+   - Load Handlebars template (`layouts/{layoutName}.hbs`)
+   - Inject CSS variables (`styles/theme-strategic-edu.css`)
+   - Apply session color (`--session-1: #1a5276`)
+   - Render HTML to `temp/slide-{id}.html`
+3. **html2pptx conversion**: Convert each HTML file to PPTX slide
+4. **PPTX saving**: Combine all slides and save
+5. **Cleanup**: Remove temporary HTML files (unless `--keep-html` flag)
+
+**Options:**
+```bash
+# Debug mode (show detailed logs)
+node scripts/generate-course.js data/my-course.json --debug
+
+# Keep HTML files for inspection
+node scripts/generate-course.js data/my-course.json --keep-html
+
+# Generate quality report
+node scripts/generate-course.js data/my-course.json --report
+
+# Custom output filename
+node scripts/generate-course.js data/my-course.json --output custom-name.pptx
+```
+
+#### Step 3: Verify Quality (Automatic)
+
+The tool automatically:
+- ✅ Checks 3-Color Rule compliance
+- ✅ Validates text overflow (via HTML layout)
+- ✅ Ensures font consistency (Noto Sans KR)
+- ✅ Verifies session color application
+
+**Manual verification** (optional):
+```bash
+# Generate thumbnail grid
+python scripts/thumbnail.py output/session1-scm-kraljic.pptx
+
+# Review thumbnail for:
+# - Text cutoff (should be none)
+# - Layout alignment (should be perfect)
+# - Color consistency (should follow session color)
+```
+
+#### Step 4: Batch Processing (Multiple Sessions)
+
+```bash
+# Generate all 7 sessions at once
+node scripts/generate-course.js data/session*.json --batch
+
+# Result:
+# output/session1-scm-kraljic.pptx (13 slides)
+# output/session2-bottleneck.pptx (10 slides)
+# output/session3-leverage.pptx (10 slides)
+# ... etc.
+```
+
+### File Structure
+
+```
+pptx-mslee/
+├── data/                          # JSON data files
+│   ├── session1-scm-kraljic.json
+│   └── session2-bottleneck.json
+│
+├── templates/education-course/    # HTML templates (Handlebars)
+│   ├── layouts/
+│   │   ├── cover.hbs              # Cover slide template
+│   │   ├── content-2col.hbs       # Two-column template
+│   │   └── list-bullets.hbs       # Bullet list template
+│   ├── styles/
+│   │   ├── variables.css          # Design variables
+│   │   └── theme-strategic-edu.css # Course theme
+│   └── partials/
+│       ├── header.hbs             # Reusable header
+│       └── footer.hbs             # Reusable footer
+│
+├── scripts/
+│   ├── generate-course.js         # Main generation script
+│   ├── edu-pptx-builder.js        # Builder class (HTML-based)
+│   └── html-generator.js          # Handlebars → HTML
+│
+├── temp/                          # Temporary HTML files
+│   └── slide-*.html               # (auto-deleted after conversion)
+│
+└── output/                        # Generated PPTX files
+    └── *.pptx
+```
+
+### Troubleshooting
+
+**Error: "Cannot find module '@ant/html2pptx'"**
+```bash
+# Solution: Install html2pptx
+npm install -g ~/.claude/skills/pptx-mslee/html2pptx.tgz
+npm install -g playwright
+```
+
+**Error: "Template not found: {layoutName}"**
+```bash
+# Solution: Check available layouts
+ls templates/education-course/layouts/
+
+# Ensure JSON references correct layout name
+# "layout": "content-2col" → layouts/content-2col.hbs must exist
+```
+
+**Warning: Text overflow detected**
+```bash
+# Solution: Reduce text length or adjust layout
+# Edit JSON data to shorten content
+# Or use different layout with more space
+```
+
+**Slow generation (>10 seconds per slide)**
+```bash
+# Normal: 3-5 seconds per slide with html2pptx
+# If slower, check:
+node --version  # Should be >= 18.0.0
+npm list -g playwright  # Should be installed
+```
+
+---
+
+## 📚 Advanced Workflows (For Specific Use Cases)
+
+### A. Editing Existing PPTX Files (OOXML)
+
+**Use when**: You need to modify an existing PowerPoint file's XML structure directly.
+
+**Workflow**:
+1. **Read OOXML guide**: `cat ooxml.md` (complete file, ~500 lines)
+2. **Unpack**: `python ooxml/scripts/unpack.py input.pptx unpacked/`
+3. **Edit XML**: Modify `ppt/slides/slide{N}.xml` files
+4. **Validate**: `python ooxml/scripts/validate.py unpacked/ --original input.pptx`
+5. **Pack**: `python ooxml/scripts/pack.py unpacked/ output.pptx`
+
+**Key XML files**:
+- `ppt/presentation.xml` - Slide references
+- `ppt/slides/slide{N}.xml` - Slide contents
+- `ppt/theme/theme1.xml` - Colors and fonts
+
+### B. Reusing Existing Templates (Python Scripts)
+
+**Use when**: You have an existing PowerPoint template and want to duplicate/rearrange slides.
+
+**Workflow**:
+1. **Extract template text**: `python -m markitdown template.pptx > template-content.md`
+2. **Create thumbnail grid**: `python scripts/thumbnail.py template.pptx`
+3. **Analyze inventory**: Create `template-inventory.md` with slide descriptions
+4. **Rearrange slides**: `python scripts/rearrange.py template.pptx working.pptx 0,5,5,12,20`
+5. **Extract text shapes**: `python scripts/inventory.py working.pptx text-inventory.json`
+6. **Replace text**: Create `replacement-text.json` and run:
+   ```bash
+   python scripts/replace.py working.pptx replacement-text.json output.pptx
+   ```
+
+**Key scripts**:
+- `inventory.py` - Extract all text shapes with positions
+- `rearrange.py` - Duplicate/reorder/delete slides
+- `replace.py` - Replace text content while preserving formatting
+
+### C. Reading and Analyzing PPTX
+
+**Text extraction** (markdown format):
+```bash
+python -m markitdown presentation.pptx
+```
+
+**Visual analysis** (thumbnail grids):
+```bash
+# Create 5-column grid (max 30 slides per grid)
+python scripts/thumbnail.py presentation.pptx
+
+# Custom: 4 columns, 20 slides per grid
+python scripts/thumbnail.py presentation.pptx --cols 4
+
+# Output: thumbnails.jpg (or thumbnails-1.jpg, thumbnails-2.jpg for large decks)
+```
+
+**Raw XML access** (for advanced analysis):
+```bash
+python ooxml/scripts/unpack.py presentation.pptx unpacked/
+
+# Read specific files:
+# - ppt/presentation.xml (structure)
+# - ppt/slides/slide1.xml (first slide content)
+# - ppt/notesSlides/notesSlide1.xml (speaker notes)
+# - ppt/comments/modernComment_*.xml (comments)
+```
+
+---
+
+## 🔧 Dependencies
+
+**Required (install once):**
+
+### Node.js Dependencies
+```bash
+cd ~/.claude/skills/pptx-mslee
+npm install
+
+# Packages:
+# - pptxgenjs: PowerPoint generation library
+# - handlebars: Template engine (for HTML generation)
+# - @ant/html2pptx: HTML → PPTX conversion (install globally)
+# - playwright: HTML rendering (required by html2pptx)
+# - cheerio: HTML parsing
+# - chalk: Terminal colors
+```
+
+### Global Dependencies
+```bash
+# html2pptx (critical for HTML→PPTX workflow)
+npm install -g ~/.claude/skills/pptx-mslee/html2pptx.tgz
+
+# Playwright (required by html2pptx)
+npm install -g playwright
+npx playwright install  # Download browser binaries
+```
+
+### Python Dependencies
+```bash
+# For OOXML editing and template reuse
+pip install "markitdown[pptx]"  # Text extraction
+pip install defusedxml          # Secure XML parsing
+pip install python-pptx         # PPTX manipulation
+pip install Pillow              # Thumbnail generation
+
+# For PDF conversion (thumbnail script)
+sudo apt-get install libreoffice poppler-utils  # Linux
+# or brew install libreoffice poppler  # macOS
+```
+
+**Verification**:
+```bash
+# Check Node.js version (>= 18.0.0)
+node --version
+
+# Check html2pptx installation
+npm list -g @ant/html2pptx
+
+# Check Python packages
+pip list | grep -E "markitdown|defusedxml|python-pptx|Pillow"
+```
+
+---
+
+## 📖 Additional Documentation
+
+- **Quick Start Guide**: `docs/QUICK-START.md` - 5-minute tutorial
+- **Template Guide**: `docs/TEMPLATE-GUIDE.md` - How to create custom layouts
+- **HTML→PPTX Details**: `html2pptx.md` - Complete html2pptx syntax and examples
+- **OOXML Editing**: `ooxml.md` - XML structure and editing guide
+- **Design Guidelines**: `references/design-guidelines.md` - Education materials standards
+
+---
+
+## 🎓 Best Practices
+
+### 1. JSON Data Organization
+```
+data/
+├── session1-scm-kraljic.json      # Session 1 (13 slides)
+├── session2-bottleneck.json        # Session 2 (10 slides)
+└── session3-leverage.json          # Session 3 (10 slides)
+```
+
+### 2. Content Guidelines
+- **Titles**: Max 3 seconds to read (use governing messages)
+- **Bullets**: Max 6 items per slide (6x6 rule)
+- **Text**: Use `\n` for line breaks in JSON strings
+- **Colors**: Rely on session colors, avoid custom colors
+
+### 3. Version Control
+```bash
+# Track JSON data files
+git add data/*.json
+
+# Track template changes
+git add templates/
+
+# Ignore output files
+echo "output/" >> .gitignore
+echo "temp/" >> .gitignore
+```
+
+### 4. Quality Checks
+```bash
+# After generation, always verify:
+# 1. Thumbnail visual check
+python scripts/thumbnail.py output/my-course.pptx
+
+# 2. Quality report
+node scripts/generate-course.js data/my-course.json --report
+cat output/my-course-report.json
+
+# 3. Manual review in PowerPoint
+open output/my-course.pptx
+```
+
+---
+
+**Version**: 2.0 (HTML→PPTX Primary Workflow)
+**Last Updated**: 2025-01-03
+**Primary Maintainer**: pptx-mslee Team

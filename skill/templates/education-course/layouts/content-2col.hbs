@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2-Column Content</title>
+  {{> common-styles}}
+</head>
+<body>
+  <div class="slide session-{{session}}">
+    <div class="slide-content">
+      {{> header}}
+
+      <div class="layout-content content-2col">
+        <div class="col-left">
+          <h2 class="section-title">{{leftTitle}}</h2>
+          <div class="body-text">
+            {{{bulletListToUl leftContent}}}
+          </div>
+        </div>
+
+        <div class="col-right">
+          <h2 class="section-title">{{rightTitle}}</h2>
+          <div class="body-text">
+            {{{bulletListToUl rightContent}}}
+          </div>
+        </div>
+      </div>
+
+      {{> footer}}
+    </div>
+  </div>
+</body>
+</html>

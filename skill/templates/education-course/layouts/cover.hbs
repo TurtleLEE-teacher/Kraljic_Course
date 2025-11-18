@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cover Slide</title>
+  {{> common-styles}}
+</head>
+<body>
+  <div class="slide layout-cover session-{{session}}">
+    <div class="cover-content">
+      <h1 class="cover-title">{{title}}</h1>
+      <h2 class="cover-subtitle">{{subtitle}}</h2>
+      <div class="cover-meta">
+        <p>{{course}}</p>
+        <p>{{date}}</p>
+        <p>{{instructor}}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

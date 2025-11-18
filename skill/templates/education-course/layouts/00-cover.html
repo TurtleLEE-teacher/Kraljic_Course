@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cover Slide</title>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/theme-strategic-edu.css">
+</head>
+<body>
+  <!--
+    Cover Slide Template
+    용도: 교육 과정 표지, 회차별 시작 슬라이드
+    색상: 세션별 그라디언트 배경
+  -->
+  <div class="slide layout-cover session-1">
+    <div class="cover-content">
+      <!-- 메인 타이틀 -->
+      <h1 class="cover-title">{{title}}</h1>
+
+      <!-- 부제목 -->
+      <h2 class="cover-subtitle">{{subtitle}}</h2>
+
+      <!-- 메타 정보 -->
+      <div class="cover-meta">
+        <p>{{course}}</p>
+        <p>{{date}}</p>
+        <p>{{instructor}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 사용 예시 (JSON 데이터) -->
+  <!--
+  {
+    "layout": "cover",
+    "session": 1,
+    "data": {
+      "title": "1회차: SCM 개념과 Kraljic Matrix",
+      "subtitle": "전략적 재고운영의 기초",
+      "course": "전략적 재고운영 및 자재계획 수립",
+      "date": "2025",
+      "instructor": "강사명"
+    }
+  }
+  -->
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "name": "@ant/html2pptx",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "main": "./dist/html2pptx.cjs",
+  "module": "./dist/html2pptx.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/html2pptx.mjs",
+      "require": "./dist/html2pptx.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean -s && npm run build:typescript -s && npm run build:playwright -s && npm run build:node -s",
+    "build:node": "vite build",
+    "build:playwright": "vite build --config vite.config.playwright.ts",
+    "build:typescript": "tsc -p tsconfig.build.json",
+    "dev": "npm run clean -s && ./script/dev.sh",
+    "dev:node": "vite build --watch",
+    "dev:playwright": "vite build --watch --config vite.config.playwright.ts",
+    "dev:typecheck": "npm run typecheck -- --watch",
+    "export": "npm run test && npm run lint && ./script/pack.sh",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "npm run typecheck && npm run lint:eslint && npm run prettier:check",
+    "lint:eslint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "npm run lint:eslint -- --fix && npm run prettier",
+    "prettier": "prettier --write .",
+    "prettier:check": "prettier --check .",
+    "prepare": "npm run build -s"
+  },
+  "dependencies": {
+    "pkg-dir": "^9.0.0",
+    "playwright": "^1.48.0",
+    "pptxgenjs": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.1",
+    "nodemon": "^3.1.4",
+    "prettier": "^3.5.0",
+    "sharp": "^0.33.5",
+    "typescript": "^5.7.3",
+    "vite": "^7.1.7",
+    "vitest": "^3.0.5"
+  }
+}

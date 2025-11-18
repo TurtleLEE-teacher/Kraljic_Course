@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cover Slide</title>
+  <style>
+  /**
+   * Education Course CSS Variables
+   * 교육자료 전용 디자인 변수 시스템
+   */
+  
+  :root {
+    /* SLIDE DIMENSIONS (16:9) */
+    --slide-width: 960px;
+    --slide-height: 540px;
+    --grid-unit: 10px;
+  
+    /* Margins & Padding */
+    --margin-outer: 40px;
+    --safe-area-width: 880px;
+    --safe-area-height: 460px;
+    --padding-content: 20px;
+    --padding-small: 10px;
+    --padding-large: 30px;
+  
+    /* TYPOGRAPHY - Noto Sans KR */
+    --font-family: 'Noto Sans KR', sans-serif;
+  
+    /* Font Sizes */
+    --font-size-title: 32pt;
+    --font-size-subtitle: 24pt;
+    --font-size-body: 20pt;
+    --font-size-caption: 18pt;
+    --font-size-small: 16pt;
+    --font-size-footer: 14pt;
+  
+    /* Font Weights */
+    --font-weight-bold: 700;
+    --font-weight-medium: 500;
+    --font-weight-regular: 400;
+  
+    /* Line Heights */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.8;
+  
+    /* BRAND COLORS (3-Color Rule Base) */
+    --color-primary: #1a5276;
+    --color-primary-light: #2e6fa3;
+    --color-primary-dark: #0d2a3b;
+  
+    --color-secondary: #3498db;
+    --color-secondary-light: #5dade2;
+    --color-secondary-dark: #2471a3;
+  
+    --color-accent: #e67e22;
+    --color-accent-light: #f39c12;
+    --color-accent-dark: #d35400;
+  
+    /* Neutrals */
+    --color-white: #ffffff;
+    --color-gray-100: #f8f9fa;
+    --color-gray-200: #e9ecef;
+    --color-gray-300: #dee2e6;
+    --color-gray-400: #ced4da;
+    --color-gray-500: #adb5bd;
+    --color-gray-600: #6c757d;
+    --color-gray-700: #495057;
+    --color-gray-800: #343a40;
+    --color-gray-900: #212529;
+    --color-black: #000000;
+  
+    /* Semantic Colors */
+    --color-success: #27ae60;
+    --color-warning: #f39c12;
+    --color-danger: #e74c3c;
+    --color-info: #3498db;
+  
+    /* MATERIAL CATEGORY COLORS (Kraljic Matrix) */
+    --material-bottleneck: #e67e22;
+    --material-bottleneck-light: #f39c12;
+    --material-bottleneck-dark: #d35400;
+  
+    --material-leverage: #27ae60;
+    --material-leverage-light: #2ecc71;
+    --material-leverage-dark: #1e8449;
+  
+    --material-strategic: #8e44ad;
+    --material-strategic-light: #9b59b6;
+    --material-strategic-dark: #6c3483;
+  
+    --material-routine: #95a5a6;
+    --material-routine-light: #bdc3c7;
+    --material-routine-dark: #7f8c8d;
+  
+    /* SESSION COLORS (7회차별 액센트) */
+    --session-1: #1a5276;
+    --session-2: #e67e22;
+    --session-3: #27ae60;
+    --session-4: #8e44ad;
+    --session-5: #95a5a6;
+    --session-6: #3498db;
+    --session-7: #c0392b;
+  
+    /* SPACING SYSTEM (10px Grid) */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
+    --spacing-2xl: 60px;
+  
+    /* BORDER & RADIUS */
+    --border-width: 2px;
+    --border-width-thick: 4px;
+    --border-radius: 4px;
+    --border-radius-large: 8px;
+    --border-radius-circle: 50%;
+  
+    /* SHADOWS */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+  
+    /* LAYOUT ZONES */
+    --header-height: 80px;
+    --footer-height: 40px;
+    --content-height: 420px;
+  
+    /* Column Widths */
+    --col-width-1: 440px;
+    --col-gap: 20px;
+    --col-width-3: 280px;
+  }
+  
+  /* BASE SLIDE STYLES */
+  .slide {
+    width: var(--slide-width);
+    height: var(--slide-height);
+    background-color: var(--color-white);
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-normal);
+    color: var(--color-gray-900);
+    position: relative;
+    box-sizing: border-box;
+  }
+  
+  .slide-content {
+    margin: var(--margin-outer);
+    width: var(--safe-area-width);
+    height: var(--safe-area-height);
+  }
+  
+  /* HEADER & FOOTER */
+  .slide-header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--border-width) solid var(--color-primary);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .slide-title {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    line-height: var(--line-height-tight);
+    max-width: 80%;
+  }
+  
+  .slide-session-badge {
+    font-size: var(--font-size-caption);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    background-color: var(--color-primary);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--border-radius);
+  }
+  
+  .slide-footer {
+    position: absolute;
+    bottom: var(--margin-outer);
+    left: var(--margin-outer);
+    right: var(--margin-outer);
+    height: var(--footer-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-gray-300);
+    padding-top: var(--spacing-sm);
+    font-size: var(--font-size-footer);
+    color: var(--color-gray-600);
+  }
+  
+  .slide-number::before {
+    content: "Slide ";
+  }
+  
+  /* SESSION-SPECIFIC COLORS */
+  .session-1 .slide-title,
+  .session-1 .slide-header { border-color: var(--session-1); }
+  .session-1 .slide-session-badge { background-color: var(--session-1); }
+  
+  .session-2 .slide-title,
+  .session-2 .slide-header { color: var(--session-2); border-color: var(--session-2); }
+  .session-2 .slide-session-badge { background-color: var(--session-2); }
+  
+  .session-3 .slide-title,
+  .session-3 .slide-header { color: var(--session-3); border-color: var(--session-3); }
+  .session-3 .slide-session-badge { background-color: var(--session-3); }
+  
+  .session-4 .slide-title,
+  .session-4 .slide-header { color: var(--session-4); border-color: var(--session-4); }
+  .session-4 .slide-session-badge { background-color: var(--session-4); }
+  
+  .session-5 .slide-title,
+  .session-5 .slide-header { color: var(--session-5); border-color: var(--session-5); }
+  .session-5 .slide-session-badge { background-color: var(--session-5); }
+  
+  .session-6 .slide-title,
+  .session-6 .slide-header { color: var(--session-6); border-color: var(--session-6); }
+  .session-6 .slide-session-badge { background-color: var(--session-6); }
+  
+  .session-7 .slide-title,
+  .session-7 .slide-header { color: var(--session-7); border-color: var(--session-7); }
+  .session-7 .slide-session-badge { background-color: var(--session-7); }
+  
+  /* LAYOUT: COVER */
+  .layout-cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: var(--color-primary);
+    color: var(--color-white);
+  }
+  
+  .layout-cover .cover-title {
+    font-size: 48pt;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-lg);
+    line-height: var(--line-height-tight);
+  }
+  
+  .layout-cover .cover-subtitle {
+    font-size: 28pt;
+    font-weight: var(--font-weight-regular);
+    margin-bottom: var(--spacing-2xl);
+    opacity: 0.9;
+  }
+  
+  .layout-cover .cover-meta {
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-regular);
+    opacity: 0.8;
+  }
+  
+  /* LAYOUT: CONTENT */
+  .layout-content {
+    padding: var(--spacing-md) 0;
+  }
+  
+  .content-2col {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--col-gap);
+  }
+  
+  /* TEXT ELEMENTS */
+  .section-title {
+    font-size: var(--font-size-subtitle);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
+  }
+  
+  .body-text {
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-gray-800);
+    margin-bottom: var(--spacing-md);
+  }
+  
+  /* LIST STYLES */
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .bullet-list li {
+    position: relative;
+    padding-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-relaxed);
+  }
+  
+  .bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 24pt;
+    line-height: 1;
+  }
+  </style>
+</head>
+<body>
+  <div class="slide layout-cover session-1">
+    <div class="cover-content">
+      <h1 class="cover-title">전략적 재고운영 Foundation</h1>
+      <h2 class="cover-subtitle">Kraljic Matrix와 자재계획 방법론</h2>
+      <div class="cover-meta">
+        <p>전략적 재고운영 및 자재계획수립 과정</p>
+        <p>2025년 1회차</p>
+        <p>SCM 전문가</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

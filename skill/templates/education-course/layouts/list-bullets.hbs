@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bullet List</title>
+  {{> common-styles}}
+</head>
+<body>
+  <div class="slide session-{{session}}">
+    <div class="slide-content">
+      {{> header}}
+
+      <div class="layout-content">
+        {{#if introduction}}
+        <div class="body-text mb-md"><p>{{introduction}}</p></div>
+        {{/if}}
+
+        <ul class="bullet-list">
+          {{#each items}}
+          <li>{{this}}</li>
+          {{/each}}
+        </ul>
+
+        {{#if callout}}
+        <div class="callout {{callout.type}}">
+          <div class="callout-title"><h4>{{callout.title}}</h4></div>
+          <div class="callout-content"><p>{{callout.content}}</p></div>
+        </div>
+        {{/if}}
+      </div>
+
+      {{> footer}}
+    </div>
+  </div>
+</body>
+</html>
