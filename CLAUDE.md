@@ -86,6 +86,126 @@ The Kraljic Matrix categorizes materials into 4 quadrants based on:
 
 ---
 
+## PPTX Generation Guidelines (CRITICAL - READ BEFORE ANY PPTX WORK)
+
+### ⚠️ Mandatory Prerequisites
+
+**BEFORE generating any PPTX files, AI assistants MUST:**
+
+1. **Read the complete Skill documentation** (no line limits):
+   - `/home/user/Kraljic_Course/skill/SKILL.md` (complete file, ~800 lines)
+   - `/home/user/Kraljic_Course/skill/html2pptx.md` (complete file)
+   - `/home/user/Kraljic_Course/skill/css.md` (complete file)
+   - **DO NOT** use offset or limit parameters when reading these files
+
+2. **Analyze the reference PPTX file thoroughly**:
+   - Path: `/home/user/Kraljic_Course/PPTX_SAMPLE/S4HANA_PI단계_단계 종료보고_20230510_v.1.4.pptx`
+   - This is the **gold standard** for style, tone, and formatting
+   - Extract slides and analyze: dimensions, colors, fonts, layout patterns
+   - Use `python-pptx` library to inspect properties
+
+3. **Understand and apply the pptx-mslee skill workflow**:
+   - Workflow: **JSON → HTML → PPTX** (not direct python-pptx coding)
+   - Use Handlebars templates in `skill/templates/education-course/layouts/`
+   - Generate HTML first, then convert to PPTX using `@ant/html2pptx`
+
+### 🎨 S4HANA Design System (MANDATORY)
+
+The reference file uses **S4HANA monochrome design principles**:
+
+#### Color System (3-Color Rule)
+- **Primary colors**: Black, white, and shades of gray ONLY
+- **Accent color**: ONE accent color maximum (e.g., dark blue)
+- **Material category colors**: Use ONLY for Kraljic Matrix quadrants:
+  - Strategic: Purple (#8E44AD)
+  - Bottleneck: Orange (#E67E22)
+  - Leverage: Green (#27AE60)
+  - Routine: Gray (#95A5A6)
+- **Forbidden**: Rainbow colors, gradients (except simple vertical/horizontal), multiple bright colors
+
+#### Typography
+- **Title font**: Arial (English), 맑은 고딕 (Korean)
+- **Body font**: 맑은 고딕 (Korean), Arial (English)
+- **Font sizes**: Consistent hierarchy (see SKILL.md variables)
+- **Font weights**: Bold for titles, Regular for body
+
+#### Slide Dimensions
+- **Width**: 10.83 inches
+- **Height**: 7.5 inches
+- **Aspect ratio**: ~1.44:1 (not 16:9!)
+
+#### Layout Principles
+- **White background**: Default for all content slides (cover slide can use color)
+- **Simple and clean**: Minimal decoration, focus on content
+- **Governing messages**: REQUIRED for all content slides
+  - One-sentence summary under the title
+  - Italic, 14pt font
+  - Captures the "so what" of the slide
+
+### 📋 Governing Message Pattern
+
+**Every content slide MUST include a governing message**:
+
+```html
+<div class="title-section fit">
+  <h1>Slide Title</h1>
+  <p class="governing-message">One-sentence summary that captures the entire slide's key point.</p>
+</div>
+```
+
+**Examples of good governing messages**:
+- ✅ "JIT 방식은 2020년 팬데믹으로 치명적 약점이 드러났고, 기업들은 JIC로 전환하고 있습니다."
+- ✅ "Kraljic Matrix는 공급 리스크와 구매 임팩트 두 축으로 자재를 4개 군으로 분류합니다."
+- ❌ "이 슬라이드는 JIT와 JIC를 비교합니다." (Too vague)
+- ❌ (No governing message) (Missing!)
+
+### 🔧 Technical Workflow
+
+**Correct approach** (using pptx-mslee skill):
+1. Create JSON data file in `skill/data/{session-name}.json`
+2. Create/use Handlebars templates in `skill/templates/education-course/layouts/`
+3. Run: `node scripts/generate-course.js data/{session-name}.json`
+4. Output: `skill/output/{session-name}.pptx`
+
+**Fallback approach** (if html2pptx fails):
+- Use `python-pptx` library with **strict adherence to S4HANA design system**
+- Replicate the reference file's style exactly
+- Include governing messages in code
+- Apply monochrome color scheme
+
+### 📁 Reference Files
+
+- **Style reference**: `PPTX_SAMPLE/S4HANA_PI단계_단계 종료보고_20230510_v.1.4.pptx`
+- **Skill documentation**: `skill/SKILL.md`, `skill/html2pptx.md`, `skill/css.md`
+- **Templates**: `skill/templates/education-course/layouts/*.hbs`
+- **Partials**: `skill/templates/education-course/partials/*.hbs`
+- **Styles**: `skill/templates/education-course/styles/*.css`
+
+### ❌ Common Mistakes to Avoid
+
+1. **Using colorful designs**: S4HANA is monochrome!
+2. **Skipping governing messages**: They are REQUIRED
+3. **Not reading SKILL.md completely**: Read the entire file, no limits
+4. **Using wrong dimensions**: Must be 10.83" × 7.5"
+5. **Ignoring the reference file**: It's the gold standard
+6. **Direct python-pptx coding without skill workflow**: Try skill approach first
+7. **Using gradients on cover slide**: Use solid colors (gradient causes rendering issues)
+
+### ✅ Checklist Before Generating PPTX
+
+- [ ] Read complete SKILL.md (no offset/limit)
+- [ ] Read complete html2pptx.md
+- [ ] Read complete css.md
+- [ ] Analyzed S4HANA reference PPTX file
+- [ ] Understood monochrome color system (3-Color Rule)
+- [ ] Planned governing messages for all content slides
+- [ ] Prepared JSON data structure
+- [ ] Verified Handlebars templates exist or created them
+- [ ] Confirmed slide dimensions: 10.83" × 7.5"
+- [ ] Tested with small sample before full generation
+
+---
+
 ## File Conventions
 
 ### Naming Patterns
