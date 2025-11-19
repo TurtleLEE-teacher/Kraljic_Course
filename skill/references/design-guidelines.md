@@ -36,19 +36,32 @@ This document provides detailed guidelines for creating professional business pr
 
 **Font**: Arial - web-safe, universally available, professional
 
-**Font Size System**:
+**Font Size System** (based on professional S4HANA analysis):
 ```
-20pt Bold     - Slide titles
-14pt Italic   - Governing messages
+48pt Bold     - Cover slide main title
+20pt Bold     - Content slide titles
+16pt Bold     - Governing messages (updated from 14pt Italic)
 14pt Bold     - Section headings (h2, h3)
-12pt Regular  - Body text, bullet points
-11pt Regular  - Captions, table content
+12-13pt       - Regular bullet points, emphasis
+10-11pt       - Body text, descriptions (PRIMARY - use 10pt most)
+8-9pt         - Small annotations, footnotes
+6-7pt         - Tiny notes (rare)
 ```
 
+**CRITICAL:** Analysis of professional presentations shows **10pt is the dominant body text size (65% of all text)**. This enables high content density (85%+) while maintaining readability.
+
+**Font Size Distribution (from professional samples):**
+- 10pt: 65.2% (body text, descriptions) - **MOST COMMON**
+- 12pt: 23.4% (bullets, emphasis)
+- 14pt: 6.5% (section headers)
+- 18pt: 3.0% (large headers)
+- Other: 1.9% (small notes)
+
 **Rationale**:
-- Arial ensures compatibility across all platforms
+- Arial/맑은 고딕 ensures compatibility across all platforms
 - Clear hierarchy through size and weight
-- Maximum readability
+- **10pt font is THE professional standard** for high-density slides
+- Maximum readability at small sizes
 - No custom fonts = no rendering issues
 
 ### 3. Governing Message Pattern (REQUIRED)
@@ -193,6 +206,169 @@ body {
 
 **Example**: See above "병목자재 vs 레버리지자재" structure
 
+### 8. Shape Count and Visual Density Requirements
+
+**Principle**: Professional S4HANA slides use **20-50+ shapes per content slide** to achieve high visual impact and information density.
+
+**Target shape counts**:
+- **Simple slides**: 10-20 shapes (text boxes, basic rectangles)
+- **Standard slides**: 20-40 shapes (boxes, arrows, icons)
+- **Complex slides**: 40-75+ shapes (door charts, process flows, matrices)
+
+**Shape types to use**:
+- **Rectangles/AUTO_SHAPES**: 15-30% - Wrap all text content
+- **GROUPS**: 70-80% - Organize related elements into logical groups
+- **Arrows/Connectors**: 5-10% - Show relationships, flow, sequence
+- **TEXT_BOX/PLACEHOLDER**: 5-10% - Labels, annotations
+
+**GROUP element strategy** (CRITICAL):
+- **Use groups extensively** (70-80% of shapes should be in groups)
+- Groups enable complex visual compositions while maintaining organization
+- Groups allow reusable patterns and consistent styling
+- Examples: Process step group, comparison box group, timeline phase group
+
+**Door Chart (문차트) Pattern**:
+A specialized high-density visualization technique for showing spectrums, priorities, or risk matrices.
+
+**Characteristics**:
+- **75+ shapes** in a single slide
+- Heavy use of groups (70-80% of elements)
+- Directional indicators: "매우 높음 →" and "← 매우 낮음"
+- Creates visual "opening" or "door" effect
+- Combines multiple layers of information
+
+**Use cases**:
+- Priority matrices (urgent vs important)
+- Risk assessment grids (likelihood vs impact)
+- Strategic positioning (Kraljic Matrix!)
+- Spectrum visualizations (traditional → modern)
+
+**Implementation**:
+```html
+<!-- Door Chart structure -->
+<div class="door-chart">
+  <!-- Left door: Low end -->
+  <div class="door-panel left">
+    <div class="indicator">← 매우 낮음</div>
+    <div class="content-group">
+      <!-- 20-30 shapes: boxes, text, icons -->
+    </div>
+  </div>
+
+  <!-- Center: Transition zone -->
+  <div class="door-center">
+    <div class="axis-label">공급 리스크</div>
+    <!-- Gradient or spectrum visualization -->
+  </div>
+
+  <!-- Right door: High end -->
+  <div class="door-panel right">
+    <div class="indicator">매우 높음 →</div>
+    <div class="content-group">
+      <!-- 20-30 shapes: boxes, text, icons -->
+    </div>
+  </div>
+</div>
+```
+
+**Benefits**:
+- High visual impact (immediately draws attention)
+- Clear spectrum/range communication
+- Supports dense information while maintaining structure
+- Perfect for Kraljic Matrix 2x2 diagrams
+
+### 9. Persuasive Storyline Development
+
+**Principle**: "청자의 마음에 Penetrate 하는 것이 핵심" (The core is to penetrate the listener's heart/mind)
+
+**Three Strategic Approaches** (from professional training):
+
+#### 9.1 Structural Approach (구조적 접근)
+Break down problems into logical structures and frameworks.
+
+**When to use**:
+- Introducing new frameworks (Session 1: Kraljic Matrix)
+- Building foundational knowledge
+- Explaining methodologies
+
+**Technique**:
+- Start with the framework (2x2 matrix, flowchart)
+- Break down into components
+- Build arguments from foundation to application
+- Use hierarchical structure (1.1, 1.2, 1.3...)
+
+**Example slide flow**:
+1. Framework overview
+2. Component 1 details
+3. Component 2 details
+4. How components interact
+5. Application examples
+
+#### 9.2 Dynamics Approach (역동적 접근)
+Focus on change, transformation, and impact.
+
+**When to use**:
+- Showing improvements (JIT → JIC transformation)
+- Before/after comparisons
+- Demonstrating value/ROI
+
+**Technique**:
+- Start with "before" state (problems, pain points)
+- Introduce the change catalyst
+- Show transformation process
+- Emphasize results and impact
+- Use visual contrast (dark → light, small → large)
+
+**Example slide flow**:
+1. Current state challenges
+2. What changed (new approach)
+3. How transformation happened
+4. After state (improvements)
+5. Quantified impact (metrics)
+
+#### 9.3 Market Change Based Approach (시장 변화 기반)
+Start from external market trends and connect to internal strategy.
+
+**When to use**:
+- Strategic planning (Sessions 8-9: Workshops)
+- Business case development
+- Justifying new initiatives
+
+**Technique**:
+- Begin with market data/trends
+- Connect external changes to internal implications
+- Show how strategy addresses market reality
+- Data-driven storytelling
+- Link to competitive advantage
+
+**Example slide flow**:
+1. Market trend data (2020 pandemic → supply chain disruption)
+2. Industry impact (JIT failures)
+3. Implications for our business
+4. Strategic response (JIC adoption)
+5. Competitive positioning
+
+**Combining Approaches**:
+- **Session 1-3**: Structural (build framework knowledge)
+- **Session 4-7**: Dynamics (show transformation per material type)
+- **Session 8-9**: Market Change (apply to real-world scenarios)
+
+**Key elements of persuasive slides**:
+1. **설득력 있는 전략** (Convincing strategy)
+   - Clear governing messages (one-sentence insights)
+   - Evidence-based arguments (data, case studies)
+   - Logical flow (cause → effect)
+
+2. **구조화된 전개** (Structured development)
+   - Consistent section numbering (X.Y format)
+   - Clear chapter divisions (1장, 2장, 3장...)
+   - Progressive complexity (foundation → application)
+
+3. **시각적 임팩트** (Visual impact)
+   - Use 20-50+ shapes per slide
+   - Combine text + visuals (Toy Page: 60-70% visual, 30-40% text)
+   - Door charts for high-impact moments
+
 ## Complete Example (S4HANA Style)
 
 **See**: `temp/s4hana-style/slide4-improved.html` for full working example
@@ -318,10 +494,12 @@ Before finalizing any S4HANA business presentation:
 - [ ] Maximum contrast for readability
 
 **Typography**:
-- [ ] Arial font only (no custom fonts)
-- [ ] Governing message present on all content slides (14pt italic)
-- [ ] Font hierarchy maintained (20pt > 14pt > 12pt > 11pt)
-- [ ] No font smaller than 11pt
+- [ ] Arial/맑은 고딕 font only (no custom fonts)
+- [ ] Governing message present on all content slides (16pt bold)
+- [ ] Font hierarchy maintained (48pt > 20pt > 16pt > 14pt > 12pt > 10pt)
+- [ ] **10pt is PRIMARY body text size** (should be 60-70% of all text)
+- [ ] 12pt for bullets and emphasis (20-25% of text)
+- [ ] No font smaller than 8pt (footnotes only)
 
 **Layout**:
 - [ ] Slide dimensions: 780px × 540px (13:9 ratio)
@@ -333,7 +511,7 @@ Before finalizing any S4HANA business presentation:
 - [ ] Present on all content slides
 - [ ] One sentence maximum
 - [ ] Captures key insight (not just topic)
-- [ ] 14pt italic, gray color (#666666)
+- [ ] 16pt bold, gray color (#666666)
 
 **2-Column Layouts (for comparisons)**:
 - [ ] Equal width columns (`.items-fill-width`)
@@ -354,11 +532,35 @@ Before finalizing any S4HANA business presentation:
 - [ ] Proper column widths and row heights defined
 - [ ] Border and styling applied
 
+**Shape Counts and Visual Density** (NEW):
+- [ ] **20-50+ shapes per content slide** (target range)
+- [ ] Simple slides: 10-20 shapes minimum
+- [ ] Standard slides: 20-40 shapes
+- [ ] Complex slides (door charts, matrices): 40-75+ shapes
+- [ ] **70-80% of shapes should be in GROUPS** (for organization)
+- [ ] Use arrows/connectors to show flow and relationships
+- [ ] All text wrapped in rectangles/boxes (no floating text)
+
+**Storyline and Persuasion** (NEW):
+- [ ] Slide flow follows one of three approaches:
+  - Structural: Framework → Components → Application
+  - Dynamics: Before → Change → After → Impact
+  - Market Change: Trend → Implication → Strategy → Positioning
+- [ ] Section numbering consistent (X.Y format: 1.1, 1.2, 2.1...)
+- [ ] Chapter divisions clear (1장, 2장, 3장...)
+- [ ] Governing messages "penetrate listener's mind" (insight, not just topic)
+- [ ] Evidence-based arguments (data, case studies, metrics)
+- [ ] Logical flow maintained throughout presentation
+
 ## Tips
 
-1. **Start with governing message**: Capture the "so what" in one sentence
-2. **Monochrome only**: Resist the urge to add color (except charts)
-3. **Maximize density**: Use full slide space efficiently
-4. **2-column for comparisons**: Side-by-side beats vertical stacking
-5. **Check bottom margin**: Ensure minimum 45px to prevent text overflow
-6. **Arial everywhere**: No exceptions for fonts
+1. **Start with governing message**: Capture the "so what" in one sentence that penetrates the listener's mind
+2. **Monochrome only**: Resist the urge to add color (except charts and Kraljic Matrix)
+3. **Use 10pt body text**: This is THE professional standard (65% of all text) - enables high density
+4. **Maximize density**: Use full slide space efficiently - aim for 85%+ filled
+5. **20-50 shapes per slide**: Don't just use text - add boxes, arrows, diagrams
+6. **Group extensively**: 70-80% of shapes should be in groups for organization
+7. **2-column for comparisons**: Side-by-side beats vertical stacking (Toy Page: 60-70% visual, 30-40% text)
+8. **Follow storyline approach**: Choose Structural, Dynamics, or Market Change flow
+9. **Check bottom margin**: Ensure minimum 45px to prevent text overflow
+10. **Arial/맑은 고딕 everywhere**: No exceptions for fonts

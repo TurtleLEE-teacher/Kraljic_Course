@@ -138,17 +138,17 @@ The reference file uses **S4HANA monochrome design principles**:
 #### Typography
 - **Title font**: Arial (English), 맑은 고딕 (Korean)
 - **Body font**: 맑은 고딕 (Korean), Arial (English)
-- **Font sizes** (actual usage from S4HANA reference):
+- **Font sizes** (actual usage from S4HANA and professional samples):
   - **48pt**: Cover slide main title (Bold)
   - **20pt**: Content slide titles (Bold)
   - **16pt**: Governing messages (Bold)
   - **14pt**: Section headers, large bullet points
-  - **12-13pt**: Regular bullet points
-  - **9-11pt**: Body text, detailed descriptions (**most common**)
-  - **8pt**: Small annotations, footnotes
+  - **12-13pt**: Regular bullet points (20-25% of text)
+  - **10-11pt**: Body text, descriptions (**PRIMARY - 60-70% of all text**)
+  - **8-9pt**: Small annotations, footnotes
   - **6-7pt**: Tiny notes (rare)
 - **Font weights**: Bold for titles/headers, Regular for body
-- **Key insight**: S4HANA uses **small fonts (8-11pt) extensively** to fit more content
+- **CRITICAL insight**: Professional analysis shows **10pt is THE dominant body text size (65.2% of all text)**. This enables high content density (85%+) while maintaining readability. Don't use 16-18pt for body text - that's too large and wastes space.
 
 - **Text color rules** (CRITICAL for readability):
   - **Dark backgrounds** (Dark Gray, Med Gray, Black) → **White text (#FFFFFF)**
@@ -292,13 +292,17 @@ The reference file uses **S4HANA monochrome design principles**:
 5. **Ignoring the reference file**: It's the gold standard
 6. **Direct python-pptx coding without skill workflow**: Try skill approach first
 7. **Using gradients on cover slide**: Use solid colors (gradient causes rendering issues)
-8. **Using too large fonts**: Don't use 16-18pt for body text - use 8-11pt like S4HANA!
+8. **Using too large fonts**: Don't use 16-18pt for body text - use 10pt! (65% of all text should be 10pt)
 9. **Too much whitespace**: Slides must be 85%+ filled - add more content, diagrams, shapes
-10. **Missing visual elements**: No flowcharts, arrows, or shapes - S4HANA uses 10-50+ shapes per slide
-11. **Misunderstanding Part numbers**: "Part 1" = Session 1 only, NOT Sessions 1-3
-12. **Poor text contrast**: Using dark text on dark backgrounds or light text on light backgrounds - Always use white text on dark backgrounds!
-13. **Not using Toy Page layout**: Most content slides should use 60-70% visual (left) + 30-40% text (right) structure
-14. **Missing section structure**: No TOC slide, no section numbers in titles (e.g., "2.3"), unclear navigation
+10. **Missing visual elements**: No flowcharts, arrows, or shapes - Professional slides use 20-50+ shapes per slide
+11. **Not using GROUPS**: 70-80% of shapes should be in groups for organization - don't just scatter individual shapes
+12. **No door charts for matrices**: Kraljic Matrix and spectrum visualizations need the door chart pattern (75+ shapes)
+13. **Missing storyline approach**: Slides lack coherent flow - choose Structural, Dynamics, or Market Change approach
+14. **Misunderstanding Part numbers**: "Part 1" = Session 1 only, NOT Sessions 1-3
+15. **Poor text contrast**: Using dark text on dark backgrounds or light text on light backgrounds - Always use white text on dark backgrounds!
+16. **Not using Toy Page layout**: Most content slides should use 60-70% visual (left) + 30-40% text (right) structure
+17. **Missing section structure**: No TOC slide, no section numbers in titles (e.g., "2.3"), unclear navigation
+18. **Weak governing messages**: Messages just describe topic instead of providing insight that "penetrates the listener's mind"
 
 ### ✅ Checklist Before Generating PPTX
 
@@ -307,11 +311,14 @@ The reference file uses **S4HANA monochrome design principles**:
 - [ ] Read complete css.md
 - [ ] Analyzed S4HANA reference PPTX file with detailed script
 - [ ] Understood monochrome color system (black/white/gray only)
-- [ ] Understood font size ranges (8-11pt for body, NOT 16-18pt)
+- [ ] Understood font size hierarchy (**10pt is PRIMARY** - 65% of text, 12pt for bullets - 20-25%)
 - [ ] Understood text color rules (white text on dark backgrounds, black text on light backgrounds)
 - [ ] Planned content density to achieve 85%+ filled area
-- [ ] Designed flowcharts, diagrams, shapes (10-50+ per slide)
-- [ ] Planned governing messages for all content slides (16pt Bold)
+- [ ] Designed flowcharts, diagrams, shapes (20-50+ per slide, not 10!)
+- [ ] Planned GROUP organization (70-80% of shapes in groups)
+- [ ] Designed door charts for Kraljic Matrix (75+ shapes with spectrum indicators)
+- [ ] Chosen storyline approach (Structural, Dynamics, or Market Change)
+- [ ] Planned governing messages for all content slides (16pt Bold, insightful not descriptive)
 - [ ] Designed Toy Page layouts (60-70% visual left, 30-40% text right)
 - [ ] Created TOC slide with clear chapter structure (1장, 2장, 3장...)
 - [ ] Applied section numbering to all slide titles (X.Y format)
