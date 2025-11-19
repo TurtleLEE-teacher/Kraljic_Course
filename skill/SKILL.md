@@ -243,6 +243,17 @@ open output/my-report.pptx
 - **CRITICAL**: Use **small fonts (8-11pt) extensively** to maximize content density
 - S4HANA reference shows 9pt is the MOST common body text size (not 12pt!)
 
+**Text color rules (CRITICAL for readability)**:
+- **Dark backgrounds** (Dark Gray, Med Gray, Black) → **White text (#FFFFFF)**
+- **Light backgrounds** (Light Gray, Very Light Gray, White) → **Black/Dark Gray text (#000000, #333333)**
+- **Rule**: Always maintain high contrast between text and background
+- Examples:
+  - Dark Gray box (#333333) → White text (#FFFFFF)
+  - Light Gray box (#CCCCCC) → Black text (#000000)
+  - Medium Gray box (#666666) → White text (#FFFFFF)
+- Apply to ALL text elements: titles, body, captions, bullets
+- Never use low-contrast combinations (e.g., gray text on gray background)
+
 #### Governing Message Pattern (REQUIRED)
 Every content slide must include a governing message - a one-sentence summary that captures the entire slide's key point:
 
@@ -280,6 +291,56 @@ body {
 - **Visual elements**: Include 10-50+ shapes per slide (flowcharts, arrows, diagrams)
 - **Shapes**: Rectangles, arrows, connectors for timelines and process flows
 - **Tables**: Use for data grids and comparison matrices
+
+**Toy Page Layout (PRIMARY PATTERN - CRITICAL)**:
+- **MOST content slides should use this layout pattern**
+- **Left side (60-70% of slide width)**: Visual elements
+  - Diagrams, flowcharts, process flows
+  - Timelines with arrows showing progression
+  - Comparison matrices and decision trees
+  - Structured shapes, boxes, charts
+  - Position: x = 0.8", width = ~6.5-7.5"
+- **Right side (30-40% of slide width)**: Text explanations
+  - 시사점 (Implications)
+  - 방안 (Solutions/Approaches)
+  - 상세설명 (Detailed explanations)
+  - Key takeaways and insights
+  - Position: x = ~7.5-8.0", width = ~2.5-3.0"
+- **HTML structure**:
+```html
+<div class="row gap">
+  <div style="flex: 0 0 65%">
+    <!-- Left: Visual diagram/flowchart -->
+  </div>
+  <div style="flex: 0 0 30%">
+    <!-- Right: Text explanations -->
+    <h3>시사점</h3>
+    <p>...</p>
+    <h3>방안</h3>
+    <p>...</p>
+  </div>
+</div>
+```
+- **Benefits**: High visual impact + clear narrative structure
+- **Examples**: Timeline (left) → Insights (right), Process flow (left) → Steps (right)
+
+**Table of Contents & Section Structure (MANDATORY)**:
+- **TOC slide at beginning**: Create clear chapter structure
+  - Format: "1장 Title", "2장 Title", "3장 Title"
+  - Show complete course outline with chapter numbers
+  - Clean, grid-aligned layout with chapter overview
+- **Section numbering in ALL slide titles**:
+  - Format: "X.Y Topic Name" where X = chapter number, Y = slide number in chapter
+  - Example: "2.3 JIT의 7가지 원칙" (3rd slide in Chapter 2)
+  - Example: "4.1 Kraljic Matrix 개요" (1st slide in Chapter 4)
+- **Clear navigation throughout**: User always knows location
+  - Current chapter number
+  - Current topic within chapter
+  - How it fits in overall structure
+- **Chapter divider slides**: Section breaks between major chapters
+  - Format: Large "N장" with chapter title
+  - Minimal design, high visual impact
+  - Provides clear transition between sections
 
 #### 2-Column Comparison Layout
 For vs/comparison slides (e.g., "ROP vs MRP", "Before vs After"):
