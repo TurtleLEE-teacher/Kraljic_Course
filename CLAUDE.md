@@ -150,6 +150,15 @@ The reference file uses **S4HANA monochrome design principles**:
 - **Font weights**: Bold for titles/headers, Regular for body
 - **Key insight**: S4HANA uses **small fonts (8-11pt) extensively** to fit more content
 
+- **Text color rules** (CRITICAL for readability):
+  - **Dark backgrounds** (Dark Gray, Med Gray, Black) → **White text (#FFFFFF)**
+  - **Light backgrounds** (Light Gray, Very Light Gray, White) → **Black/Dark Gray text (#000000, #333333)**
+  - **Rule**: Always maintain high contrast between text and background
+  - Examples:
+    - Dark Gray box (#333333) → White text (#FFFFFF)
+    - Light Gray box (#CCCCCC) → Black text (#000000)
+    - Medium Gray box (#666666) → White text (#FFFFFF)
+
 #### Slide Dimensions
 - **Width**: 10.83 inches
 - **Height**: 7.5 inches
@@ -190,6 +199,45 @@ The reference file uses **S4HANA monochrome design principles**:
   - Use borders (0.75-1pt) to separate sections
   - Comparisons: Side-by-side boxes with arrow between
   - Sequences: Boxes in row with arrows connecting
+
+- **Toy Page Layout (PRIMARY PATTERN - CRITICAL)**:
+  - **MOST content slides should use this layout**
+  - **Left side (60-70% of slide width)**: Visual elements
+    - Diagrams, flowcharts, process flows
+    - Timelines with arrows
+    - Comparison matrices
+    - Structured shapes and boxes
+    - Charts, graphs, illustrations
+    - Position: x = 0.8", width = ~6.5-7.5"
+  - **Right side (30-40% of slide width)**: Text explanations
+    - 시사점 (Implications)
+    - 방안 (Solutions/Approaches)
+    - 상세설명 (Detailed explanations)
+    - Key takeaways, insights
+    - Position: x = ~7.5-8.0", width = ~2.5-3.0"
+  - **Examples of Toy Page slides**:
+    - Timeline (left) → Key insights (right)
+    - Process flow diagram (left) → Implementation steps (right)
+    - Comparison matrix (left) → Strategic recommendations (right)
+  - **Benefits**: High visual impact + Clear narrative structure
+
+- **Table of Contents & Section Structure (MANDATORY)**:
+  - **TOC slide at beginning**: Create clear chapter structure
+    - Format: "1장 Title", "2장 Title", "3장 Title"
+    - Show complete course outline with chapter numbers
+    - Use clean, grid-aligned layout
+  - **Section numbering in slide titles**:
+    - Format: "X.Y Topic Name" where X = chapter, Y = slide in chapter
+    - Example: "2.3 JIT의 7가지 원칙" (3rd slide in Chapter 2)
+    - Example: "4.1 Kraljic Matrix 개요" (1st slide in Chapter 4)
+  - **Clear navigation**: User should always know current location
+    - Which chapter they're in
+    - Which topic within that chapter
+    - How it fits in the overall structure
+  - **Chapter dividers**: Use section break slides between chapters
+    - Format: Large "N장" with chapter title
+    - Minimal design, high visual impact
+
 - **Governing messages**: REQUIRED for all content slides
   - One-sentence summary under the title
   - Position: (0.30", 1.01"), Size: 10.32" × 0.63"
@@ -248,6 +296,9 @@ The reference file uses **S4HANA monochrome design principles**:
 9. **Too much whitespace**: Slides must be 85%+ filled - add more content, diagrams, shapes
 10. **Missing visual elements**: No flowcharts, arrows, or shapes - S4HANA uses 10-50+ shapes per slide
 11. **Misunderstanding Part numbers**: "Part 1" = Session 1 only, NOT Sessions 1-3
+12. **Poor text contrast**: Using dark text on dark backgrounds or light text on light backgrounds - Always use white text on dark backgrounds!
+13. **Not using Toy Page layout**: Most content slides should use 60-70% visual (left) + 30-40% text (right) structure
+14. **Missing section structure**: No TOC slide, no section numbers in titles (e.g., "2.3"), unclear navigation
 
 ### ✅ Checklist Before Generating PPTX
 
@@ -255,11 +306,15 @@ The reference file uses **S4HANA monochrome design principles**:
 - [ ] Read complete html2pptx.md
 - [ ] Read complete css.md
 - [ ] Analyzed S4HANA reference PPTX file with detailed script
-- [ ] Understood monochrome color system (3-Color Rule)
+- [ ] Understood monochrome color system (black/white/gray only)
 - [ ] Understood font size ranges (8-11pt for body, NOT 16-18pt)
+- [ ] Understood text color rules (white text on dark backgrounds, black text on light backgrounds)
 - [ ] Planned content density to achieve 85%+ filled area
 - [ ] Designed flowcharts, diagrams, shapes (10-50+ per slide)
 - [ ] Planned governing messages for all content slides (16pt Bold)
+- [ ] Designed Toy Page layouts (60-70% visual left, 30-40% text right)
+- [ ] Created TOC slide with clear chapter structure (1장, 2장, 3장...)
+- [ ] Applied section numbering to all slide titles (X.Y format)
 - [ ] Prepared JSON data structure
 - [ ] Verified Handlebars templates exist or created them
 - [ ] Confirmed slide dimensions: 10.83" × 7.5"
