@@ -187,24 +187,43 @@ open output/my-report.pptx
 
 ### Design Principles (S4HANA Business Reporting Style)
 
-#### Monochrome Color System
-**Strictly enforced** through CSS variables for professional, clean appearance:
+#### Monochrome Color System (STRICT)
+**CRITICAL: Use ONLY monochrome colors for ALL slides (except Kraljic Matrix diagram)**
+
 ```css
 :root {
-  --color-text: #000000;           /* Primary text */
-  --color-text-secondary: #333333; /* Secondary text */
-  --color-text-muted: #666666;     /* Muted text, captions */
-  --color-border: #CCCCCC;         /* Borders, separators */
-  --color-bg: #FFFFFF;             /* Background */
-  --color-bg-light: #F5F5F5;       /* Light background, boxes */
+  --color-black: #000000;          /* Primary text, key emphasis */
+  --color-dark-gray: #333333;      /* Secondary text, headers */
+  --color-med-gray: #666666;       /* Normal text */
+  --color-light-gray: #CCCCCC;     /* Backgrounds, borders */
+  --color-very-light-gray: #E6E6E6; /* Subtle backgrounds */
+  --color-white: #FFFFFF;          /* White backgrounds, reverse text */
+  --color-accent: #1A5276;         /* Dark blue (MINIMAL use only) */
 }
 ```
 
-**Color usage principles**:
-- Black/gray scale only for text and backgrounds
-- No bright colors except for data visualization (charts)
+**Color usage rules**:
+- **Standard slides (99%)**: Use ONLY black/white/gray from above palette
+- **Kraljic Matrix diagram (1 slide)**: ONLY place to use purple/orange/green/gray quadrant colors
+- **Forbidden EVERYWHERE ELSE**: Rainbow colors, multiple bright colors, gradients
+- **Rule**: Not Matrix diagram → Monochrome ONLY
 - Maximum contrast for readability
 - Consistent throughout entire presentation
+
+**Grid System (MANDATORY)**:
+- All elements MUST align to grid (no random positioning!)
+- 2-column: x = [0.8", 5.5"] (width: 4.5" each)
+- 3-column: x = [1.0", 4.2", 7.4"] (width: 3.0" each)
+- 4-column: x = [0.8", 3.2", 5.6", 8.0"] (width: 2.2" each)
+- Row spacing: 0.8-1.0" between rows
+
+**Shape Variety (CRITICAL)**:
+- Rectangles: Wrap ALL text (no floating text!)
+- Arrows: Time sequences (Before → After), process flows
+- Triangles: Increase/decrease, priorities
+- Rounded rectangles: Key point emphasis
+- Connectors: Show relationships
+- Alternate backgrounds: Light Gray ↔ Very Light Gray ↔ White
 
 #### Typography (Arial Only)
 ```css
