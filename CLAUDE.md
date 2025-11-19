@@ -113,15 +113,27 @@ The Kraljic Matrix categorizes materials into 4 quadrants based on:
 
 The reference file uses **S4HANA monochrome design principles**:
 
-#### Color System (3-Color Rule)
-- **Primary colors**: Black, white, and shades of gray ONLY
-- **Accent color**: ONE accent color maximum (e.g., dark blue)
-- **Material category colors**: Use ONLY for Kraljic Matrix quadrants:
-  - Strategic: Purple (#8E44AD)
-  - Bottleneck: Orange (#E67E22)
-  - Leverage: Green (#27AE60)
-  - Routine: Gray (#95A5A6)
-- **Forbidden**: Rainbow colors, gradients (except simple vertical/horizontal), multiple bright colors
+#### Color System (STRICT Monochrome)
+**CRITICAL: Use ONLY monochrome colors (black/white/gray) for ALL slides**
+
+- **Standard palette** (use for 99% of slides):
+  - Black (#000000): Primary text, key emphasis
+  - Dark Gray (#333333): Secondary text, headers
+  - Medium Gray (#666666): Normal text
+  - Light Gray (#CCCCCC): Backgrounds, borders
+  - Very Light Gray (#E6E6E6): Subtle backgrounds
+  - White (#FFFFFF): White backgrounds, reverse text
+  - Dark Blue (#1A5276): Accent color (MINIMAL use only)
+
+- **Kraljic colors**: Use ONLY in Kraljic Matrix 2×2 diagram slide
+  - Strategic: Purple (#8E44AD) - ONE slide only
+  - Bottleneck: Orange (#E67E22) - ONE slide only
+  - Leverage: Green (#27AE60) - ONE slide only
+  - Routine: Gray (#95A5A6) - ONE slide only
+  - **DO NOT** use these colors in any other slides!
+
+- **Forbidden EVERYWHERE ELSE**: Rainbow colors, multiple bright colors, gradients
+- **Rule**: If not Matrix diagram → Use ONLY black/white/gray
 
 #### Typography
 - **Title font**: Arial (English), 맑은 고딕 (Korean)
@@ -145,17 +157,39 @@ The reference file uses **S4HANA monochrome design principles**:
 
 #### Layout Principles
 - **White background**: Default for all content slides (cover slide can use color)
+
+- **Grid System (MANDATORY)**: All elements MUST align to grid
+  - **2-column layout**: x = [0.8", 5.5"] (width: 4.5" each)
+  - **3-column layout**: x = [1.0", 4.2", 7.4"] (width: 3.0" each)
+  - **4-column layout**: x = [0.8", 3.2", 5.6", 8.0"] (width: 2.2" each)
+  - **Row spacing**: 0.8-1.0" between rows
+  - **NO random positioning**: Every box must snap to grid
+
 - **Content density**: CRITICAL - Slides must use **85%+ of slide area**
   - S4HANA average: 83.4% (median: 75.5%)
   - Many slides exceed 100% density due to overlapping elements
   - **Minimize whitespace** - Use small fonts (8-11pt) to fit more content
   - Example: Slide 4 has 26 AUTO_SHAPES + 7 text boxes = 84.6% density
+
 - **Visual elements**: Use extensive diagrams, flowcharts, and shapes
   - **Shapes per slide**: 10-50+ AUTO_SHAPES (rectangles, arrows, connectors)
+  - **Shape variety (CRITICAL)**:
+    - Rectangles: Wrap ALL text content (no floating text!)
+    - Arrows: Show time sequence (Before → After), process flow (Step 1 → Step 2)
+    - Triangles: Indicate increase/decrease, priorities
+    - Rounded rectangles: Emphasize key points
+    - Connectors: Show relationships between concepts
   - **Flowcharts**: Timeline diagrams, process flows with arrows
   - **Tables**: Data grids, comparison matrices
   - **Groups**: Organize related shapes into logical groups
   - Example: Slide 4 has timeline with phases, arrows, and 20+ detail boxes
+
+- **Structuring with shapes**:
+  - Every text block → wrapped in rectangle box
+  - Alternate background colors: Light Gray ↔ Very Light Gray ↔ White
+  - Use borders (0.75-1pt) to separate sections
+  - Comparisons: Side-by-side boxes with arrow between
+  - Sequences: Boxes in row with arrows connecting
 - **Governing messages**: REQUIRED for all content slides
   - One-sentence summary under the title
   - Position: (0.30", 1.01"), Size: 10.32" × 0.63"
