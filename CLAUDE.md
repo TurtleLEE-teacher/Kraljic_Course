@@ -682,6 +682,29 @@ If creating analysis scripts or tools:
 
 ---
 
-**Last Updated**: 2025-11-17
-**CLAUDE.md Version**: 1.0
-**Repository State**: Initial structure documented
+**Last Updated**: 2025-11-19
+**CLAUDE.md Version**: 2.0
+**Repository State**: Course content updated (Nov 19), Design guidelines enhanced
+
+## Update History
+
+### Version 2.0 (2025-11-19)
+- **Content Update**: All session files updated with Notion_251119 export
+  - Session 5 (레버리지자재 & MRP): +483 lines - Major expansion with industry examples
+  - Session 7 (일상자재 효율화): +232 lines - Detailed automation strategies
+  - Session 6 (전략자재 & 하이브리드): +184 lines - Enhanced hybrid planning
+  - Session 1 (Foundation): +99 lines - Strengthened JIT/JIC paradigm explanation
+  - Session 4 (병목자재 & ROP): +42 lines - Improved ROP methodology
+  - **Total**: +1,051 lines of enhanced content
+- **Design Guidelines**: Enhanced with professional training insights
+  - Font size analysis: 10pt confirmed as THE professional standard (65.2%)
+  - Door chart pattern documented (75+ shapes for matrices)
+  - Three storyline approaches: Structural, Dynamics, Market Change
+  - Shape count targets: 20-50+ per slide (70-80% in groups)
+
+### Version 1.0 (2025-11-17)
+- Initial structure documentation
+- Repository overview and course guide
+- PPTX generation guidelines
+- File conventions and data schema
+

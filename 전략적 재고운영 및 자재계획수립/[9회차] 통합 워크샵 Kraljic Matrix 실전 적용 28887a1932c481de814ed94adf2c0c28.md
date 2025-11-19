@@ -6,7 +6,7 @@
 Min: 45
 No: 9
 
-# [7회차] 통합 워크샵: Kraljic Matrix 실전 적용
+## [9회차] 통합 워크샵: Kraljic Matrix 실전 적용
 
 ---
 

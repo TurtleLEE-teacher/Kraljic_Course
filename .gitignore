@@ -71,3 +71,8 @@ build/
 .env
 .env.local
 .env.*.local
+
+# Notion export temporary files
+Notion_*_temp/
+제목\ 없음*.md
+Notion_*.zip
