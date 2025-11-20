@@ -238,21 +238,21 @@ def create_slide_2_toc(prs):
     """Slide 2: Table of Contents with 7 chapter boxes"""
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
-    add_slide_title(slide, "목차", slide_num=2)
+    add_slide_title(slide, "📚 목차", slide_num=2)
     add_governing_message(
         slide,
         "본 과정은 Kraljic Matrix 기반으로 자재군별 차별화 전략과 계획 방법론을 체계적으로 학습합니다."
     )
 
-    # 7 chapter boxes (alternating colors)
+    # 7 chapter boxes with emojis for visual appeal
     chapters = [
-        "1장 JIT → JIC 패러다임 전환",
-        "2장 Kraljic Matrix 프레임워크",
-        "3장 차별화 전략",
-        "4장 계획 방법론",
-        "5장 통합 KPI 프레임워크",
-        "6장 산업별 적용 사례",
-        "7장 9회차 학습 여정"
+        "1장 🔄 JIT → JIC 패러다임 전환",
+        "2장 📊 Kraljic Matrix 프레임워크",
+        "3장 🎯 차별화 전략",
+        "4장 📋 계획 방법론",
+        "5장 📈 통합 KPI 프레임워크",
+        "6장 🏭 산업별 적용 사례",
+        "7장 🚀 9회차 학습 여정"
     ]
 
     y_start = 2.00
@@ -355,7 +355,7 @@ def create_slide_4_jit_timeline(prs):
     """
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
-    add_slide_title(slide, "1.1 JIT의 영광과 몰락", slide_num=4)
+    add_slide_title(slide, "1.1 📅 JIT의 영광과 몰락", slide_num=4)
     add_governing_message(
         slide,
         "JIT 방식은 40년간 제조업의 표준이었으나 2020년 팬데믹으로 치명적 약점이 드러났습니다."
@@ -634,7 +634,7 @@ def create_slide_5_pandemic(prs):
     """
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
-    add_slide_title(slide, "1.2 팬데믹이 드러낸 JIT의 약점", slide_num=5)
+    add_slide_title(slide, "1.2 ⚠️ 팬데믹이 드러낸 JIT의 약점", slide_num=5)
     add_governing_message(
         slide,
         "글로벌 공급망 마비로 JIT의 3대 위험(재고 부족, 공급 중단, 생산 마비)이 현실화되었습니다."
@@ -947,7 +947,7 @@ def create_slide_6_jit_vs_jic(prs):
     """
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
-    add_slide_title(slide, "1.3 JIT vs JIC 비교", slide_num=6)
+    add_slide_title(slide, "1.3 ⚡ JIT vs 🛡️ JIC 비교", slide_num=6)
     add_governing_message(
         slide,
         "JIT는 원가 절감에, JIC는 공급 안정성에 초점을 맞춰 서로 다른 리스크 환경에 대응합니다."
@@ -1428,7 +1428,7 @@ def create_slide_9_kraljic_birth(prs):
     """
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
-    add_slide_title(slide, "2.1 Kraljic Matrix 탄생", slide_num=9)
+    add_slide_title(slide, "2.1 💡 Kraljic Matrix 탄생", slide_num=9)
     add_governing_message(
         slide,
         "1983년 Peter Kraljic이 개발한 2×2 매트릭스는 자재 특성에 따른 차별화 전략의 기초가 되었습니다."
@@ -2034,7 +2034,7 @@ def create_slide_11_kraljic_door_chart(prs):
     """
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
-    add_slide_title(slide, "2.3 Kraljic Matrix", slide_num=11)
+    add_slide_title(slide, "2.3 📊 Kraljic Matrix", slide_num=11)
     add_governing_message(
         slide,
         "Kraljic Matrix는 공급 리스크와 구매 금액을 기준으로 자재를 4개 군으로 분류하여 차별화 전략을 수립합니다."
@@ -2085,10 +2085,10 @@ def create_slide_11_kraljic_door_chart(prs):
     )
     shape_count += 1
 
-    # Quadrant title
+    # Quadrant title with emoji
     add_text_box(
         slide, q1_x + 0.10, q1_y + 0.08, quad_w - 0.20, 0.28,
-        "전략자재 (Strategic)", font_size=13, bold=True,
+        "💎 전략자재 (Strategic)", font_size=13, bold=True,
         color=COLOR_WHITE, align=PP_ALIGN.CENTER
     )
     shape_count += 1
@@ -2152,10 +2152,10 @@ def create_slide_11_kraljic_door_chart(prs):
     )
     shape_count += 1
 
-    # Quadrant title
+    # Quadrant title with emoji
     add_text_box(
         slide, q2_x + 0.10, q2_y + 0.08, quad_w - 0.20, 0.28,
-        "병목자재 (Bottleneck)", font_size=13, bold=True,
+        "⚠️ 병목자재 (Bottleneck)", font_size=13, bold=True,
         color=COLOR_WHITE, align=PP_ALIGN.CENTER
     )
     shape_count += 1
@@ -2219,10 +2219,10 @@ def create_slide_11_kraljic_door_chart(prs):
     )
     shape_count += 1
 
-    # Quadrant title
+    # Quadrant title with emoji
     add_text_box(
         slide, q3_x + 0.10, q3_y + 0.08, quad_w - 0.20, 0.28,
-        "레버리지자재 (Leverage)", font_size=13, bold=True,
+        "💰 레버리지자재 (Leverage)", font_size=13, bold=True,
         color=COLOR_WHITE, align=PP_ALIGN.CENTER
     )
     shape_count += 1
@@ -2286,10 +2286,10 @@ def create_slide_11_kraljic_door_chart(prs):
     )
     shape_count += 1
 
-    # Quadrant title
+    # Quadrant title with emoji
     add_text_box(
         slide, q4_x + 0.10, q4_y + 0.08, quad_w - 0.20, 0.28,
-        "일상자재 (Routine)", font_size=13, bold=True,
+        "📦 일상자재 (Routine)", font_size=13, bold=True,
         color=COLOR_WHITE, align=PP_ALIGN.CENTER
     )
     shape_count += 1
@@ -2692,7 +2692,7 @@ def create_slide_12_bottleneck(prs):
     }
 
     return create_material_category_slide(
-        prs, 12, "2.4 병목자재 (Bottleneck)",
+        prs, 12, "2.4 ⚠️ 병목자재 (Bottleneck)",
         COLOR_BOTTLENECK,
         "병목자재는 공급 리스크가 높지만 구매 금액이 낮아 공급 안정성 확보가 최우선 과제입니다.",
         data
@@ -2750,7 +2750,7 @@ def create_slide_13_leverage(prs):
     }
 
     return create_material_category_slide(
-        prs, 13, "2.5 레버리지자재 (Leverage)",
+        prs, 13, "2.5 💰 레버리지자재 (Leverage)",
         COLOR_LEVERAGE,
         "레버리지자재는 공급 리스크가 낮고 구매 금액이 높아 경쟁입찰과 가격협상으로 원가 절감을 추구합니다.",
         data
@@ -2809,7 +2809,7 @@ def create_slide_14_strategic(prs):
     }
 
     return create_material_category_slide(
-        prs, 14, "2.6 전략자재 (Strategic)",
+        prs, 14, "2.6 💎 전략자재 (Strategic)",
         COLOR_STRATEGIC,
         "전략자재는 공급 리스크와 구매 금액이 모두 높아 장기 파트너십과 리스크 관리가 핵심입니다.",
         data
@@ -2867,7 +2867,7 @@ def create_slide_15_routine(prs):
     }
 
     return create_material_category_slide(
-        prs, 15, "2.7 일상자재 (Routine)",
+        prs, 15, "2.7 📦 일상자재 (Routine)",
         COLOR_ROUTINE,
         "일상자재는 공급 리스크와 구매 금액이 모두 낮아 프로세스 효율화와 자동화로 관리합니다.",
         data
