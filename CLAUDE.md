@@ -98,6 +98,19 @@ The Kraljic Matrix categorizes materials into 4 quadrants based on:
    - `/home/user/Kraljic_Course/skill/css.md` (complete file)
    - **DO NOT** use offset or limit parameters when reading these files
 
+1-b. **Read the complete Reference guidelines** (CRITICAL - no line limits):
+   - `/home/user/Kraljic_Course/skill/references/design-guidelines.md` (complete file, 567 lines)
+     - Contains: Font size hierarchy, Shape count targets, Door chart pattern, Storyline approaches
+     - Section 8: Shape Count & Visual Density Requirements (20-50+ shapes per slide)
+     - Section 9: Persuasive Storyline Development (Structural, Dynamics, Market Change)
+   - `/home/user/Kraljic_Course/skill/references/design-patterns-findings.md` (complete file, 350 lines)
+     - Contains: Professional analysis data (10pt font = 65.2%, 75 shapes in door charts)
+     - Actual statistics from 추가자료2_Inspiration_2024.pptx and RedSlide materials
+   - `/home/user/Kraljic_Course/skill/references/DESIGN_ENHANCEMENT_REPORT.md` (complete file, 560 lines)
+     - Contains: Executive summary, Session-specific recommendations, Implementation checklist
+   - **DO NOT** use offset or limit parameters - Read these files COMPLETELY
+   - **These contain the professional standards** that prevented Part 1 quality issues
+
 2. **Analyze the reference PPTX file thoroughly**:
    - Path: `/home/user/Kraljic_Course/PPTX_SAMPLE/S4HANA_PI단계_단계 종료보고_20230510_v.1.4.pptx`
    - This is the **gold standard** for style, tone, and formatting
@@ -288,23 +301,24 @@ The reference file uses **S4HANA monochrome design principles**:
 1. **Using colorful designs**: S4HANA is monochrome!
 2. **Skipping governing messages**: They are REQUIRED
 3. **Not reading SKILL.md completely**: Read the entire file, no limits
-4. **Using wrong dimensions**: Must be 10.83" × 7.5"
-5. **Ignoring the reference file**: It's the gold standard
-6. **Direct python-pptx coding without skill workflow**: Try skill approach first
-7. **Using gradients on cover slide**: Use solid colors (gradient causes rendering issues)
-8. **Using too large fonts**: Don't use 16-18pt for body text - use 10pt! (65% of all text should be 10pt)
-9. **Too much whitespace**: Slides must be 85%+ filled - add more content, diagrams, shapes
-10. **Missing visual elements**: No flowcharts, arrows, or shapes - Professional slides use 20-50+ shapes per slide
-11. **Not using GROUPS**: 70-80% of shapes should be in groups for organization - don't just scatter individual shapes
-12. **No door charts for matrices**: Kraljic Matrix and spectrum visualizations need the door chart pattern (75+ shapes)
-13. **Missing storyline approach**: Slides lack coherent flow - choose Structural, Dynamics, or Market Change approach
-14. **Misunderstanding Part numbers**: "Part 1" = Session 1 only, NOT Sessions 1-3
-15. **Poor text contrast**: Using dark text on dark backgrounds or light text on light backgrounds - Always use white text on dark backgrounds!
-16. **Not using Toy Page layout**: Most content slides should use 60-70% visual (left) + 30-40% text (right) structure
-17. **Missing section structure**: No TOC slide, no section numbers in titles (e.g., "2.3"), unclear navigation
-18. **Weak governing messages**: Messages just describe topic instead of providing insight that "penetrates the listener's mind"
-19. **Ignoring checklist items**: Reading checklist but not actually verifying each item before generation
-20. **Superficial reference analysis**: Extracting only colors/fonts from S4HANA without analyzing actual slide structure, shape counts, layout patterns
+4. **Not reading skill/references/ guidelines**: The 3 reference files (design-guidelines.md, design-patterns-findings.md, DESIGN_ENHANCEMENT_REPORT.md) contain critical professional standards - MUST read all 1,477 lines!
+5. **Using wrong dimensions**: Must be 10.83" × 7.5"
+6. **Ignoring the reference file**: It's the gold standard
+7. **Direct python-pptx coding without skill workflow**: Try skill approach first
+8. **Using gradients on cover slide**: Use solid colors (gradient causes rendering issues)
+9. **Using too large fonts**: Don't use 16-18pt for body text - use 10pt! (65% of all text should be 10pt)
+10. **Too much whitespace**: Slides must be 85%+ filled - add more content, diagrams, shapes
+11. **Missing visual elements**: No flowcharts, arrows, or shapes - Professional slides use 20-50+ shapes per slide
+12. **Not using GROUPS**: 70-80% of shapes should be in groups for organization - don't just scatter individual shapes
+13. **No door charts for matrices**: Kraljic Matrix and spectrum visualizations need the door chart pattern (75+ shapes)
+14. **Missing storyline approach**: Slides lack coherent flow - choose Structural, Dynamics, or Market Change approach
+15. **Misunderstanding Part numbers**: "Part 1" = Session 1 only, NOT Sessions 1-3
+16. **Poor text contrast**: Using dark text on dark backgrounds or light text on light backgrounds - Always use white text on dark backgrounds!
+17. **Not using Toy Page layout**: Most content slides should use 60-70% visual (left) + 30-40% text (right) structure
+18. **Missing section structure**: No TOC slide, no section numbers in titles (e.g., "2.3"), unclear navigation
+19. **Weak governing messages**: Messages just describe topic instead of providing insight that "penetrates the listener's mind"
+20. **Ignoring checklist items**: Reading checklist but not actually verifying each item before generation
+21. **Superficial reference analysis**: Extracting only colors/fonts from S4HANA without analyzing actual slide structure, shape counts, layout patterns
 
 ---
 
@@ -556,10 +570,20 @@ echo "✅ All Parts passed quality checks"
 
 ### ✅ Checklist Before Generating PPTX (Updated with Mandatory Gates)
 
-#### Phase 1: Documentation Review (READ ONLY)
+#### Phase 1: Documentation Review (READ ONLY - MANDATORY)
 - [ ] Read complete SKILL.md (no offset/limit)
 - [ ] Read complete html2pptx.md
 - [ ] Read complete css.md
+- [ ] **MANDATORY**: Read complete skill/references/design-guidelines.md (567 lines)
+  - Section 8: Shape Count & Visual Density Requirements
+  - Section 9: Persuasive Storyline Development (Structural, Dynamics, Market Change)
+  - Quality Checklist (complete)
+- [ ] **MANDATORY**: Read complete skill/references/design-patterns-findings.md (350 lines)
+  - Professional data: 10pt font = 65.2% usage
+  - Door chart pattern: 75 shapes, 70-80% in groups
+- [ ] **MANDATORY**: Read complete skill/references/DESIGN_ENHANCEMENT_REPORT.md (560 lines)
+  - Session-specific recommendations
+  - Implementation checklist
 - [ ] Read "CRITICAL: Preventing Quality Failures" section above
 
 #### Phase 2: Pre-Generation Analysis (MUST DO - 30 min)
