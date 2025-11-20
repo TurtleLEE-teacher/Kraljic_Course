@@ -303,30 +303,308 @@ The reference file uses **S4HANA monochrome design principles**:
 16. **Not using Toy Page layout**: Most content slides should use 60-70% visual (left) + 30-40% text (right) structure
 17. **Missing section structure**: No TOC slide, no section numbers in titles (e.g., "2.3"), unclear navigation
 18. **Weak governing messages**: Messages just describe topic instead of providing insight that "penetrates the listener's mind"
+19. **Ignoring checklist items**: Reading checklist but not actually verifying each item before generation
+20. **Superficial reference analysis**: Extracting only colors/fonts from S4HANA without analyzing actual slide structure, shape counts, layout patterns
 
-### ✅ Checklist Before Generating PPTX
+---
 
+## 🚨 CRITICAL: Preventing Quality Failures (Part 1-9 Consistency)
+
+### Why This Section Exists
+
+Part 1 초기 생성에서 발생한 문제:
+- 체크리스트를 읽기만 하고 실제로 검증하지 않음
+- python-pptx fallback 사용 시 모든 디자인 요구사항을 무시함
+- S4HANA 참고 파일을 색상/폰트만 추출하고 구조 분석 안 함
+- 결과: 텍스트박스만 있는 저품질 슬라이드 (content density 30-40%, shapes < 5개/슬라이드)
+
+**Part 1-9까지 일관성이 중요**: 한 Part만 품질이 다르면 전체 과정의 신뢰도 하락
+
+### Mandatory Pre-Generation Steps (절대 생략 불가)
+
+#### Step 1: S4HANA Reference Deep Analysis (30분 소요)
+
+**단순히 색상/폰트만 추출하는 것이 아니라, 실제 슬라이드 구조를 분석해야 함**
+
+```python
+# 필수 실행 스크립트
+python3 -c "
+from pptx import Presentation
+prs = Presentation('PPTX_SAMPLE/S4HANA_PI단계_단계 종료보고_20230510_v.1.4.pptx')
+
+print('=== S4HANA Slide Structure Analysis ===')
+for i, slide in enumerate(prs.slides[:10], 1):
+    shapes = len(slide.shapes)
+    auto_shapes = sum(1 for s in slide.shapes if str(s.shape_type) == 'AUTO_SHAPE (1)')
+    text_boxes = sum(1 for s in slide.shapes if hasattr(s, 'text') and s.text.strip())
+    groups = sum(1 for s in slide.shapes if str(s.shape_type) == 'GROUP (6)')
+
+    print(f'\nSlide {i}:')
+    print(f'  Total shapes: {shapes}')
+    print(f'  AUTO_SHAPES: {auto_shapes}')
+    print(f'  Text boxes: {text_boxes}')
+    print(f'  Groups: {groups}')
+    print(f'  Density estimate: {(shapes * 2)}%')  # Rough estimate
+"
+```
+
+**분석 결과 예시** (실제 S4HANA):
+```
+Slide 4: 56 shapes (26 AUTO_SHAPES, 7 text boxes, density ~84%)
+Slide 12: 102 shapes (87 AUTO_SHAPES, density ~100%+)
+```
+
+**⚠️ 이 분석 없이 생성 시작하면 안 됨!**
+
+#### Step 2: Design Implementation Plan (필수 문서화)
+
+생성 시작 전에 다음을 명시적으로 계획하고 문서화:
+
+```markdown
+## Part N Design Plan
+
+### Slide Density Targets
+- Target: 85%+ per slide
+- Strategy: [구체적으로 어떻게 달성할 것인가]
+  - Example: "Timeline slides: 20-30 shapes (arrows + boxes + connectors)"
+  - Example: "Comparison slides: 15-20 shapes (rectangles + arrows)"
+
+### Shape Usage Plan
+- Total shapes per slide: [minimum 20개]
+- Shape types to use:
+  - Rectangles: [용도]
+  - Arrows: [용도]
+  - Triangles: [용도]
+  - Connectors: [용도]
+  - Groups: [70-80% of shapes grouped]
+
+### Toy Page Layout Implementation
+- Slides using Toy Page: [슬라이드 번호 리스트]
+- Left side (60-70%): [구체적 비주얼 요소]
+- Right side (30-40%): [구체적 텍스트 내용]
+
+### Governing Messages
+- [각 슬라이드별로 governing message 초안 작성]
+- Verification: "Does it penetrate the listener's mind?"
+```
+
+**⚠️ 이 문서 없이 코딩 시작하면 안 됨!**
+
+#### Step 3: Template/Code Review (코드 작성 후)
+
+**python-pptx fallback 사용 시에도 다음을 반드시 구현해야 함**:
+
+```python
+# ✅ REQUIRED Checklist for python-pptx code
+
+# 1. Slide dimensions
+prs.slide_width = Inches(10.83)  # NOT 10.0!
+prs.slide_height = Inches(7.5)
+
+# 2. Governing messages (16pt Bold, NOT 14pt Italic)
+gov_box = slide.shapes.add_textbox(...)
+gov_frame.paragraphs[0].font.size = Pt(16)  # NOT 14!
+gov_frame.paragraphs[0].font.bold = True    # NOT italic!
+
+# 3. Shape variety (minimum 20 per slide)
+# - Must include: rectangles, arrows, connectors, groups
+# - Example:
+arrow = slide.shapes.add_connector(
+    MSO_CONNECTOR.STRAIGHT,
+    Inches(2.0), Inches(3.0),  # Start
+    Inches(4.0), Inches(3.0)   # End
+)
+arrow.line.color.rgb = COLOR_DARK_GRAY
+arrow.line.width = Pt(2)
+
+# 4. Text on dark backgrounds = WHITE color
+# CRITICAL: Check every text element
+text_frame.paragraphs[0].font.color.rgb = COLOR_WHITE  # if background is dark
+
+# 5. Groups (70-80% of shapes)
+# Group related shapes together
+shapes_to_group = [shape1, shape2, shape3]
+# Note: python-pptx doesn't support grouping easily - document this limitation
+
+# 6. Font size distribution
+# 65% of text: 10pt (PRIMARY)
+# 20-25% of text: 12pt (bullets)
+# Rest: 8pt (captions), 14pt (headings)
+```
+
+### Mandatory Post-Generation Verification (생성 즉시 실행)
+
+```python
+# 필수 검증 스크립트 (생성된 PPTX 파일에 대해 실행)
+python3 -c "
+from pptx import Presentation
+import sys
+
+prs = Presentation('Part1_Session1_StrategicInventory.pptx')
+failures = []
+
+# Check 1: Slide dimensions
+if prs.slide_width != 914400 * 10.83:
+    failures.append(f'❌ Width: {prs.slide_width/914400:.2f}\" (should be 10.83\")')
+if prs.slide_height != 914400 * 7.5:
+    failures.append(f'❌ Height: {prs.slide_height/914400:.2f}\" (should be 7.5\")')
+
+# Check 2: Slide count
+if len(prs.slides) < 20:
+    failures.append(f'❌ Only {len(prs.slides)} slides (expected 20+)')
+
+# Check 3: Shapes per slide
+low_density_slides = []
+for i, slide in enumerate(prs.slides[1:], 2):  # Skip cover
+    if len(slide.shapes) < 10:
+        low_density_slides.append(f'Slide {i}: {len(slide.shapes)} shapes')
+
+if low_density_slides:
+    failures.append(f'❌ Low shape count:\n  ' + '\n  '.join(low_density_slides[:5]))
+
+# Check 4: Font sizes (sample check)
+font_sizes = {}
+for slide in prs.slides[:5]:
+    for shape in slide.shapes:
+        if hasattr(shape, 'text_frame'):
+            for para in shape.text_frame.paragraphs:
+                for run in para.runs:
+                    if run.font.size:
+                        size = int(run.font.size.pt)
+                        font_sizes[size] = font_sizes.get(size, 0) + 1
+
+total_text = sum(font_sizes.values())
+pt10_ratio = font_sizes.get(10, 0) / total_text if total_text > 0 else 0
+if pt10_ratio < 0.4:  # Should be 65% but allow some tolerance
+    failures.append(f'❌ 10pt text ratio: {pt10_ratio*100:.1f}% (should be 60%+)')
+
+print('\\n=== PPTX Quality Verification ===')
+if failures:
+    print('\\n'.join(failures))
+    print(f'\\n🚫 FAILED {len(failures)} checks - DO NOT PROCEED')
+    sys.exit(1)
+else:
+    print('✅ All checks passed')
+    print(f'   Slides: {len(prs.slides)}')
+    print(f'   Dimensions: {prs.slide_width/914400:.2f}\" × {prs.slide_height/914400:.2f}\"')
+"
+```
+
+**⚠️ 이 검증 통과 못하면 수정 후 재검증!**
+
+### Quality Gates (각 단계별 통과 기준)
+
+| Stage | Gate | Pass Criteria | Fail Action |
+|-------|------|---------------|-------------|
+| **Pre-Gen** | S4HANA Analysis | Analyzed ≥10 slides structure | STOP - Run analysis script |
+| **Pre-Gen** | Design Plan | Documented plan exists | STOP - Write plan first |
+| **Pre-Gen** | Code Review | All 6 checklist items ✅ | STOP - Fix code |
+| **Post-Gen** | Verification Script | All checks pass | STOP - Fix and regenerate |
+| **Post-Gen** | Manual Review | Spot-check 5 slides | STOP - Identify issues |
+
+**⚠️ 어느 gate라도 실패하면 다음 단계로 진행 금지!**
+
+### Common Failure Patterns (실제 발생한 문제들)
+
+#### Pattern 1: "빠르게 완성" 마인드
+- **증상**: 체크리스트 읽고 바로 코딩 시작
+- **결과**: 텍스트박스만 있는 저품질 슬라이드
+- **해결**: Pre-Generation Steps 강제 실행
+
+#### Pattern 2: "일단 돌아가게" 구현
+- **증상**: python-pptx fallback에서 최소한만 구현
+- **결과**: Shapes < 5개/슬라이드, governing messages 누락
+- **해결**: Code Review Checklist 강제 검증
+
+#### Pattern 3: "피상적 참고"
+- **증상**: S4HANA에서 색상만 추출
+- **결과**: 구조, 레이아웃, 밀도 무시
+- **해결**: Deep Analysis Script 강제 실행
+
+#### Pattern 4: "검증 생략"
+- **증상**: 생성 후 바로 커밋
+- **결과**: 품질 문제 발견 못함
+- **해결**: Verification Script 강제 실행
+
+### Part 1-9 Consistency Enforcement
+
+**모든 Part는 동일한 품질 기준을 충족해야 함**:
+
+```bash
+# Part 1-9 공통 검증 스크립트
+for part in Part{1..9}_*.pptx; do
+    echo "Verifying $part..."
+    python3 verify_pptx_quality.py "$part"
+    if [ $? -ne 0 ]; then
+        echo "❌ $part failed quality check"
+        exit 1
+    fi
+done
+
+echo "✅ All Parts passed quality checks"
+```
+
+**Consistency Checklist** (Part 간 일관성):
+- [ ] 동일한 슬라이드 크기 (10.83" × 7.5")
+- [ ] 동일한 색상 팔레트 (monochrome + Kraljic)
+- [ ] 동일한 폰트 크기 분포 (10pt 65%, 12pt 20-25%)
+- [ ] 동일한 governing message 스타일 (16pt Bold)
+- [ ] 동일한 shape 밀도 (20-50+ per slide)
+- [ ] 동일한 레이아웃 패턴 (Toy Page, 2-col, etc.)
+
+---
+
+### ✅ Checklist Before Generating PPTX (Updated with Mandatory Gates)
+
+#### Phase 1: Documentation Review (READ ONLY)
 - [ ] Read complete SKILL.md (no offset/limit)
 - [ ] Read complete html2pptx.md
 - [ ] Read complete css.md
-- [ ] Analyzed S4HANA reference PPTX file with detailed script
-- [ ] Understood monochrome color system (black/white/gray only)
-- [ ] Understood font size hierarchy (**10pt is PRIMARY** - 65% of text, 12pt for bullets - 20-25%)
-- [ ] Understood text color rules (white text on dark backgrounds, black text on light backgrounds)
-- [ ] Planned content density to achieve 85%+ filled area
-- [ ] Designed flowcharts, diagrams, shapes (20-50+ per slide, not 10!)
-- [ ] Planned GROUP organization (70-80% of shapes in groups)
-- [ ] Designed door charts for Kraljic Matrix (75+ shapes with spectrum indicators)
+- [ ] Read "CRITICAL: Preventing Quality Failures" section above
+
+#### Phase 2: Pre-Generation Analysis (MUST DO - 30 min)
+- [ ] **MANDATORY**: Run S4HANA Deep Analysis script
+  - Analyze ≥10 slides structure (shapes, AUTO_SHAPES, text boxes, groups)
+  - Document findings: average shapes per slide, density estimates
+  - Identify layout patterns used in reference
+- [ ] **MANDATORY**: Create Design Implementation Plan document
+  - Slide density targets (85%+ strategy)
+  - Shape usage plan (minimum 20 per slide, types & purposes)
+  - Toy Page layout implementation list
+  - Governing messages draft for ALL slides
+- [ ] Understood monochrome color system (black/white/gray only, Kraljic exception)
+- [ ] Understood font size hierarchy (10pt PRIMARY 65%, 12pt bullets 20-25%)
+- [ ] Understood text color rules (WHITE on dark, BLACK on light - CRITICAL)
+
+#### Phase 3: Design Planning (MUST DOCUMENT)
+- [ ] Planned content density strategy to achieve 85%+ (written in plan)
+- [ ] Designed flowcharts, diagrams, shapes (20-50+ per slide minimum)
+- [ ] Planned shape variety: rectangles, arrows, triangles, connectors
+- [ ] Planned GROUP organization (70-80% of shapes grouped)
+- [ ] Designed door charts for Kraljic Matrix (75+ shapes)
 - [ ] Chosen storyline approach (Structural, Dynamics, or Market Change)
-- [ ] Planned governing messages for all content slides (16pt Bold, insightful not descriptive)
-- [ ] Designed Toy Page layouts (60-70% visual left, 30-40% text right)
-- [ ] Created TOC slide with clear chapter structure (1장, 2장, 3장...)
-- [ ] Applied section numbering to all slide titles (X.Y format)
-- [ ] Prepared JSON data structure
-- [ ] Verified Handlebars templates exist or created them
+- [ ] Drafted governing messages (16pt Bold, insightful, "penetrate listener's mind")
+- [ ] Designed Toy Page layouts (list slides: 60-70% visual left, 30-40% text right)
+
+#### Phase 4: Implementation Preparation
+- [ ] Created TOC slide with chapter structure (1장, 2장...)
+- [ ] Applied section numbering to ALL slide titles (X.Y format)
+- [ ] Prepared JSON data structure OR python-pptx code
+- [ ] If using templates: Verified Handlebars templates exist
+- [ ] If using python-pptx: Reviewed code against 6-item checklist
 - [ ] Confirmed slide dimensions: 10.83" × 7.5"
-- [ ] Confirmed Part/Session mapping (Part N = Session N, not Sessions N-M)
-- [ ] Tested with small sample before full generation
+- [ ] Confirmed Part/Session mapping (Part N = Session N only)
+
+#### Phase 5: Quality Gates (STOP if fail)
+- [ ] **GATE 1**: S4HANA Analysis complete? (YES/NO) - STOP if NO
+- [ ] **GATE 2**: Design Plan documented? (YES/NO) - STOP if NO
+- [ ] **GATE 3**: Code reviewed against checklist? (YES/NO) - STOP if NO
+
+#### Phase 6: Post-Generation Verification (MUST RUN)
+- [ ] **MANDATORY**: Run verification script immediately after generation
+- [ ] Verification passed all checks? (YES/NO) - STOP & FIX if NO
+- [ ] Manual spot-check 5 slides for visual quality
+- [ ] Confirmed consistency with previous Parts (if Part 2+)
 
 ---
 
