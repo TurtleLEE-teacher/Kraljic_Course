@@ -2368,14 +2368,487 @@ def create_slide_11_kraljic_door_chart(prs):
     return slide
 
 # ============================================================================
+# SLIDE 12-15: MATERIAL CATEGORY DETAILS (70-80 shapes each)
+# ============================================================================
+
+def create_material_category_slide(prs, slide_num, title, quadrant_color, governing_msg, category_data):
+    """Generic function for material category detail slides (70-80 shapes each)
+
+    Layout: Detailed breakdown with examples and strategies
+    - Category overview box
+    - Characteristics (5-6 items)
+    - Strategy details (6-8 items)
+    - Planning methodology details
+    - Real-world examples (4-5 companies)
+    - KPI targets
+    - Use 8-9pt text for maximum density
+    """
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+
+    add_slide_title(slide, title, slide_num=slide_num)
+    add_governing_message(slide, governing_msg)
+
+    shape_count = 0
+
+    # ===== TOP: Category Overview Box =====
+    overview_x = 0.80
+    overview_y = 2.00
+    overview_w = 9.50
+    overview_h = 0.60
+
+    add_rectangle(
+        slide, overview_x, overview_y, overview_w, overview_h,
+        fill_color=quadrant_color,
+        border_color=COLOR_BLACK,
+        border_width=2
+    )
+    shape_count += 1
+
+    add_text_box(
+        slide, overview_x + 0.20, overview_y + 0.08, overview_w - 0.40, 0.20,
+        category_data["overview"], font_size=12, bold=True,
+        color=COLOR_WHITE, align=PP_ALIGN.CENTER
+    )
+    shape_count += 1
+
+    add_text_box(
+        slide, overview_x + 0.20, overview_y + 0.32, overview_w - 0.40, 0.22,
+        category_data["tagline"], font_size=10, bold=False,
+        color=COLOR_WHITE, align=PP_ALIGN.CENTER
+    )
+    shape_count += 1
+
+    # ===== LEFT COLUMN: Characteristics & Strategy =====
+    left_x = 0.80
+    left_w = 4.60
+
+    # Characteristics section
+    char_y = overview_y + overview_h + 0.20
+    add_rectangle(
+        slide, left_x, char_y, left_w, 0.28,
+        fill_color=COLOR_DARK_GRAY,
+        border_color=COLOR_BLACK,
+        border_width=1
+    )
+    shape_count += 1
+
+    add_text_box(
+        slide, left_x + 0.10, char_y + 0.03, left_w - 0.20, 0.22,
+        "특성 (Characteristics)", font_size=10, bold=True,
+        color=COLOR_WHITE, align=PP_ALIGN.CENTER
+    )
+    shape_count += 1
+
+    char_items_y = char_y + 0.38
+    for char in category_data["characteristics"]:
+        add_text_box(
+            slide, left_x + 0.10, char_items_y, 0.12, 0.16,
+            "•", font_size=8, color=COLOR_DARK_GRAY
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, left_x + 0.25, char_items_y, left_w - 0.35, 0.16,
+            char, font_size=8, color=COLOR_DARK_GRAY
+        )
+        shape_count += 1
+
+        char_items_y += 0.19
+
+    # Strategy section
+    strategy_y = char_items_y + 0.12
+    add_rectangle(
+        slide, left_x, strategy_y, left_w, 0.28,
+        fill_color=COLOR_MED_GRAY,
+        border_color=COLOR_BLACK,
+        border_width=1
+    )
+    shape_count += 1
+
+    add_text_box(
+        slide, left_x + 0.10, strategy_y + 0.03, left_w - 0.20, 0.22,
+        "전략 (Strategy)", font_size=10, bold=True,
+        color=COLOR_WHITE, align=PP_ALIGN.CENTER
+    )
+    shape_count += 1
+
+    strategy_items_y = strategy_y + 0.38
+    for strategy in category_data["strategies"]:
+        add_text_box(
+            slide, left_x + 0.10, strategy_items_y, 0.12, 0.16,
+            "•", font_size=8, color=COLOR_BLACK
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, left_x + 0.25, strategy_items_y, left_w - 0.35, 0.16,
+            strategy, font_size=8, color=COLOR_BLACK
+        )
+        shape_count += 1
+
+        strategy_items_y += 0.19
+
+    # Planning methodology section
+    planning_y = strategy_items_y + 0.12
+    add_rectangle(
+        slide, left_x, planning_y, left_w, 0.28,
+        fill_color=COLOR_DARK_GRAY,
+        border_color=COLOR_BLACK,
+        border_width=1
+    )
+    shape_count += 1
+
+    add_text_box(
+        slide, left_x + 0.10, planning_y + 0.03, left_w - 0.20, 0.22,
+        f"계획 방법론: {category_data['planning_method']}", font_size=10, bold=True,
+        color=COLOR_WHITE, align=PP_ALIGN.CENTER
+    )
+    shape_count += 1
+
+    planning_items_y = planning_y + 0.38
+    for planning in category_data["planning_details"]:
+        add_text_box(
+            slide, left_x + 0.10, planning_items_y, 0.12, 0.16,
+            "•", font_size=8, color=COLOR_DARK_GRAY
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, left_x + 0.25, planning_items_y, left_w - 0.35, 0.16,
+            planning, font_size=8, color=COLOR_DARK_GRAY
+        )
+        shape_count += 1
+
+        planning_items_y += 0.19
+
+    # ===== RIGHT COLUMN: Examples & KPIs =====
+    right_x = 5.70
+    right_w = 4.60
+
+    # Examples section
+    examples_y = char_y
+    add_rectangle(
+        slide, right_x, examples_y, right_w, 0.28,
+        fill_color=COLOR_MED_GRAY,
+        border_color=COLOR_BLACK,
+        border_width=1
+    )
+    shape_count += 1
+
+    add_text_box(
+        slide, right_x + 0.10, examples_y + 0.03, right_w - 0.20, 0.22,
+        "실제 사례 (Examples)", font_size=10, bold=True,
+        color=COLOR_WHITE, align=PP_ALIGN.CENTER
+    )
+    shape_count += 1
+
+    examples_items_y = examples_y + 0.38
+    for example in category_data["examples"]:
+        # Example box
+        add_rectangle(
+            slide, right_x + 0.10, examples_items_y, right_w - 0.20, 0.50,
+            fill_color=COLOR_VERY_LIGHT_GRAY,
+            border_color=COLOR_LIGHT_GRAY,
+            border_width=0.75
+        )
+        shape_count += 1
+
+        # Company name (9pt bold)
+        add_text_box(
+            slide, right_x + 0.15, examples_items_y + 0.05, right_w - 0.30, 0.16,
+            example["company"], font_size=9, bold=True,
+            color=COLOR_BLACK
+        )
+        shape_count += 1
+
+        # Material (8pt)
+        add_text_box(
+            slide, right_x + 0.15, examples_items_y + 0.24, right_w - 0.30, 0.22,
+            f"자재: {example['material']}", font_size=8, color=COLOR_DARK_GRAY
+        )
+        shape_count += 1
+
+        examples_items_y += 0.58
+
+    # KPI section
+    kpi_y = examples_items_y + 0.12
+    add_rectangle(
+        slide, right_x, kpi_y, right_w, 0.28,
+        fill_color=COLOR_DARK_GRAY,
+        border_color=COLOR_BLACK,
+        border_width=1
+    )
+    shape_count += 1
+
+    add_text_box(
+        slide, right_x + 0.10, kpi_y + 0.03, right_w - 0.20, 0.22,
+        "KPI 목표 (Targets)", font_size=10, bold=True,
+        color=COLOR_WHITE, align=PP_ALIGN.CENTER
+    )
+    shape_count += 1
+
+    kpi_items_y = kpi_y + 0.38
+    for kpi in category_data["kpis"]:
+        add_text_box(
+            slide, right_x + 0.10, kpi_items_y, 0.12, 0.16,
+            "•", font_size=8, color=COLOR_DARK_GRAY
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, right_x + 0.25, kpi_items_y, right_w - 0.35, 0.16,
+            kpi, font_size=8, color=COLOR_DARK_GRAY
+        )
+        shape_count += 1
+
+        kpi_items_y += 0.19
+
+    print(f"✓ Slide {slide_num}: {title.split()[1]} ({shape_count} shapes)")
+    return slide
+
+def create_slide_12_bottleneck(prs):
+    """Slide 12: Bottleneck Materials"""
+    COLOR_BOTTLENECK = RGBColor(230, 126, 34)  # Orange
+
+    data = {
+        "overview": "병목자재 (Bottleneck Materials)",
+        "tagline": "공급 리스크는 높지만 구매 금액이 낮은 자재 - 공급 안정성 확보가 최우선",
+        "characteristics": [
+            "공급 리스크: 매우 높음 (공급원 1-2개)",
+            "구매 금액: 낮음 (매출 2% 미만)",
+            "대체 가능성: 어려움 (인증/규격)",
+            "리드타임: 긴 편 (4-12주)",
+            "시장 특성: 과점 또는 독점",
+            "비중: 전체 자재의 5-10%"
+        ],
+        "strategies": [
+            "공급 안정성 최우선 확보",
+            "충분한 안전재고 유지 (8-12주)",
+            "복수 공급원 개발 추진",
+            "대체 자재 R&D 투자",
+            "장기 공급 계약 체결",
+            "공급업체와 긴밀한 관계 유지",
+            "수요 예측 정확도 향상",
+            "비상 조달 계획 수립"
+        ],
+        "planning_method": "ROP (Re-Order Point)",
+        "planning_details": [
+            "재주문점 방식 (ROP = 리드타임 수요 + 안전재고)",
+            "안전재고율 높게 설정 (50-100%)",
+            "Min-Max 재고 관리 병행",
+            "재고 모니터링 일일 점검",
+            "긴급 발주 프로세스 구축",
+            "비상 재고 별도 확보"
+        ],
+        "examples": [
+            {"company": "현대자동차", "material": "특수 반도체 칩 (독일 Bosch 독점)"},
+            {"company": "삼성전자", "material": "희토류 원소 (중국 의존 95%)"},
+            {"company": "LG화학", "material": "특수 촉매제 (일본 3개사 과점)"},
+            {"company": "포스코", "material": "특수 합금 원료 (호주 2개 광산)"},
+            {"company": "두산중공업", "material": "항공 인증 부품 (미국 1개사)"
+            }
+        ],
+        "kpis": [
+            "재고 가용률 98% 이상",
+            "결품률 0.5% 이하",
+            "리드타임 준수율 95% 이상",
+            "비상 재고 8주 이상 확보",
+            "공급업체 관계 점수 4.0/5.0",
+            "대체품 개발 진행률"
+        ]
+    }
+
+    return create_material_category_slide(
+        prs, 12, "2.4 병목자재 (Bottleneck)",
+        COLOR_BOTTLENECK,
+        "병목자재는 공급 리스크가 높지만 구매 금액이 낮아 공급 안정성 확보가 최우선 과제입니다.",
+        data
+    )
+
+def create_slide_13_leverage(prs):
+    """Slide 13: Leverage Materials"""
+    COLOR_LEVERAGE = RGBColor(39, 174, 96)  # Green
+
+    data = {
+        "overview": "레버리지자재 (Leverage Materials)",
+        "tagline": "공급 리스크는 낮지만 구매 금액이 높은 자재 - 가격 협상과 원가 절감이 핵심",
+        "characteristics": [
+            "공급 리스크: 낮음 (공급원 10개+)",
+            "구매 금액: 높음 (매출 5-10%)",
+            "대체 가능성: 용이 (표준화)",
+            "리드타임: 짧은 편 (1-4주)",
+            "시장 특성: 완전 경쟁",
+            "비중: 전체 자재의 50-60%"
+        ],
+        "strategies": [
+            "경쟁 입찰 적극 활용",
+            "가격 협상력 극대화",
+            "물량 레버리지 활용 (Volume Discount)",
+            "단기 계약 체결 (시장 가격 반영)",
+            "공급업체 다변화",
+            "글로벌 소싱 추진",
+            "e-Auction 활용",
+            "원가 절감 목표 설정 (연 5%+)"
+        ],
+        "planning_method": "MRP (Material Requirements Planning)",
+        "planning_details": [
+            "수요 기반 발주 (MRP 연동)",
+            "최소 안전재고 유지 (1-2주)",
+            "JIT 방식 적용 가능",
+            "생산 계획 연동 발주",
+            "재고 회전율 극대화",
+            "원가 절감 우선"
+        ],
+        "examples": [
+            {"company": "현대자동차", "material": "철강 원자재 (POSCO 등 다수)"},
+            {"company": "삼성전자", "material": "표준 PCB (국내외 20개사)"},
+            {"company": "LG생활건강", "material": "화장품 용기 (플라스틱)"},
+            {"company": "SK하이닉스", "material": "표준 화학약품 (글로벌 소싱)"},
+            {"company": "롯데케미칼", "material": "원유 (글로벌 시장 거래)"}
+        ],
+        "kpis": [
+            "원가 절감률 5% 이상/년",
+            "재고 회전율 12회 이상/년",
+            "가격 경쟁력 시장 상위 10%",
+            "조달 효율 90% 이상",
+            "공급업체 수 10개 이상 유지",
+            "e-Auction 활용률 80% 이상"
+        ]
+    }
+
+    return create_material_category_slide(
+        prs, 13, "2.5 레버리지자재 (Leverage)",
+        COLOR_LEVERAGE,
+        "레버리지자재는 공급 리스크가 낮고 구매 금액이 높아 경쟁입찰과 가격협상으로 원가 절감을 추구합니다.",
+        data
+    )
+
+def create_slide_14_strategic(prs):
+    """Slide 14: Strategic Materials"""
+    COLOR_STRATEGIC = RGBColor(142, 68, 173)  # Purple
+
+    data = {
+        "overview": "전략자재 (Strategic Materials)",
+        "tagline": "공급 리스크와 구매 금액이 모두 높은 자재 - 장기 파트너십과 리스크 관리가 핵심",
+        "characteristics": [
+            "공급 리스크: 매우 높음 (공급원 1-3개)",
+            "구매 금액: 매우 높음 (매출 10% 이상)",
+            "대체 가능성: 매우 어려움",
+            "리드타임: 매우 긴 편 (8-24주)",
+            "시장 특성: 과점, 기술 집약적",
+            "비중: 전체 자재의 15-20%"
+        ],
+        "strategies": [
+            "장기 전략적 파트너십 구축",
+            "협력적 관계 강화 (Win-Win)",
+            "공동 기술 개발 및 R&D",
+            "리스크 공유 계약 (Take-or-Pay)",
+            "수직 통합 검토 (M&A)",
+            "복수 지역 소싱 전략",
+            "공급망 가시성 확보",
+            "정기적 리스크 평가"
+        ],
+        "planning_method": "하이브리드 (LTP + MRP)",
+        "planning_details": [
+            "예측 기반 장기 계획 (LTP: 12-24개월)",
+            "수요 기반 단기 조정 (MRP: 월간)",
+            "전략적 안전재고 확보 (4-8주)",
+            "공급업체와 계획 공유 (VMI)",
+            "시나리오 플래닝 수행",
+            "리스크 헤지 전략 수립"
+        ],
+        "examples": [
+            {"company": "삼성전자", "material": "최첨단 반도체 장비 (ASML 독점)"},
+            {"company": "현대자동차", "material": "차세대 배터리 (LG·CATL)"},
+            {"company": "SK하이닉스", "material": "EUV 포토레지스트 (일본 2개사)"},
+            {"company": "두산밥캣", "material": "특수 엔진 (Perkins 독점)"},
+            {"company": "한화에어로스페이스", "material": "항공 엔진 부품 (GE/RR)"
+            }
+        ],
+        "kpis": [
+            "공급 안정성 95% 이상",
+            "품질 불량률 0.1% 이하",
+            "납기 준수율 98% 이상",
+            "협력 지수 4.5/5.0",
+            "혁신 프로젝트 2건/년",
+            "리스크 시나리오 대응율 100%"
+        ]
+    }
+
+    return create_material_category_slide(
+        prs, 14, "2.6 전략자재 (Strategic)",
+        COLOR_STRATEGIC,
+        "전략자재는 공급 리스크와 구매 금액이 모두 높아 장기 파트너십과 리스크 관리가 핵심입니다.",
+        data
+    )
+
+def create_slide_15_routine(prs):
+    """Slide 15: Routine Materials"""
+    COLOR_ROUTINE = RGBColor(149, 165, 166)  # Gray
+
+    data = {
+        "overview": "일상자재 (Routine Materials)",
+        "tagline": "공급 리스크와 구매 금액이 모두 낮은 자재 - 프로세스 효율화와 자동화가 핵심",
+        "characteristics": [
+            "공급 리스크: 매우 낮음 (공급원 20개+)",
+            "구매 금액: 매우 낮음 (매출 1% 미만)",
+            "대체 가능성: 매우 용이",
+            "리드타임: 매우 짧음 (1-2주)",
+            "시장 특성: 완전 경쟁, 상품화",
+            "비중: 전체 자재의 20-25%"
+        ],
+        "strategies": [
+            "프로세스 효율화 최우선",
+            "자동 발주 시스템 구축",
+            "통합 구매 (카탈로그/e-Mall)",
+            "관리 비용 최소화",
+            "셀프 서비스 구매 (P-Card)",
+            "공급업체 통합 (소수화)",
+            "표준화 및 집약화",
+            "사용자 만족도 중심"
+        ],
+        "planning_method": "Min-Max 자동화",
+        "planning_details": [
+            "Min-Max 자동 발주",
+            "VMI (Vendor Managed Inventory)",
+            "e-Procurement 시스템 활용",
+            "재고 모니터링 자동화",
+            "예외 관리만 수동 처리",
+            "최소 안전재고 (1주 미만)"
+        ],
+        "examples": [
+            {"company": "삼성전자", "material": "사무용품 (펜, 종이 등)"},
+            {"company": "현대자동차", "material": "MRO 소모품 (볼트, 너트 등)"},
+            {"company": "LG화학", "material": "청소·안전 용품"},
+            {"company": "SK텔레콤", "material": "IT 소모품 (케이블, USB 등)"},
+            {"company": "포스코", "material": "일반 공구류"}
+        ],
+        "kpis": [
+            "처리 시간 단축 50% 이상",
+            "발주 비용 최소화 (건당 1만원 미만)",
+            "자동화율 80% 이상",
+            "사용자 만족도 4.0/5.0",
+            "재고 회전율 24회 이상/년",
+            "관리 공수 50% 절감"
+        ]
+    }
+
+    return create_material_category_slide(
+        prs, 15, "2.7 일상자재 (Routine)",
+        COLOR_ROUTINE,
+        "일상자재는 공급 리스크와 구매 금액이 모두 낮아 프로세스 효율화와 자동화로 관리합니다.",
+        data
+    )
+
+# ============================================================================
 # MAIN GENERATION FUNCTION
 # ============================================================================
 
 def main():
-    """Generate Part 1 PPTX (Slides 1-11) - INCLUDING CRITICAL DOOR CHART!"""
-    print("=== Part 1 PPTX Generation (Slides 1-11) ===")
+    """Generate Part 1 PPTX (Slides 1-15) - Including material category details"""
+    print("=== Part 1 PPTX Generation (Slides 1-15) ===")
     print("High-quality implementation following S4HANA standards")
-    print("Including CRITICAL Kraljic Matrix Door Chart (Slide 11)\n")
+    print("Including Kraljic Door Chart + 4 Material Category Detail slides\n")
 
     prs = create_presentation()
 
@@ -2394,14 +2867,20 @@ def main():
     create_slide_10_kraljic_axes(prs)
     create_slide_11_kraljic_door_chart(prs)
 
+    # Material Category Details
+    create_slide_12_bottleneck(prs)
+    create_slide_13_leverage(prs)
+    create_slide_14_strategic(prs)
+    create_slide_15_routine(prs)
+
     # Save
     output_path = "/home/user/Kraljic_Course/Part1_Session1_StrategicInventory.pptx"
     prs.save(output_path)
 
     print(f"\n=== Generation Complete ===")
     print(f"Output: {output_path}")
-    print(f"Slides generated: 11 (including Door Chart!)")
-    print(f"\nNext: Run verification script")
+    print(f"Slides generated: 15")
+    print(f"\nNext: Generate remaining slides 16-25")
 
     return output_path
 
