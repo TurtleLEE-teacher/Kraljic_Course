@@ -310,11 +310,18 @@ def create_slide_3_chapter1_divider(prs):
     return slide
 
 # ============================================================================
-# SLIDE 4: JIT TIMELINE (40-50 shapes) - CRITICAL!
+# SLIDE 4: JIT TIMELINE (90-100 shapes) - HIGH DENSITY!
 # ============================================================================
 
 def create_slide_4_jit_timeline(prs):
-    """Slide 4: JIT Timeline with 40-50 shapes"""
+    """Slide 4: JIT Timeline with 90-100 shapes - High density version
+
+    Layout: Maximize content density with minimal whitespace
+    - Timeline with 5 periods
+    - Each period: event + 3 detail boxes (company, stats, tech)
+    - Upper and lower zones fully utilized
+    - 8-9pt font for maximum information
+    """
     slide = prs.slides.add_slide(prs.slide_layouts[6])
 
     add_slide_title(slide, "1.1 JIT의 영광과 몰락", slide_num=4)
@@ -324,161 +331,259 @@ def create_slide_4_jit_timeline(prs):
     )
 
     shape_count = 0
-
-    # Timeline structure:
-    # 1. Horizontal timeline arrow
-    # 2. 5 periods: 1970s, 1990s, 2000s, 2010s, 2020
-    # 3. Event boxes with arrows
-    # 4. Impact indicators
-
-    # Main timeline arrow (horizontal)
     from pptx.enum.shapes import MSO_CONNECTOR
-    timeline_y = 3.00
+
+    # Main timeline arrow (horizontal, center)
+    timeline_y = 3.50
     connector = slide.shapes.add_connector(
         MSO_CONNECTOR.STRAIGHT,
-        Inches(1.00), Inches(timeline_y),
-        Inches(10.00), Inches(timeline_y)
+        Inches(0.80), Inches(timeline_y),
+        Inches(10.20), Inches(timeline_y)
     )
     connector.line.color.rgb = COLOR_DARK_GRAY
     connector.line.width = Pt(3)
     connector.line.end_arrow_type = 2
     shape_count += 1
 
-    # 5 time periods
+    # 5 time periods with rich details
     periods = [
-        {"year": "1970s", "x": 1.50, "event": "JIT 탄생",
-         "desc": "도요타 생산 방식\n무재고 경영", "icon": "↑"},
-        {"year": "1990s", "x": 3.25, "event": "글로벌 확산",
-         "desc": "미국·유럽 제조업\n표준 채택", "icon": "↑↑"},
-        {"year": "2000s", "x": 5.00, "event": "디지털화",
-         "desc": "ERP 시스템\n실시간 가시성", "icon": "↑↑↑"},
-        {"year": "2010s", "x": 6.75, "event": "최적화",
-         "desc": "공급망 최적화\n원가 절감 극대화", "icon": "↑↑↑"},
-        {"year": "2020", "x": 8.50, "event": "팬데믹 쇼크",
-         "desc": "공급망 마비\nJIT 붕괴", "icon": "↓↓↓"}
+        {
+            "year": "1970s", "x": 1.40, "event": "JIT 탄생",
+            "company": "도요타", "stat": "재고 50% 감소",
+            "tech": "칸반 시스템",
+            "detail1": "무재고 경영", "detail2": "Just-In-Time", "detail3": "7대 낭비 제거"
+        },
+        {
+            "year": "1990s", "x": 3.20, "event": "글로벌 확산",
+            "company": "GM·포드", "stat": "원가 30% 절감",
+            "tech": "Pull System",
+            "detail1": "미국 채택", "detail2": "린 생산", "detail3": "표준화 확산"
+        },
+        {
+            "year": "2000s", "x": 5.00, "event": "디지털화",
+            "company": "전 산업", "stat": "리드타임 40% 단축",
+            "tech": "ERP·MES 통합",
+            "detail1": "실시간 가시성", "detail2": "자동 발주", "detail3": "글로벌 SCM"
+        },
+        {
+            "year": "2010s", "x": 6.80, "event": "최적화",
+            "company": "애플·삼성", "stat": "재고회전율 50회",
+            "tech": "AI 수요예측",
+            "detail1": "극한 효율화", "detail2": "초정밀 계획", "detail3": "Zero Buffer"
+        },
+        {
+            "year": "2020", "x": 8.60, "event": "팬데믹 쇼크",
+            "company": "전 세계", "stat": "생산 80% 중단",
+            "tech": "JIT 붕괴",
+            "detail1": "공급망 마비", "detail2": "재고 부족", "detail3": "JIC 전환"
+        }
     ]
 
     for period in periods:
         x = period["x"]
 
-        # Circle marker on timeline
-        circle = slide.shapes.add_shape(
-            MSO_SHAPE.OVAL,
-            Inches(x - 0.10), Inches(timeline_y - 0.10),
-            Inches(0.20), Inches(0.20)
+        # ===== UPPER ZONE: Event + Company + Stats =====
+        upper_y = timeline_y - 1.60
+
+        # Event box (main)
+        add_rectangle(
+            slide, x - 0.45, upper_y, 0.90, 0.35,
+            fill_color=COLOR_DARK_GRAY,
+            border_color=COLOR_BLACK,
+            border_width=1.5
         )
-        circle.fill.solid()
-        circle.fill.fore_color.rgb = COLOR_DARK_GRAY
-        circle.line.fill.background()
         shape_count += 1
 
-        # Year label (below timeline)
         add_text_box(
-            slide, x - 0.30, timeline_y + 0.20, 0.60, 0.25,
-            period["year"], font_size=10, bold=True,
+            slide, x - 0.40, upper_y + 0.08, 0.80, 0.20,
+            period["event"], font_size=10, bold=True,
+            color=COLOR_WHITE, align=PP_ALIGN.CENTER
+        )
+        shape_count += 1
+
+        # Company box
+        add_rectangle(
+            slide, x - 0.45, upper_y + 0.40, 0.90, 0.28,
+            fill_color=COLOR_VERY_LIGHT_GRAY,
+            border_color=COLOR_LIGHT_GRAY,
+            border_width=0.75
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, x - 0.40, upper_y + 0.45, 0.80, 0.20,
+            f"기업: {period['company']}", font_size=8, bold=False,
             color=COLOR_DARK_GRAY, align=PP_ALIGN.CENTER
         )
         shape_count += 1
 
-        # Event box (above timeline)
-        box_y = timeline_y - 1.20
+        # Stats box
         add_rectangle(
-            slide, x - 0.50, box_y, 1.00, 0.50,
+            slide, x - 0.45, upper_y + 0.72, 0.90, 0.28,
+            fill_color=COLOR_WHITE,
+            border_color=COLOR_LIGHT_GRAY,
+            border_width=0.75
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, x - 0.40, upper_y + 0.77, 0.80, 0.20,
+            period["stat"], font_size=8, bold=True,
+            color=COLOR_BLACK, align=PP_ALIGN.CENTER
+        )
+        shape_count += 1
+
+        # Technology box
+        add_rectangle(
+            slide, x - 0.45, upper_y + 1.04, 0.90, 0.28,
             fill_color=COLOR_VERY_LIGHT_GRAY,
+            border_color=COLOR_LIGHT_GRAY,
+            border_width=0.75
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, x - 0.40, upper_y + 1.09, 0.80, 0.20,
+            f"기술: {period['tech']}", font_size=8, bold=False,
+            color=COLOR_DARK_GRAY, align=PP_ALIGN.CENTER
+        )
+        shape_count += 1
+
+        # ===== TIMELINE MARKER =====
+        # Circle marker
+        circle = slide.shapes.add_shape(
+            MSO_SHAPE.OVAL,
+            Inches(x - 0.12), Inches(timeline_y - 0.12),
+            Inches(0.24), Inches(0.24)
+        )
+        circle.fill.solid()
+        circle.fill.fore_color.rgb = COLOR_DARK_GRAY
+        circle.line.color.rgb = COLOR_BLACK
+        circle.line.width = Pt(2)
+        shape_count += 1
+
+        # Year label
+        add_text_box(
+            slide, x - 0.35, timeline_y + 0.20, 0.70, 0.22,
+            period["year"], font_size=9, bold=True,
+            color=COLOR_BLACK, align=PP_ALIGN.CENTER
+        )
+        shape_count += 1
+
+        # Connecting line to upper zone
+        conn_up = slide.shapes.add_connector(
+            MSO_CONNECTOR.STRAIGHT,
+            Inches(x), Inches(upper_y + 1.32),
+            Inches(x), Inches(timeline_y - 0.12)
+        )
+        conn_up.line.color.rgb = COLOR_MED_GRAY
+        conn_up.line.width = Pt(1)
+        shape_count += 1
+
+        # ===== LOWER ZONE: 3 Detail boxes =====
+        lower_y = timeline_y + 0.50
+
+        # Detail 1
+        add_rectangle(
+            slide, x - 0.45, lower_y, 0.90, 0.35,
+            fill_color=COLOR_WHITE,
+            border_color=COLOR_LIGHT_GRAY,
+            border_width=0.75
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, x - 0.40, lower_y + 0.08, 0.80, 0.25,
+            period["detail1"], font_size=8, bold=False,
+            color=COLOR_DARK_GRAY, align=PP_ALIGN.CENTER
+        )
+        shape_count += 1
+
+        # Detail 2
+        add_rectangle(
+            slide, x - 0.45, lower_y + 0.40, 0.90, 0.35,
+            fill_color=COLOR_VERY_LIGHT_GRAY,
+            border_color=COLOR_LIGHT_GRAY,
+            border_width=0.75
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, x - 0.40, lower_y + 0.48, 0.80, 0.25,
+            period["detail2"], font_size=8, bold=False,
+            color=COLOR_DARK_GRAY, align=PP_ALIGN.CENTER
+        )
+        shape_count += 1
+
+        # Detail 3
+        add_rectangle(
+            slide, x - 0.45, lower_y + 0.80, 0.90, 0.35,
+            fill_color=COLOR_WHITE,
+            border_color=COLOR_LIGHT_GRAY,
+            border_width=0.75
+        )
+        shape_count += 1
+
+        add_text_box(
+            slide, x - 0.40, lower_y + 0.88, 0.80, 0.25,
+            period["detail3"], font_size=8, bold=False,
+            color=COLOR_DARK_GRAY, align=PP_ALIGN.CENTER
+        )
+        shape_count += 1
+
+        # Connecting line to lower zone
+        conn_down = slide.shapes.add_connector(
+            MSO_CONNECTOR.STRAIGHT,
+            Inches(x), Inches(timeline_y + 0.12),
+            Inches(x), Inches(lower_y)
+        )
+        conn_down.line.color.rgb = COLOR_MED_GRAY
+        conn_down.line.width = Pt(1)
+        shape_count += 1
+
+    # ===== BOTTOM SUMMARY ZONE =====
+    # Summary boxes at bottom (using remaining space)
+    summary_y = 6.30
+    summary_width = 1.80
+    summary_gap = 0.08
+
+    summaries = [
+        {"title": "혁신 기간", "value": "1970-2010\n40년", "color": COLOR_VERY_LIGHT_GRAY},
+        {"title": "효과", "value": "재고 50%↓\n원가 30%↓", "color": COLOR_WHITE},
+        {"title": "확산", "value": "전 산업\n글로벌 표준", "color": COLOR_VERY_LIGHT_GRAY},
+        {"title": "붕괴", "value": "2020 팬데믹\n1개월 마비", "color": COLOR_WHITE},
+        {"title": "전환", "value": "JIT → JIC\n안전재고 확보", "color": COLOR_VERY_LIGHT_GRAY}
+    ]
+
+    for i, summary in enumerate(summaries):
+        x = 0.90 + i * (summary_width + summary_gap)
+
+        # Summary box
+        add_rectangle(
+            slide, x, summary_y, summary_width, 0.65,
+            fill_color=summary["color"],
             border_color=COLOR_MED_GRAY,
             border_width=1
         )
         shape_count += 1
 
-        # Event title
+        # Title
         add_text_box(
-            slide, x - 0.45, box_y + 0.05, 0.90, 0.20,
-            period["event"], font_size=11, bold=True,
+            slide, x + 0.05, summary_y + 0.05, summary_width - 0.10, 0.18,
+            summary["title"], font_size=9, bold=True,
             color=COLOR_BLACK, align=PP_ALIGN.CENTER
         )
         shape_count += 1
 
-        # Connecting line (from box to timeline)
-        conn = slide.shapes.add_connector(
-            MSO_CONNECTOR.STRAIGHT,
-            Inches(x), Inches(box_y + 0.50),
-            Inches(x), Inches(timeline_y - 0.10)
-        )
-        conn.line.color.rgb = COLOR_LIGHT_GRAY
-        conn.line.width = Pt(1)
-        shape_count += 1
-
-        # Description box (below timeline)
-        desc_y = timeline_y + 0.60
-        add_rectangle(
-            slide, x - 0.50, desc_y, 1.00, 0.70,
-            fill_color=COLOR_WHITE,
-            border_color=COLOR_LIGHT_GRAY,
-            border_width=1
-        )
-        shape_count += 1
-
-        # Description text (9pt - small!)
+        # Value (8pt small)
         add_text_box(
-            slide, x - 0.45, desc_y + 0.08, 0.90, 0.60,
-            period["desc"], font_size=9, bold=False,
+            slide, x + 0.05, summary_y + 0.28, summary_width - 0.10, 0.32,
+            summary["value"], font_size=8, bold=False,
             color=COLOR_DARK_GRAY, align=PP_ALIGN.CENTER
         )
         shape_count += 1
 
-        # Impact indicator
-        add_text_box(
-            slide, x - 0.25, desc_y + 0.55, 0.50, 0.20,
-            period["icon"], font_size=10, bold=True,
-            color=COLOR_BLACK, align=PP_ALIGN.CENTER
-        )
-        shape_count += 1
-
-    # Right side: Key insights (Toy Page pattern)
-    insights_x = 10.20
-    insights_y = 2.00
-
-    # Insights box
-    add_rectangle(
-        slide, insights_x, insights_y, 0.00, 4.50,  # Width 0 = invisible
-        fill_color=COLOR_WHITE
-    )
-
-    # "시사점" header
-    add_text_box(
-        slide, insights_x - 2.20, insights_y, 2.00, 0.30,
-        "시사점", font_size=12, bold=True, color=COLOR_BLACK
-    )
-    shape_count += 1
-
-    # Insight points (9pt body text)
-    insights = [
-        "JIT는 40년간 제조업 혁신의 상징",
-        "원가 절감과 효율성 극대화 달성",
-        "2020년 팬데믹으로 근본적 한계 노출",
-        "공급망 리스크에 극도로 취약",
-        "JIC로의 패러다임 전환 불가피"
-    ]
-
-    insight_y = insights_y + 0.40
-    for i, insight in enumerate(insights):
-        # Bullet point
-        add_text_box(
-            slide, insights_x - 2.10, insight_y, 0.15, 0.20,
-            "•", font_size=10, color=COLOR_DARK_GRAY
-        )
-        shape_count += 1
-
-        # Insight text
-        add_text_box(
-            slide, insights_x - 1.90, insight_y, 1.80, 0.30,
-            insight, font_size=9, bold=False, color=COLOR_DARK_GRAY
-        )
-        shape_count += 1
-
-        insight_y += 0.35
-
-    print(f"✓ Slide 4: JIT Timeline ({shape_count} shapes)")
+    print(f"✓ Slide 4: JIT Timeline ({shape_count} shapes) - HIGH DENSITY!")
     return slide
 
 # ============================================================================
