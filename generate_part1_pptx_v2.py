@@ -19,6 +19,14 @@ from pptx.enum.shapes import MSO_SHAPE
 from pptx.dml.color import RGBColor
 from pptx.enum.dml import MSO_LINE_DASH_STYLE
 
+# ============================================================================
+# SLIDE DIMENSIONS - CRITICAL CONSTRAINTS
+# ============================================================================
+SLIDE_WIDTH = 10.83   # inches - DO NOT EXCEED!
+SLIDE_HEIGHT = 7.50   # inches - DO NOT EXCEED!
+SAFE_BOTTOM = 7.05    # Safe bottom (leave 0.45" margin)
+SAFE_RIGHT = 10.50    # Safe right (leave 0.33" margin)
+
 # S4HANA Color Palette (Monochrome)
 COLOR_BLACK = RGBColor(0, 0, 0)
 COLOR_DARK_GRAY = RGBColor(51, 51, 51)
@@ -71,6 +79,29 @@ def add_rectangle(slide, x, y, w, h, fill_color, border_color=None, border_width
         shape.line.fill.background()
 
     return shape
+
+def check_bounds(x, y, w, h, label="Shape"):
+    """Check if shape fits within slide boundaries
+
+    Args:
+        x, y, w, h: Position and size in inches
+        label: Description for error message
+
+    Returns:
+        tuple: (is_valid, right_edge, bottom_edge)
+
+    Raises:
+        Warning if bounds exceeded
+    """
+    right = x + w
+    bottom = y + h
+
+    if right > SLIDE_WIDTH:
+        print(f"⚠️  {label}: RIGHT overflow {right:.2f}\" > {SLIDE_WIDTH}\" (exceed by {right - SLIDE_WIDTH:.2f}\")")
+    if bottom > SLIDE_HEIGHT:
+        print(f"⚠️  {label}: BOTTOM overflow {bottom:.2f}\" > {SLIDE_HEIGHT}\" (exceed by {bottom - SLIDE_HEIGHT:.2f}\")")
+
+    return (right <= SLIDE_WIDTH and bottom <= SLIDE_HEIGHT, right, bottom)
 
 def add_text_box(slide, x, y, w, h, text, font_size=10, bold=False,
                  color=COLOR_BLACK, align=PP_ALIGN.LEFT, font_name='맑은 고딕'):
@@ -855,9 +886,9 @@ def create_slide_5_pandemic(prs):
 
         ind_y += 0.48
 
-    # ===== BOTTOM SUMMARY ZONE =====
+    # ===== BOTTOM SUMMARY ZONE ===== (FIXED: Reduce width to fit within 10.83")
     summary_y = 6.50
-    summary_w = 2.45
+    summary_w = 2.30  # Reduced from 2.45 to fit 4 boxes within bounds
     summary_gap = 0.10
 
     summaries = [
@@ -869,6 +900,7 @@ def create_slide_5_pandemic(prs):
 
     for i, summary in enumerate(summaries):
         x = 0.90 + i * (summary_w + summary_gap)
+        # Bounds check: right edge = 0.90 + 3*(2.30+0.10) + 2.30 = 10.50" ✓
 
         # Summary box
         add_rectangle(
@@ -924,12 +956,12 @@ def create_slide_6_jit_vs_jic(prs):
     shape_count = 0
     from pptx.enum.shapes import MSO_CONNECTOR
 
-    # ===== TABLE STRUCTURE =====
+    # ===== TABLE STRUCTURE ===== (FIXED: Reduce row height to fit 9 rows within 7.50")
     # Header row
     table_x = 0.80
     table_y = 2.00
     col_w = 4.50  # Width for each column (JIT and JIC)
-    row_h = 0.55  # Height for each row
+    row_h = 0.48  # Reduced from 0.55 to fit all rows (9 rows * 0.50 = 4.50")
 
     # Header: JIT column
     add_rectangle(
@@ -1040,8 +1072,8 @@ def create_slide_6_jit_vs_jic(prs):
         )
         shape_count += 1
 
-        # JIT cell content (3 items, 8pt)
-        item_y = current_y + 0.05
+        # JIT cell content (3 items, 8pt) - Adjusted spacing for reduced row height
+        item_y = current_y + 0.03
         for item in cat["jit"]:
             add_text_box(
                 slide, table_x + 0.08, item_y, 0.12, 0.14,
@@ -1055,7 +1087,7 @@ def create_slide_6_jit_vs_jic(prs):
             )
             shape_count += 1
 
-            item_y += 0.16
+            item_y += 0.14  # Reduced from 0.16 to fit in 0.48" row
 
         # JIC cell
         add_rectangle(
@@ -1066,8 +1098,8 @@ def create_slide_6_jit_vs_jic(prs):
         )
         shape_count += 1
 
-        # JIC cell content (3 items, 8pt)
-        item_y = current_y + 0.05
+        # JIC cell content (3 items, 8pt) - Adjusted spacing for reduced row height
+        item_y = current_y + 0.03
         for item in cat["jic"]:
             add_text_box(
                 slide, table_x + col_w + 0.23, item_y, 0.12, 0.14,
@@ -1081,7 +1113,7 @@ def create_slide_6_jit_vs_jic(prs):
             )
             shape_count += 1
 
-            item_y += 0.16
+            item_y += 0.14  # Reduced from 0.16 to fit in 0.48" row
 
         current_y += row_h + 0.02
 
@@ -2010,11 +2042,11 @@ def create_slide_11_kraljic_door_chart(prs):
 
     shape_count = 0
 
-    # ===== MATRIX DIMENSIONS =====
+    # ===== MATRIX DIMENSIONS ===== (FIXED: Reduce size to fit in 7.50" height)
     matrix_x = 1.50
-    matrix_y = 2.20
-    quad_w = 3.80
-    quad_h = 2.00
+    matrix_y = 2.10  # Moved up slightly
+    quad_w = 3.70    # Slightly narrower
+    quad_h = 1.85    # Reduced from 2.00 to fit all content
     gap = 0.10
 
     # Define Kraljic colors (ONLY used in this slide!)
@@ -2023,10 +2055,11 @@ def create_slide_11_kraljic_door_chart(prs):
     COLOR_LEVERAGE = RGBColor(39, 174, 96)     # Green
     COLOR_ROUTINE = RGBColor(149, 165, 166)    # Gray
 
-    # ===== AXIS LABELS =====
-    # Y-axis label (left)
+    # ===== AXIS LABELS ===== (FIXED: Reduce Y-axis label height to fit within 7.50")
+    # Y-axis label (left) - Adjusted height to prevent overflow
+    y_label_height = 3.50  # Reduced from 2*quad_h + gap (3.80") to fit within 7.50"
     add_text_box(
-        slide, 0.50, matrix_y + quad_h, 0.80, 2*quad_h + gap,
+        slide, 0.50, matrix_y + quad_h, 0.80, y_label_height,
         "구매 임팩트\n(Purchase Impact)\n→", font_size=12, bold=True,
         color=COLOR_BLACK, align=PP_ALIGN.CENTER
     )
@@ -2082,30 +2115,30 @@ def create_slide_11_kraljic_door_chart(prs):
         "협력 지수 4.5/5.0"
     ]
 
-    detail_y = q1_y + 0.42
+    detail_y = q1_y + 0.40  # Reduced from 0.42 to fit more items
     for item in strategic_items:
         if item.startswith("---"):  # Section divider
             add_text_box(
-                slide, q1_x + 0.12, detail_y, quad_w - 0.24, 0.12,
+                slide, q1_x + 0.12, detail_y, quad_w - 0.24, 0.10,
                 item, font_size=8, bold=True,
                 color=COLOR_WHITE, align=PP_ALIGN.CENTER
             )
             shape_count += 1
-            detail_y += 0.14
+            detail_y += 0.10  # Reduced from 0.14 to fit within quad_h
         else:
             add_text_box(
-                slide, q1_x + 0.12, detail_y, 0.10, 0.10,
+                slide, q1_x + 0.12, detail_y, 0.10, 0.09,
                 "•", font_size=7, color=COLOR_WHITE
             )
             shape_count += 1
 
             add_text_box(
-                slide, q1_x + 0.24, detail_y, quad_w - 0.36, 0.10,
+                slide, q1_x + 0.24, detail_y, quad_w - 0.36, 0.09,
                 item, font_size=8, color=COLOR_WHITE
             )
             shape_count += 1
 
-            detail_y += 0.11
+            detail_y += 0.075  # Reduced from 0.11 to fit 18 items in 1.45" (quad_h 1.85 - header 0.40)
 
     # ===== QUADRANT 2: BOTTLENECK (TOP LEFT) =====
     q2_x = matrix_x
@@ -2149,30 +2182,30 @@ def create_slide_11_kraljic_door_chart(prs):
         "비상 재고 8주+"
     ]
 
-    detail_y = q2_y + 0.42
+    detail_y = q2_y + 0.40  # Reduced from 0.42
     for item in bottleneck_items:
         if item.startswith("---"):
             add_text_box(
-                slide, q2_x + 0.12, detail_y, quad_w - 0.24, 0.12,
+                slide, q2_x + 0.12, detail_y, quad_w - 0.24, 0.10,
                 item, font_size=8, bold=True,
                 color=COLOR_WHITE, align=PP_ALIGN.CENTER
             )
             shape_count += 1
-            detail_y += 0.14
+            detail_y += 0.10  # Reduced from 0.14
         else:
             add_text_box(
-                slide, q2_x + 0.12, detail_y, 0.10, 0.10,
+                slide, q2_x + 0.12, detail_y, 0.10, 0.09,
                 "•", font_size=7, color=COLOR_WHITE
             )
             shape_count += 1
 
             add_text_box(
-                slide, q2_x + 0.24, detail_y, quad_w - 0.36, 0.10,
+                slide, q2_x + 0.24, detail_y, quad_w - 0.36, 0.09,
                 item, font_size=8, color=COLOR_WHITE
             )
             shape_count += 1
 
-            detail_y += 0.11
+            detail_y += 0.075  # Reduced from 0.11
 
     # ===== QUADRANT 3: LEVERAGE (BOTTOM RIGHT) =====
     q3_x = matrix_x + quad_w + gap
@@ -2216,30 +2249,30 @@ def create_slide_11_kraljic_door_chart(prs):
         "조달 효율 90%+"
     ]
 
-    detail_y = q3_y + 0.42
+    detail_y = q3_y + 0.40  # Reduced from 0.42
     for item in leverage_items:
         if item.startswith("---"):
             add_text_box(
-                slide, q3_x + 0.12, detail_y, quad_w - 0.24, 0.12,
+                slide, q3_x + 0.12, detail_y, quad_w - 0.24, 0.10,
                 item, font_size=8, bold=True,
                 color=COLOR_WHITE, align=PP_ALIGN.CENTER
             )
             shape_count += 1
-            detail_y += 0.14
+            detail_y += 0.10  # Reduced from 0.14
         else:
             add_text_box(
-                slide, q3_x + 0.12, detail_y, 0.10, 0.10,
+                slide, q3_x + 0.12, detail_y, 0.10, 0.09,
                 "•", font_size=7, color=COLOR_WHITE
             )
             shape_count += 1
 
             add_text_box(
-                slide, q3_x + 0.24, detail_y, quad_w - 0.36, 0.10,
+                slide, q3_x + 0.24, detail_y, quad_w - 0.36, 0.09,
                 item, font_size=8, color=COLOR_WHITE
             )
             shape_count += 1
 
-            detail_y += 0.11
+            detail_y += 0.075  # Reduced from 0.11
 
     # ===== QUADRANT 4: ROUTINE (BOTTOM LEFT) =====
     q4_x = matrix_x
@@ -2283,30 +2316,30 @@ def create_slide_11_kraljic_door_chart(prs):
         "사용자 만족도 4.0/5.0"
     ]
 
-    detail_y = q4_y + 0.42
+    detail_y = q4_y + 0.40  # Reduced from 0.42
     for item in routine_items:
         if item.startswith("---"):
             add_text_box(
-                slide, q4_x + 0.12, detail_y, quad_w - 0.24, 0.12,
+                slide, q4_x + 0.12, detail_y, quad_w - 0.24, 0.10,
                 item, font_size=8, bold=True,
                 color=COLOR_WHITE, align=PP_ALIGN.CENTER
             )
             shape_count += 1
-            detail_y += 0.14
+            detail_y += 0.10  # Reduced from 0.14
         else:
             add_text_box(
-                slide, q4_x + 0.12, detail_y, 0.10, 0.10,
+                slide, q4_x + 0.12, detail_y, 0.10, 0.09,
                 "•", font_size=7, color=COLOR_WHITE
             )
             shape_count += 1
 
             add_text_box(
-                slide, q4_x + 0.24, detail_y, quad_w - 0.36, 0.10,
+                slide, q4_x + 0.24, detail_y, quad_w - 0.36, 0.09,
                 item, font_size=8, color=COLOR_WHITE
             )
             shape_count += 1
 
-            detail_y += 0.11
+            detail_y += 0.075  # Reduced from 0.11
 
     # ===== SUMMARY TABLE (Right side) =====
     summary_x = 9.50
@@ -2422,8 +2455,8 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
     left_x = 0.80
     left_w = 4.60
 
-    # Characteristics section
-    char_y = overview_y + overview_h + 0.20
+    # Characteristics section (FIXED: Reduce spacing to fit within 7.50")
+    char_y = overview_y + overview_h + 0.15  # Reduced from 0.20
     add_rectangle(
         slide, left_x, char_y, left_w, 0.28,
         fill_color=COLOR_DARK_GRAY,
@@ -2439,24 +2472,24 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
     )
     shape_count += 1
 
-    char_items_y = char_y + 0.38
+    char_items_y = char_y + 0.30  # Reduced from 0.38
     for char in category_data["characteristics"]:
         add_text_box(
-            slide, left_x + 0.10, char_items_y, 0.12, 0.16,
+            slide, left_x + 0.10, char_items_y, 0.12, 0.14,  # Reduced height
             "•", font_size=8, color=COLOR_DARK_GRAY
         )
         shape_count += 1
 
         add_text_box(
-            slide, left_x + 0.25, char_items_y, left_w - 0.35, 0.16,
+            slide, left_x + 0.25, char_items_y, left_w - 0.35, 0.14,  # Reduced height
             char, font_size=8, color=COLOR_DARK_GRAY
         )
         shape_count += 1
 
-        char_items_y += 0.19
+        char_items_y += 0.14  # Reduced from 0.19 to fit all content
 
     # Strategy section
-    strategy_y = char_items_y + 0.12
+    strategy_y = char_items_y + 0.08  # Reduced from 0.12
     add_rectangle(
         slide, left_x, strategy_y, left_w, 0.28,
         fill_color=COLOR_MED_GRAY,
@@ -2472,24 +2505,24 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
     )
     shape_count += 1
 
-    strategy_items_y = strategy_y + 0.38
+    strategy_items_y = strategy_y + 0.30  # Reduced from 0.38
     for strategy in category_data["strategies"]:
         add_text_box(
-            slide, left_x + 0.10, strategy_items_y, 0.12, 0.16,
+            slide, left_x + 0.10, strategy_items_y, 0.12, 0.14,  # Reduced height
             "•", font_size=8, color=COLOR_BLACK
         )
         shape_count += 1
 
         add_text_box(
-            slide, left_x + 0.25, strategy_items_y, left_w - 0.35, 0.16,
+            slide, left_x + 0.25, strategy_items_y, left_w - 0.35, 0.14,  # Reduced height
             strategy, font_size=8, color=COLOR_BLACK
         )
         shape_count += 1
 
-        strategy_items_y += 0.19
+        strategy_items_y += 0.14  # Reduced from 0.19
 
     # Planning methodology section
-    planning_y = strategy_items_y + 0.12
+    planning_y = strategy_items_y + 0.08  # Reduced from 0.12
     add_rectangle(
         slide, left_x, planning_y, left_w, 0.28,
         fill_color=COLOR_DARK_GRAY,
@@ -2505,27 +2538,27 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
     )
     shape_count += 1
 
-    planning_items_y = planning_y + 0.38
+    planning_items_y = planning_y + 0.30  # Reduced from 0.38
     for planning in category_data["planning_details"]:
         add_text_box(
-            slide, left_x + 0.10, planning_items_y, 0.12, 0.16,
+            slide, left_x + 0.10, planning_items_y, 0.12, 0.14,  # Reduced height
             "•", font_size=8, color=COLOR_DARK_GRAY
         )
         shape_count += 1
 
         add_text_box(
-            slide, left_x + 0.25, planning_items_y, left_w - 0.35, 0.16,
+            slide, left_x + 0.25, planning_items_y, left_w - 0.35, 0.14,  # Reduced height
             planning, font_size=8, color=COLOR_DARK_GRAY
         )
         shape_count += 1
 
-        planning_items_y += 0.19
+        planning_items_y += 0.14  # Reduced from 0.19
 
     # ===== RIGHT COLUMN: Examples & KPIs =====
     right_x = 5.70
     right_w = 4.60
 
-    # Examples section
+    # Examples section (FIXED: Reduce spacing to fit within 7.50")
     examples_y = char_y
     add_rectangle(
         slide, right_x, examples_y, right_w, 0.28,
@@ -2542,11 +2575,11 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
     )
     shape_count += 1
 
-    examples_items_y = examples_y + 0.38
+    examples_items_y = examples_y + 0.30  # Reduced from 0.38
     for example in category_data["examples"]:
-        # Example box
+        # Example box (reduced height)
         add_rectangle(
-            slide, right_x + 0.10, examples_items_y, right_w - 0.20, 0.50,
+            slide, right_x + 0.10, examples_items_y, right_w - 0.20, 0.45,  # Reduced from 0.50
             fill_color=COLOR_VERY_LIGHT_GRAY,
             border_color=COLOR_LIGHT_GRAY,
             border_width=0.75
@@ -2555,7 +2588,7 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
 
         # Company name (9pt bold)
         add_text_box(
-            slide, right_x + 0.15, examples_items_y + 0.05, right_w - 0.30, 0.16,
+            slide, right_x + 0.15, examples_items_y + 0.04, right_w - 0.30, 0.14,  # Reduced
             example["company"], font_size=9, bold=True,
             color=COLOR_BLACK
         )
@@ -2563,15 +2596,15 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
 
         # Material (8pt)
         add_text_box(
-            slide, right_x + 0.15, examples_items_y + 0.24, right_w - 0.30, 0.22,
+            slide, right_x + 0.15, examples_items_y + 0.21, right_w - 0.30, 0.20,  # Reduced
             f"자재: {example['material']}", font_size=8, color=COLOR_DARK_GRAY
         )
         shape_count += 1
 
-        examples_items_y += 0.58
+        examples_items_y += 0.50  # Reduced from 0.58
 
     # KPI section
-    kpi_y = examples_items_y + 0.12
+    kpi_y = examples_items_y + 0.08  # Reduced from 0.12
     add_rectangle(
         slide, right_x, kpi_y, right_w, 0.28,
         fill_color=COLOR_DARK_GRAY,
@@ -2587,21 +2620,21 @@ def create_material_category_slide(prs, slide_num, title, quadrant_color, govern
     )
     shape_count += 1
 
-    kpi_items_y = kpi_y + 0.38
+    kpi_items_y = kpi_y + 0.30  # Reduced from 0.38
     for kpi in category_data["kpis"]:
         add_text_box(
-            slide, right_x + 0.10, kpi_items_y, 0.12, 0.16,
+            slide, right_x + 0.10, kpi_items_y, 0.12, 0.14,  # Reduced height
             "•", font_size=8, color=COLOR_DARK_GRAY
         )
         shape_count += 1
 
         add_text_box(
-            slide, right_x + 0.25, kpi_items_y, right_w - 0.35, 0.16,
+            slide, right_x + 0.25, kpi_items_y, right_w - 0.35, 0.14,  # Reduced height
             kpi, font_size=8, color=COLOR_DARK_GRAY
         )
         shape_count += 1
 
-        kpi_items_y += 0.19
+        kpi_items_y += 0.14  # Reduced from 0.19
 
     print(f"✓ Slide {slide_num}: {title.split()[1]} ({shape_count} shapes)")
     return slide
@@ -2889,7 +2922,9 @@ def create_chapter_divider(prs, chapter_num, chapter_title):
 # that maintains high quality while being more concise
 
 def create_simple_content_slide(prs, slide_num, title, gov_msg, sections_data):
-    """Simplified content slide generator for remaining slides (60-70 shapes)"""
+    """Simplified content slide generator for remaining slides (60-70 shapes)
+    FIXED: Reduce spacing to fit 5 sections with 4 items each within 7.50" height
+    """
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_slide_title(slide, title, slide_num=slide_num)
     add_governing_message(slide, gov_msg)
@@ -2914,24 +2949,24 @@ def create_simple_content_slide(prs, slide_num, title, gov_msg, sections_data):
         )
         shape_count += 1
 
-        # Section items
-        item_y = current_y + 0.38
+        # Section items (FIXED: Reduce spacing)
+        item_y = current_y + 0.30  # Reduced from 0.38
         for item in section["items"]:
             add_text_box(
-                slide, 0.90, item_y, 0.12, 0.16,
+                slide, 0.90, item_y, 0.12, 0.14,  # Reduced height
                 "•", font_size=8, color=COLOR_DARK_GRAY
             )
             shape_count += 1
 
             add_text_box(
-                slide, 1.05, item_y, 9.15, 0.16,
+                slide, 1.05, item_y, 9.15, 0.14,  # Reduced height
                 item, font_size=8, color=COLOR_DARK_GRAY
             )
             shape_count += 1
 
-            item_y += 0.19
+            item_y += 0.14  # Reduced from 0.19
 
-        current_y = item_y + 0.12
+        current_y = item_y + 0.08  # Reduced from 0.12
 
     print(f"✓ Slide {slide_num}: {title.split()[0]} ({shape_count} shapes)")
     return slide
