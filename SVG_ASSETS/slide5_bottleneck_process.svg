@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="250" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <style>
+        .box { fill: #E6E6E6; stroke: #666666; stroke-width: 2; }
+        .box-dark { fill: #666666; stroke: #333333; stroke-width: 2; }
+        .arrow { fill: #666666; }
+        .line { stroke: #666666; stroke-width: 2; fill: none; }
+        .text { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #333333; }
+        .text-bold { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #000000; }
+        .text-small { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 11px; fill: #666666; }
+        .text-white { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #FFFFFF; }
+        .circle { fill: #1A5276; }
+        .bg-accent { fill: #1A5276; }
+    </style>
+</defs>
+<rect class="box" x="20" y="75" width="180" height="100" rx="10"/>
+<text class="text-bold" x="110.0" y="130.0" text-anchor="middle">공급선 다변화</text>
+<circle class="circle" cx="40" cy="95" r="15"/>
+<text class="text-white" x="40" y="100" text-anchor="middle" font-weight="bold">1</text>
+<line class="line" x1="205" y1="125.0" x2="225" y2="125.0"/>
+<polygon class="arrow" points="225,120.0 235,125.0 225,130.0"/>
+<rect class="box" x="240" y="75" width="180" height="100" rx="10"/>
+<text class="text-bold" x="330.0" y="130.0" text-anchor="middle">이중 공급 체계</text>
+<circle class="circle" cx="260" cy="95" r="15"/>
+<text class="text-white" x="260" y="100" text-anchor="middle" font-weight="bold">2</text>
+<line class="line" x1="425" y1="125.0" x2="445" y2="125.0"/>
+<polygon class="arrow" points="445,120.0 455,125.0 445,130.0"/>
+<rect class="box" x="460" y="75" width="180" height="100" rx="10"/>
+<text class="text-bold" x="550.0" y="130.0" text-anchor="middle">장기 계약</text>
+<circle class="circle" cx="480" cy="95" r="15"/>
+<text class="text-white" x="480" y="100" text-anchor="middle" font-weight="bold">3</text>
+<line class="line" x1="645" y1="125.0" x2="665" y2="125.0"/>
+<polygon class="arrow" points="665,120.0 675,125.0 665,130.0"/>
+<rect class="box" x="680" y="75" width="180" height="100" rx="10"/>
+<text class="text-bold" x="770.0" y="130.0" text-anchor="middle">관계 강화</text>
+<circle class="circle" cx="700" cy="95" r="15"/>
+<text class="text-white" x="700" y="100" text-anchor="middle" font-weight="bold">4</text>
+</svg>

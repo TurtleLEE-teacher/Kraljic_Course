@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <style>
+        .box { fill: #E6E6E6; stroke: #666666; stroke-width: 2; }
+        .box-dark { fill: #666666; stroke: #333333; stroke-width: 2; }
+        .arrow { fill: #666666; }
+        .line { stroke: #666666; stroke-width: 2; fill: none; }
+        .text { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #333333; }
+        .text-bold { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #000000; }
+        .text-small { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 11px; fill: #666666; }
+        .text-white { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #FFFFFF; }
+        .circle { fill: #1A5276; }
+        .bg-accent { fill: #1A5276; }
+    </style>
+</defs>
+<text class="text-bold" x="400" y="30" text-anchor="middle" font-size="18">Toyota SRM 3대 핵심 전략</text>
+<circle class="circle" cx="150" cy="80" r="25"/>
+<text class="text-white" x="150" y="85" text-anchor="middle" font-weight="bold">1</text>
+<rect class="box-dark" x="50" y="120" width="200" height="70" rx="10"/>
+<text class="text-white" x="150.0" y="160.0" text-anchor="middle">상호 신뢰
+파트너십</text>
+<rect class="box" x="60" y="220" width="180" height="35" rx="5"/>
+<text class="text" x="150.0" y="242.5" text-anchor="middle">장기 계약</text>
+<rect class="box" x="60" y="265" width="180" height="35" rx="5"/>
+<text class="text" x="150.0" y="287.5" text-anchor="middle">투명한 정보</text>
+<rect class="box" x="60" y="310" width="180" height="35" rx="5"/>
+<text class="text" x="150.0" y="332.5" text-anchor="middle">공정한 가격</text>
+<circle class="circle" cx="400" cy="80" r="25"/>
+<text class="text-white" x="400" y="85" text-anchor="middle" font-weight="bold">2</text>
+<rect class="box-dark" x="300" y="120" width="200" height="70" rx="10"/>
+<text class="text-white" x="400.0" y="160.0" text-anchor="middle">Kaizen
+지속적 개선</text>
+<rect class="box" x="310" y="220" width="180" height="35" rx="5"/>
+<text class="text" x="400.0" y="242.5" text-anchor="middle">교육 지원</text>
+<rect class="box" x="310" y="265" width="180" height="35" rx="5"/>
+<text class="text" x="400.0" y="287.5" text-anchor="middle">현장 지원</text>
+<rect class="box" x="310" y="310" width="180" height="35" rx="5"/>
+<text class="text" x="400.0" y="332.5" text-anchor="middle">공동 해결</text>
+<circle class="circle" cx="650" cy="80" r="25"/>
+<text class="text-white" x="650" y="85" text-anchor="middle" font-weight="bold">3</text>
+<rect class="box-dark" x="550" y="120" width="200" height="70" rx="10"/>
+<text class="text-white" x="650.0" y="160.0" text-anchor="middle">성장 비전
+공유</text>
+<rect class="box" x="560" y="220" width="180" height="35" rx="5"/>
+<text class="text" x="650.0" y="242.5" text-anchor="middle">장기 예측</text>
+<rect class="box" x="560" y="265" width="180" height="35" rx="5"/>
+<text class="text" x="650.0" y="287.5" text-anchor="middle">투자 지원</text>
+<rect class="box" x="560" y="310" width="180" height="35" rx="5"/>
+<text class="text" x="650.0" y="332.5" text-anchor="middle">공동 R&D</text>
+</svg>

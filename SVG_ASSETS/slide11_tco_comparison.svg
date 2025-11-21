@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="350" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <style>
+        .box { fill: #E6E6E6; stroke: #666666; stroke-width: 2; }
+        .box-dark { fill: #666666; stroke: #333333; stroke-width: 2; }
+        .arrow { fill: #666666; }
+        .line { stroke: #666666; stroke-width: 2; fill: none; }
+        .text { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #333333; }
+        .text-bold { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #000000; }
+        .text-small { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 11px; fill: #666666; }
+        .text-white { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #FFFFFF; }
+        .circle { fill: #1A5276; }
+        .bg-accent { fill: #1A5276; }
+    </style>
+</defs>
+<text class="text-bold" x="400" y="30" text-anchor="middle">TCO = 구매가 + 물류비 + 관세 + 품질비용 + 재고비용 + 관리비용</text>
+<rect class="box" x="50" y="80" width="320" height="240" rx="10"/>
+<text class="text-bold" x="210" y="110" text-anchor="middle">국내 공급업체</text>
+<text class="text" x="70" y="140">구매가: ₩100</text>
+<text class="text" x="70" y="170">물류비: ₩5</text>
+<text class="text" x="70" y="200">관세: ₩0</text>
+<text class="text" x="70" y="230">품질비용: ₩2</text>
+<text class="text" x="70" y="260">재고비용: ₩3</text>
+<text class="text" x="70" y="290">관리비용: ₩2</text>
+<text class="text-bold" x="210" y="330" text-anchor="middle" fill="#1A5276">총 TCO: ₩112</text>
+<rect class="box" x="430" y="80" width="320" height="240" rx="10"/>
+<text class="text-bold" x="590" y="110" text-anchor="middle">해외 공급업체</text>
+<text class="text" x="450" y="140">구매가: ₩85</text>
+<text class="text" x="450" y="170">물류비: ₩15</text>
+<text class="text" x="450" y="200">관세: ₩8</text>
+<text class="text" x="450" y="230">품질비용: ₩5</text>
+<text class="text" x="450" y="260">재고비용: ₩8</text>
+<text class="text" x="450" y="290">관리비용: ₩4</text>
+<text class="text-bold" x="590" y="330" text-anchor="middle" fill="#1A5276">총 TCO: ₩125</text>
+<text class="text-bold" x="400" y="340" text-anchor="middle" fill="#27AE60">← 국내 공급업체 선정 (TCO 우위)</text>
+</svg>
