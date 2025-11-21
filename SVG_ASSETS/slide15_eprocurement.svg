@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="350" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <style>
+        .box { fill: #E6E6E6; stroke: #666666; stroke-width: 2; }
+        .box-dark { fill: #666666; stroke: #333333; stroke-width: 2; }
+        .arrow { fill: #666666; }
+        .line { stroke: #666666; stroke-width: 2; fill: none; }
+        .text { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #333333; }
+        .text-bold { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #000000; }
+        .text-small { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 11px; fill: #666666; }
+        .text-white { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #FFFFFF; }
+        .circle { fill: #1A5276; }
+        .bg-accent { fill: #1A5276; }
+    </style>
+</defs>
+<rect class="box" x="100" y="30" width="600" height="60" rx="8"/>
+<text class="text-bold" x="130" y="58">카탈로그 구매</text>
+<text class="text-small" x="130" y="78">사전 등록 품목 선택</text>
+<line class="line" x1="400.0" y1="93" x2="400.0" y2="97"/>
+<polygon class="arrow" points="395.0,97 400.0,107 405.0,97"/>
+<rect class="box" x="100" y="110" width="600" height="60" rx="8"/>
+<text class="text-bold" x="130" y="138">자동 발주</text>
+<text class="text-small" x="130" y="158">재고 부족 시 자동 생성</text>
+<line class="line" x1="400.0" y1="173" x2="400.0" y2="177"/>
+<polygon class="arrow" points="395.0,177 400.0,187 405.0,177"/>
+<rect class="box" x="100" y="190" width="600" height="60" rx="8"/>
+<text class="text-bold" x="130" y="218">승인 자동화</text>
+<text class="text-small" x="130" y="238">일정 금액 이하 자동 승인</text>
+<line class="line" x1="400.0" y1="253" x2="400.0" y2="257"/>
+<polygon class="arrow" points="395.0,257 400.0,267 405.0,257"/>
+<rect class="box" x="100" y="270" width="600" height="60" rx="8"/>
+<text class="text-bold" x="130" y="298">3-Way Matching</text>
+<text class="text-small" x="130" y="318">PO-GR-IR 자동 매칭</text>
+</svg>

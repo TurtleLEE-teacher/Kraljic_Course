@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="700" height="400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+    <style>
+        .box { fill: #E6E6E6; stroke: #666666; stroke-width: 2; }
+        .box-dark { fill: #666666; stroke: #333333; stroke-width: 2; }
+        .arrow { fill: #666666; }
+        .line { stroke: #666666; stroke-width: 2; fill: none; }
+        .text { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #333333; }
+        .text-bold { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #000000; }
+        .text-small { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 11px; fill: #666666; }
+        .text-white { font-family: 'Malgun Gothic', Arial, sans-serif; font-size: 14px; fill: #FFFFFF; }
+        .circle { fill: #1A5276; }
+        .bg-accent { fill: #1A5276; }
+    </style>
+</defs>
+<rect class="box-dark" x="50" y="50" width="140" height="60" rx="8"/>
+<text class="text-white" x="120.0" y="85.0" text-anchor="middle">RFQ 발송</text>
+<line class="line" x1="193" y1="80.0" x2="207" y2="80.0"/>
+<polygon class="arrow" points="207,75.0 217,80.0 207,85.0"/>
+<rect class="box-dark" x="220" y="50" width="140" height="60" rx="8"/>
+<text class="text-white" x="290.0" y="85.0" text-anchor="middle">경쟁 입찰</text>
+<line class="line" x1="363" y1="80.0" x2="377" y2="80.0"/>
+<polygon class="arrow" points="377,75.0 387,80.0 377,85.0"/>
+<rect class="box-dark" x="390" y="50" width="140" height="60" rx="8"/>
+<text class="text-white" x="460.0" y="85.0" text-anchor="middle">TCO 분석</text>
+<line class="line" x1="533" y1="80.0" x2="547" y2="80.0"/>
+<polygon class="arrow" points="547,75.0 557,80.0 547,85.0"/>
+<rect class="box-dark" x="560" y="50" width="140" height="60" rx="8"/>
+<text class="text-white" x="630.0" y="85.0" text-anchor="middle">공급업체 선정</text>
+<rect class="box" x="80" y="180" width="540" height="40" rx="5"/>
+<text class="text" x="100" y="205">• 표준화된 견적서</text>
+<rect class="box" x="80" y="230" width="540" height="40" rx="5"/>
+<text class="text" x="100" y="255">• 다수 공급업체</text>
+<rect class="box" x="80" y="280" width="540" height="40" rx="5"/>
+<text class="text" x="100" y="305">• 가격 경쟁 유도</text>
+<rect class="box" x="80" y="330" width="540" height="40" rx="5"/>
+<text class="text" x="100" y="355">• 물량 통합</text>
+</svg>
