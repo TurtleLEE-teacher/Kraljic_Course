@@ -1,0 +1,84 @@
+<svg width="750" height="450" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="375" y="30" font-family="Malgun Gothic, Arial" font-size="18" font-weight="bold"
+        text-anchor="middle" fill="#333">Supplier Scorecard 평가 체계</text>
+
+  <!-- 5 evaluation categories in a radial layout -->
+
+  <!-- Center: Total Score -->
+  <circle cx="375" cy="230" r="50" fill="#1A5276" stroke="#333" stroke-width="2"/>
+  <text x="375" y="220" font-family="Malgun Gothic" font-size="12" font-weight="bold"
+        text-anchor="middle" fill="#FFF">총점</text>
+  <text x="375" y="242" font-family="Arial" font-size="24" font-weight="bold"
+        text-anchor="middle" fill="#FFF">100</text>
+
+  <!-- Category 1: Quality (30%) - Top -->
+  <rect x="305" y="80" width="140" height="70" rx="10" fill="#E74C3C" stroke="#333" stroke-width="2"/>
+  <text x="375" y="102" font-family="Malgun Gothic" font-size="13" font-weight="bold"
+        text-anchor="middle" fill="#FFF">1. 품질 (30%)</text>
+  <text x="375" y="120" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">불량률 (PPM)</text>
+  <text x="375" y="135" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">검사 통과율</text>
+  <path d="M 375 180 L 375 150" stroke="#666" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+
+  <!-- Category 2: Delivery (30%) - Top Right -->
+  <rect x="520" y="130" width="140" height="70" rx="10" fill="#E67E22" stroke="#333" stroke-width="2"/>
+  <text x="590" y="152" font-family="Malgun Gothic" font-size="13" font-weight="bold"
+        text-anchor="middle" fill="#FFF">2. 납기 (30%)</text>
+  <text x="590" y="170" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">납기 준수율 (OTD)</text>
+  <text x="590" y="185" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">리드타임 안정성</text>
+  <path d="M 425 230 L 520 165" stroke="#666" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+
+  <!-- Category 3: Price (20%) - Bottom Right -->
+  <rect x="520" y="260" width="140" height="70" rx="10" fill="#F39C12" stroke="#333" stroke-width="2"/>
+  <text x="590" y="282" font-family="Malgun Gothic" font-size="13" font-weight="bold"
+        text-anchor="middle" fill="#FFF">3. 가격 (20%)</text>
+  <text x="590" y="300" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">시장가 대비 수준</text>
+  <text x="590" y="315" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">원가 절감 기여도</text>
+  <path d="M 425 230 L 520 295" stroke="#666" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+
+  <!-- Category 4: Collaboration (10%) - Bottom Left -->
+  <rect x="90" y="260" width="140" height="70" rx="10" fill="#3498DB" stroke="#333" stroke-width="2"/>
+  <text x="160" y="282" font-family="Malgun Gothic" font-size="13" font-weight="bold"
+        text-anchor="middle" fill="#FFF">4. 협력 (10%)</text>
+  <text x="160" y="300" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">정보 공유 수준</text>
+  <text x="160" y="315" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">개선 제안 건수</text>
+  <path d="M 325 230 L 230 295" stroke="#666" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+
+  <!-- Category 5: Risk (10%) - Top Left -->
+  <rect x="90" y="130" width="140" height="70" rx="10" fill="#9B59B6" stroke="#333" stroke-width="2"/>
+  <text x="160" y="152" font-family="Malgun Gothic" font-size="13" font-weight="bold"
+        text-anchor="middle" fill="#FFF">5. 리스크 (10%)</text>
+  <text x="160" y="170" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">재무 건전성</text>
+  <text x="160" y="185" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#FFF">지속가능성</text>
+  <path d="M 325 230 L 230 165" stroke="#666" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+
+  <!-- Grade classification -->
+  <rect x="150" y="370" width="450" height="60" rx="8" fill="#F0F0F0" stroke="#666" stroke-width="1"/>
+  <text x="375" y="390" font-family="Malgun Gothic" font-size="12" font-weight="bold"
+        text-anchor="middle" fill="#333">등급 분류</text>
+  <text x="220" y="410" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#27AE60">A (90+)</text>
+  <text x="320" y="410" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#3498DB">B (70-89)</text>
+  <text x="430" y="410" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#F39C12">C (50-69)</text>
+  <text x="530" y="410" font-family="Malgun Gothic" font-size="10"
+        text-anchor="middle" fill="#E74C3C">D (&lt;50)</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+</svg>

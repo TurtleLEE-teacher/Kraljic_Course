@@ -1,0 +1,58 @@
+<svg width="650" height="400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Title -->
+  <text x="325" y="30" font-family="Malgun Gothic, Arial" font-size="18" font-weight="bold"
+        text-anchor="middle" fill="#333">일상자재: 원스톱 쇼핑 (One-Stop Shopping)</text>
+
+  <!-- Central Supplier -->
+  <rect x="225" y="80" width="200" height="100" rx="15" fill="#95A5A6" stroke="#333" stroke-width="3"/>
+  <text x="325" y="115" font-family="Malgun Gothic" font-size="16" font-weight="bold"
+        text-anchor="middle" fill="#FFF">통합 공급업체</text>
+  <text x="325" y="135" font-family="Malgun Gothic" font-size="12"
+        text-anchor="middle" fill="#FFF">(MRO 전문업체)</text>
+  <text x="325" y="155" font-family="Arial" font-size="11"
+        text-anchor="middle" fill="#FFF">1~2개 업체로 통합</text>
+
+  <!-- Category 1 -->
+  <ellipse cx="120" cy="250" rx="70" ry="35" fill="#E6E6E6" stroke="#666" stroke-width="1.5"/>
+  <text x="120" y="245" font-family="Malgun Gothic" font-size="11" font-weight="bold"
+        text-anchor="middle" fill="#333">사무용품</text>
+  <text x="120" y="260" font-family="Malgun Gothic" font-size="9"
+        text-anchor="middle" fill="#666">문구, 종이 등</text>
+  <path d="M 165 235 L 235 165" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Category 2 -->
+  <ellipse cx="250" cy="290" rx="70" ry="35" fill="#E6E6E6" stroke="#666" stroke-width="1.5"/>
+  <text x="250" y="285" font-family="Malgun Gothic" font-size="11" font-weight="bold"
+        text-anchor="middle" fill="#333">청소용품</text>
+  <text x="250" y="300" font-family="Malgun Gothic" font-size="9"
+        text-anchor="middle" fill="#666">세제, 도구 등</text>
+  <path d="M 280 265 L 305 180" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Category 3 -->
+  <ellipse cx="400" cy="290" rx="70" ry="35" fill="#E6E6E6" stroke="#666" stroke-width="1.5"/>
+  <text x="400" y="285" font-family="Malgun Gothic" font-size="11" font-weight="bold"
+        text-anchor="middle" fill="#333">전기/전자</text>
+  <text x="400" y="300" font-family="Malgun Gothic" font-size="9"
+        text-anchor="middle" fill="#666">전구, 배터리 등</text>
+  <path d="M 370 265 L 345 180" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Category 4 -->
+  <ellipse cx="530" cy="250" rx="70" ry="35" fill="#E6E6E6" stroke="#666" stroke-width="1.5"/>
+  <text x="530" y="245" font-family="Malgun Gothic" font-size="11" font-weight="bold"
+        text-anchor="middle" fill="#333">소모성 공구</text>
+  <text x="530" y="260" font-family="Malgun Gothic" font-size="9"
+        text-anchor="middle" fill="#666">드릴, 톱 등</text>
+  <path d="M 485 235 L 415 165" stroke="#666" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- Benefits box -->
+  <rect x="50" y="340" width="550" height="50" rx="8" fill="#F0F0F0" stroke="#666" stroke-width="1"/>
+  <text x="325" y="360" font-family="Malgun Gothic" font-size="11" font-weight="bold"
+        text-anchor="middle" fill="#333">✓ 발주 간소화  |  ✓ 관리 비용 감소  |  ✓ 월간 통합 결제  |  ✓ E-Procurement 연계</text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+  </defs>
+</svg>
